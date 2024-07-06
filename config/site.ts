@@ -1,5 +1,5 @@
 export const siteConfig = {
-    name: "Bolota.eu",
+    name: "bolota.eu",
     url: "https://example.com",
     description: "Website where I share what I'm up to.",
     author: "Artur Chichorro",

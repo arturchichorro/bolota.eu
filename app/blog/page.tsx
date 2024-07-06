@@ -11,7 +11,6 @@ interface BlogPageProps {
     }
 }
 
-
 export default async function BlogPage({ searchParams }: BlogPageProps) {
 
     const currentPage = Number(searchParams?.page) || 1

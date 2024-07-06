@@ -11,35 +11,23 @@ export default function Home() {
 
   return (
     <>
-      <section className="space-y-6 pb-8 pt-6 md:pb-12 md:mt-10 lg:py-32">
+      <section className="space-y-6 pb-8 pt-6 md:pb-2 md:mt-2 lg:py-2">
         <div className="container flex flex-col gap-4 text-center">
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-balance">
-            Hello, this is placeholder text
-          </h1>
-          <p className="max-w-[42rem] mx-auto text-muted-foreground sm:text-xl text-balance">
-            Here's some more of that placeholder text
+          <h3 className="text-xl font-black text-secondary">
+            ** Welcome.
+          </h3>
+          <p className="max-w-[60rem] mx-auto sm:text-lg text-balance tracking-wide">
+            I'm Artur. I have a bachelor's degree in mathematics and I'm currently taking a gap year to explore my interests. If you wish to find out more about my skills & background check the about me page. You can contact me at arturchichorro [at] gmail [dot] com.
           </p>
-          <div className="flex flex-col gap-4 justify-center sm:flex-row">
-            <Link href="/blog" className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-fit")}>
-              View my blog
-            </Link>
-            <Link
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noreferrer"
-              className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full sm:w-fit")}>
-              GitHub
-            </Link>
-          </div>
         </div>
       </section>
-      <section className="container max-w-4xl py-6 lg:py-10 flex flex-col space-y-6 mt-60">
-        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-center">
-          Latest Posts
+      <section className="container max-w-4xl flex flex-col space-y-2">
+        <h2 className="text-xl font-black text-secondary">
+          ** Latest Posts.
         </h2>
         <ul className="flex flex-col">
           {latestPosts.map((post) => (
-            <li key={post.slug} className="first:border-t first:border-border">
+            <li key={post.slug}>
               <PostItem
                 slug={post.slug}
                 title={post.title}

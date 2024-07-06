@@ -1,6 +1,4 @@
-import { Calendar } from "lucide-react";
 import Link from "next/link";
-import { buttonVariants } from "./ui/button";
 import { cn, formatDate } from "@/lib/utils";
 
 interface PostItemProps {
@@ -12,23 +10,18 @@ interface PostItemProps {
 
 export function PostItem({ slug, title, description, date }: PostItemProps) {
     return (
-        <article className="flex flex-col gap-2 border-border border-b py-3">
+        <article className="flex flex-row justify-between border-border border-b py-1.5">
             <div>
-                <h2 className="text-2xl font-bold">
-                    <Link href={slug}>{title}</Link>
+                <h2 className="text-base font-medium hover:bg-destructive text-accent hover:text-accent-foreground tracking-widest">
+                    <Link href={slug}># {title}</Link>
                 </h2>
             </div>
-            <div className="max-w-none text-muted-foreground">{description}</div>
             <div className="flex justify-between items-center">
-                <dl>
+                <dl className="flex flex-row">
                     <dt className="sr-only">Published On</dt>
-                    <dd className="text-sm sm:text-base font-medium flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
+                    <dd className="text-sm flex items-center">
                         <time dateTime={date}>{formatDate(date)}</time>
                     </dd>
-                    <Link href={slug} className={cn(buttonVariants({ variant: "link" }), "py-0")}>
-                        Read More ➜
-                    </Link>
                 </dl>
             </div>
         </article>

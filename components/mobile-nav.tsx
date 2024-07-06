@@ -21,7 +21,7 @@ export function MobileNav() {
                 </Button>
             </SheetTrigger>
             <SheetContent side="right">
-                <MobileLink onOpenChange={setOpen} href={"/"} className="flex items-center">
+                <MobileLink onOpenChange={setOpen} href={"/"} className="flex items-center gap-2">
                     <Icons.logo className="mr-2 h-4 w-4" />
                     <span className="font-bold">{siteConfig.name}</span>
                 </MobileLink>
