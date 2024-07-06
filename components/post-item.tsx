@@ -12,7 +12,7 @@ export function PostItem({ slug, title, description, date }: PostItemProps) {
     return (
         <article className="flex flex-row justify-between border-border border-b py-1.5">
             <div>
-                <h2 className="text-base font-medium hover:bg-destructive text-accent hover:text-accent-foreground tracking-widest">
+                <h2 className="border-b-2 border-accent/[0.6] text-accent tracking-widest hover:border-transparent text-base font-normal hover:bg-destructive hover:text-accent-foreground">
                     <Link href={slug}># {title}</Link>
                 </h2>
             </div>
