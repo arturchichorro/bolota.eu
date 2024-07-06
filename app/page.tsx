@@ -21,8 +21,8 @@ export default function Home() {
           </p>
         </div>
       </section>
-      <section className="container max-w-4xl flex flex-col space-y-2 pt-6">
-        <h2 className="text-xl font-black text-secondary">
+      <section className="container max-w-4xl flex flex-col pt-6">
+        <h2 className="text-xl font-black text-secondary py-2">
           ** Latest Posts.
         </h2>
         <ul className="flex flex-col gap-2">

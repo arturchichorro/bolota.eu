@@ -74,3 +74,7 @@
       @apply bg-background text-foreground;
     }
   }
+
+  .link {
+    @apply border-b-2 border-accent/[0.6] text-accent hover:border-transparent text-base font-normal hover:bg-destructive hover:text-accent-foreground no-underline
+ }
