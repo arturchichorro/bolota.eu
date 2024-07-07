@@ -31,7 +31,9 @@ But, apparently <a className="link" href="https://undertale.com/" target="_blank
 
 Right now, this website can read any markdown file and automatically format it into a post at the path _/posts/:fileName_. It supports images, and it even supports mathematical characters! Here's an example:
 
-
+$$
+\sum_{n=i+j+1}^{\infty} (1-p)^{n} = \frac{(1-p)^{i+j+1}}{1-(1-p)} = \frac{(1-p)^{i+j+1}}{p}
+$$
 
 This is really nice, because it allows me to write about all types of things I'm interested in. I also made it so that code blocks within the markdown file have nice formatting and syntax highligting (shown below with some of the simple styling used in the website):
 
@@ -49,7 +51,7 @@ a:hover {
 }
 ```
 
-Everytime I want to add a post to the website, all I have to do is write a note in Obsidian (which writes notes in .md format), and edit my ``data.js`` file with some information about the post. Everything else happens automatically!
+Right now, everytime I want to add a post to the website, all I have to do is write a note in Obsidian (which writes notes in .md format), and edit my ``data.js`` file with some information about the post:
 
 ```js data.js
 export const POSTS = {
@@ -65,8 +67,6 @@ export const POSTS = {
     }
 }
 ```
-
-Another thing this website does right, is that it doesn't need to refresh the page to update the content being rendered. This is one of the main reasons one would use React, but after starting out with HTML and CSS, you can really feel the difference in responsiveness. 
 
 ### * Last notes.
 
