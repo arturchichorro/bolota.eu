@@ -12,12 +12,12 @@ export default function Home() {
   return (
     <>
       <section className="container max-w-4xl space-y-6 pb-8 pt-6 md:pb-2 md:mt-2 lg:py-2">
-        <div className="flex flex-col gap-4 text-start">
+        <div className="flex flex-col gap-4">
           <h3 className="text-2xl font-black text-accent">
             ** Welcome.
           </h3>
-          <p className="mx-auto sm:text-lg text-balance tracking-wide">
-            I'm Artur. I have a bachelor's degree in mathematics and I'm currently taking a gap year to explore my interests. If you wish to find out more about my skills & background check the about me page. You can contact me at arturchichorro [at] gmail [dot] com.
+          <p className="sm:text-lg">
+            Hello, I'm Artur, a mathematician / coder. Welcome to my corner of the internet, where I talk about whatever I spend my energy on. If you wish to find out more about me check the <a href="/about" className="link">about me</a> page.
           </p>
         </div>
       </section>

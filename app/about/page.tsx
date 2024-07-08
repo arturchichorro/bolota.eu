@@ -3,18 +3,15 @@ import { siteConfig } from "@/config/site";
 
 export default async function AboutPage() {
     return (
-        <div className="container max-w-4xl py-6 lg:py-10">
-            <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
-                <div className="flex-1 space-x-4">
-                    <h1 className="inline-block font-black text-4xl lg:text-5xl">
-                        About me
-                    </h1>
-                </div>
-            </div>
-            <hr className="my-8" />
+        <div className="container max-w-4xl space-y-6 pb-8 pt-6 md:pb-2 md:mt-2 lg:py-2">
+
+            <h1 className="inline-block text-2xl font-black text-accent">
+                ** About me.
+            </h1>
+
             <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                <div className="min-w-32 max-w-32 flex flex-col gap-2">
-                    <Avatar className="h-32 w-32">
+                <div className="min-w-48 max-w-48 flex flex-col gap-2">
+                    <Avatar className="h-48 w-48">
                         <AvatarImage src="/avatar.png" alt={siteConfig.author} />
                         <AvatarFallback>AC</AvatarFallback>
                     </Avatar>
@@ -25,9 +22,16 @@ export default async function AboutPage() {
                         Mathematician turned Software Developer
                     </p>
                 </div>
-                <p className="text-muted-foreground text-lg py-4">
-                    I'm a recently graduated math student, without much of an idea of what to do next. Currently, I'm spending my time exploring some of my interests, which involve mathematics, web development, coding, videography, cooking, basketball and chess.
-                </p>
+                <div className="prose prose-base dark:prose-invert">
+                    <p> Hey, I'm Artur. I've been fiddling with mathematics since I can remember. </p>
+                    <p>
+                        This website exists because I like the idea of having my corner of the internet where I can express myself and talk about what I care about, whatever that may be. Developing it was also my introduction to web development, and the whole world surrounding that.
+                    </p>
+                    <p>
+                        Currently, I'm taking a gap year to spend time exploring my interests, which involve mathematics, coding, videography, cooking, basketball and chess.
+                    </p>
+                    <p> Feel free to mail me at <a className="link">arturchichorro [at] gmail.com</a> to say hello! </p>
+                </div>
             </div>
         </div>
     )
