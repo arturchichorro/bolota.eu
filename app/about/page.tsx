@@ -22,7 +22,7 @@ export default async function AboutPage() {
                         Mathematician turned Software Developer
                     </p>
                 </div>
-                <div className="prose prose-base dark:prose-invert">
+                <div className="prose prose-base dark:prose-invert prose-p:text-primary">
                     <p> Hey, I&apos;m Artur. I&apos;ve been fiddling with mathematics since I can remember. </p>
                     <p>
                         This website exists because I like the idea of having my corner of the internet where I can express myself and talk about what I care about, whatever that may be. Developing it was also my introduction to web development, and the whole world surrounding that.
