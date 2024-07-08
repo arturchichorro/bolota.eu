@@ -32,9 +32,6 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
                 <div className="flex-1 space-y-10">
                     <h1 className="inline-block font-black text-2xl text-accent">** All Posts.</h1>
-                    {/* <p className="sm:text-lg text-balance tracking-wide">
-                        Here's what I've been up to.
-                    </p> */}
                 </div>
             </div>
             {displayPosts?.length > 0 ? (

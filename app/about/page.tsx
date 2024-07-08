@@ -23,12 +23,12 @@ export default async function AboutPage() {
                     </p>
                 </div>
                 <div className="prose prose-base dark:prose-invert">
-                    <p> Hey, I'm Artur. I've been fiddling with mathematics since I can remember. </p>
+                    <p> Hey, I&apos;m Artur. I&apos;ve been fiddling with mathematics since I can remember. </p>
                     <p>
                         This website exists because I like the idea of having my corner of the internet where I can express myself and talk about what I care about, whatever that may be. Developing it was also my introduction to web development, and the whole world surrounding that.
                     </p>
                     <p>
-                        Currently, I'm taking a gap year to spend time exploring my interests, which involve mathematics, coding, videography, cooking, basketball and chess.
+                        Currently, I&apos;m taking a gap year to spend time exploring my interests, which involve mathematics, coding, videography, cooking, basketball and chess.
                     </p>
                     <p> Feel free to mail me at <a className="link">arturchichorro [at] gmail.com</a> to say hello! </p>
                 </div>
