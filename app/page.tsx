@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <section className="container max-w-4xl space-y-6 pb-8 pt-6 md:pb-2 md:mt-2 lg:py-2">
         <div className="flex flex-col gap-4 text-start">
-          <h3 className="text-xl font-black text-secondary">
+          <h3 className="text-2xl font-black text-accent">
             ** Welcome.
           </h3>
           <p className="mx-auto sm:text-lg text-balance tracking-wide">
@@ -22,7 +22,7 @@ export default function Home() {
         </div>
       </section>
       <section className="container max-w-4xl flex flex-col pt-6">
-        <h2 className="text-xl font-black text-secondary py-2">
+        <h2 className="text-2xl font-black text-secondary py-2">
           ** Latest Posts.
         </h2>
         <ul className="flex flex-col gap-2">
