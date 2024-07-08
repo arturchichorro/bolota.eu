@@ -22,7 +22,7 @@ export default function Home() {
         </div>
       </section>
       <section className="container max-w-4xl flex flex-col pt-6">
-        <h2 className="text-2xl font-black text-secondary py-2">
+        <h2 className="text-2xl font-black text-accent py-2">
           ** Latest Posts.
         </h2>
         <ul className="flex flex-col gap-2">

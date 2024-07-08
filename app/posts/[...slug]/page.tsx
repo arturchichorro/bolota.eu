@@ -33,7 +33,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <article className="container py-6 prose prose-headings:text-accent prose-a:text-accent dark:prose-invert max-w-3xl mx-auto">
             <h1 className="mb-2">{post.title}</h1>
             <p className="text-xl mt-0 text-muted-foreground">Posted on <time dateTime={post.date}>{formatDate(post.date)}</time></p>
-            <hr className="my-4" />
+            <hr className="my-4 border-border/[0.50]" />
             <MDXContent code={post.body} />
         </article>
     )
