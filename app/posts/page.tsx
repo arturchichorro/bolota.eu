@@ -2,6 +2,12 @@ import { posts } from "#site/content";
 import { PostItem } from "@/components/post-item";
 import { QueryPagination } from "@/components/query-pagination";
 import { sortPosts } from "@/lib/utils";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "My Posts",
+    description: "List of all posts in bolota.eu.",
+}
 
 const POSTS_PER_PAGE = 10;
 
