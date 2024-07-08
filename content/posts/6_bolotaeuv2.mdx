@@ -1,0 +1,38 @@
+---
+title: bolota.eu 2.0
+description: Rewrote this website's code using Next.js and typescript.
+date: 2024-07-07
+published: true
+---
+
+I decided I wanted to make my website better. My first attempt was nice, and the idea of turning markdown files straight from my notes into blog posts remains the same. There were just some thing that were annoying to me.
+
+### Pain points of the first version
+- I couldn't style a single blog post individually. This gave me little power of customization, and it bothered me in general. All the styles of the previous website were in one css file;
+- Images and videos were generally a pain, and I wanted a simpler way to be able to display them;
+- Adding a post wasn't as simple as it could be: I had to write the markdown file, put it in the public folder, and then edit a data.js file with an object that contained information about each post that I wanted to have published. It worked, it just wasn't great. It wasn't the whole "write down a note, have a blog post" kind of experience that I wanted;
+- The design wasn't super clean, and it wasn't responsive for mobile and different screen sizes;
+- The code was organised very poorly.
+
+### Current state
+Because of all of these issues, I decided to just rewrite the whole thing. This time, I used <a className="link" target="_blank" href="https://nextjs.org/">Next.js</a>, and it was really cool to learn about it. I also used Typescript instead of Javascript. Other than that, I used <a className="link" target="_blank" href="https://tailwindcss.com/">Tailwind CSS</a> (for the first time, and I like it), <a className="link" target="_blank" href="https://velite.js.org/">Velite</a> and some <a className="link" target="_blank" href="https://ui.shadcn.com/">shadcn</a> components.
+
+I'm happy to say that I've fixed basically all of the issues mentioned above, and I even added some extra stuff that I had not thought about doing before. The most significant change has to be the fact that I'm no longer using .md files: instead, I now write my blog posts in <a className="link" target="_blank" href="https://mdxjs.com/">.mdx</a> files. It really is basically the same thing, with the slight difference that I can now add custom html and React components in the middle of my markdown file, with classes and styles and all that. This basically means that I can customise any individual blog post however I want, using Tailwind classes, while not losing the usefulness of default styles for most stuff. I used Tailwind Typography's prose class with some tweaks for the styling of the blog posts.
+
+### Changes
+I ended up getting carried away with some stuff, and there's a bunch of tiny changes. Overall, I think these are the most significant ones:
+- Responsive design, plus the inclusion of light/dark themes;
+- Support of <a className="link" target="_blank" href="https://mdxjs.com/">MDX</a> files;
+- Adding and resizing images or videos is super simple now;
+- Better developer experience using Next.js routing (this is so much better than react-router, at least for this use case);
+- Dynamic Graph Images to generate previews of the website when the link gets shared somewhere else;
+
+### Conclusion
+I'm still new to the web development world, so I'd really appreciate it if you're reading this and have some feedback for me. Let me know!
+
+Regarding my usage of Next.js for a static website, yeah, I agree, there are simpler options. But I actually had some thoughts about that when I did the first version of the website, and they haven't changed. Check them out <a href="/posts/1_bolotaeuv1" className="link">here</a>.
+
+In case I ever decide to update the website again, or simply redesign it, here's a screenshot of how it looks like for posteority's sake:
+
+<img src="/assets/bolotav2.png" width="768" alt="Screenshot of the second version of this website." />
+

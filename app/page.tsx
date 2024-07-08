@@ -7,7 +7,7 @@ import { PostItem } from "@/components/post-item";
 
 export default function Home() {
 
-  const latestPosts = sortPosts(posts).slice(0, 5);
+  const latestPosts = sortPosts(posts).slice(0, 10);
 
   return (
     <>
