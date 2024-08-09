@@ -3,7 +3,8 @@ import { cn } from "@/lib/utils";
 
 interface MediaItem {
     type: "image" | "video",
-    src: "string",
+    src: string,
+    caption?: string
 }
 
 interface ThreeImagesProps {
@@ -16,25 +17,28 @@ export function ThreeMedias({
 }: ThreeImagesProps) {
     return (
         <div
-            className={cn("flex gap-2 justify-between items-center my-6 w-full")}
+            className={cn("grid grid-cols-3 gap-2 w-full")}
             {...props}
         >
             {mediaItems.map((item, index) => (
-                item.type === 'image' ? (
-                    <img
-                        key={index}
-                        src={item.src}
-                        alt={`Media ${index + 1}`}
-                        className="w-1/3 object-cover rounded-md border-2 border-border"
-                    />
-                ) : (
-                    <video
-                        key={index}
-                        src={item.src}
-                        controls
-                        className="w-1/3 object-cover rounded-md border-2 border-border"
-                    />
-                )
+                <div key={index}>
+                    {item.type === 'image' ? (
+                        <img
+                            src={item.src}
+                            alt={`Media ${index + 1}`}
+                            className="object-cover rounded-md border-2 border-border w-full"
+                        />
+                    ) : (
+                        <video
+                            src={item.src}
+                            controls
+                            className="object-cover rounded-md border-2 border-border w-full"
+                        />
+                    )}
+                    {item.caption && (
+                        <p className="text-sm text-muted-foreground text-center">{item.caption}</p>
+                    )}
+                </div>
             ))}
         </div>
     );
