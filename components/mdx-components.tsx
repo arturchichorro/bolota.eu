@@ -1,6 +1,7 @@
 import Image from "next/image";
 import * as runtime from "react/jsx-runtime";
 import { Callout } from "./callout";
+import { ThreeMedias } from "./three-pics";
 import { cn } from "@/lib/utils";
 
 const useMDXComponent = (code: string) => {
@@ -10,7 +11,8 @@ const useMDXComponent = (code: string) => {
 
 const components = {
     Image,
-    Callout
+    Callout,
+    ThreeMedias,
 };
 
 interface MdxProps {
