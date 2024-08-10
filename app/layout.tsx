@@ -9,7 +9,7 @@ import "../node_modules/katex/dist/katex.min.css";
 import { siteConfig } from "@/config/site";
 import { Analytics } from "@vercel/analytics/react"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 
 export const metadata: Metadata = {
   title: siteConfig.name,
@@ -30,7 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-pt-[3.5rem]">
+    <html lang="en" className="scroll-pt-[3.5rem]" suppressHydrationWarning>
+      <head />
       <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
         <Providers>
           <div className="relative flex min-h-dvh flex-col bg-background">
