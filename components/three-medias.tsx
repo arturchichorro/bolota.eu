@@ -17,7 +17,7 @@ export function ThreeMedias({
 }: ThreeImagesProps) {
     return (
         <div
-            className={cn("grid grid-cols-3 gap-2 w-full")}
+            className={cn("grid grid-cols-3 gap-1 w-full")}
             {...props}
         >
             {mediaItems.map((item, index) => (
