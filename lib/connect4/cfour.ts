@@ -1,14 +1,14 @@
-interface GameState {
+export interface GameState {
     position: ('r' | 'y' | '')[][],
     turn: 'r' | 'y',
 }
 
-const initGameState: GameState = {
+export const initGameState: GameState = {
     position: new Array(6).fill('').map(x => new Array(7).fill('')),
     turn: 'r',
 }
 
-function printGame(game: GameState) {
+export function printGame(game: GameState) {
     console.log(`Turn: ${game.turn}`);
     for (let i = 5; i > -1; i--) {
         let row = " |  ";
@@ -23,7 +23,7 @@ function printGame(game: GameState) {
     }
 }
 
-function getValidMoves(game: GameState): number[] {
+export function getValidMoves(game: GameState): number[] {
     let r = []
     for (let j = 0; j<7; j++) {
         if (game.position[5][j] === '') {
@@ -33,9 +33,10 @@ function getValidMoves(game: GameState): number[] {
     return r
 }
 
-function makeMove(game: GameState, move: number) {
+export function makeMove(game: GameState, move: number) {
     
-    if(!getValidMoves(game).includes(move)) return;
+
+    if(!getValidMoves(game).includes(move) || gameIsOver(game)) return;
     
     for (let i = 0; i<7; i++) {
         if (game.position[i][move] === '') {
@@ -46,7 +47,7 @@ function makeMove(game: GameState, move: number) {
     }
 }
 
-function hasWon(game: GameState, player: 'r' | 'y'): boolean {
+export function hasWon(game: GameState, player: 'r' | 'y'): boolean {
     const directions = [
         {dx: 1, dy: 0}, 
         {dx: 0, dy: 1}, 
@@ -80,7 +81,7 @@ function hasWon(game: GameState, player: 'r' | 'y'): boolean {
     return false
 }
 
-function isDraw(game: GameState): boolean {
+export function isDraw(game: GameState): boolean {
     for (let j = 0; j<7; j++) {
         if (game.position[5][j] === '') {
             return false
@@ -94,11 +95,11 @@ function isDraw(game: GameState): boolean {
     return true
 }
 
-function gameIsOver(game: GameState): boolean {
+export function gameIsOver(game: GameState): boolean {
     return (hasWon(game, 'r') || hasWon(game, 'y') || isDraw(game))
 }
 
-function evaluation(game: GameState): number {
+export function evaluation(game: GameState): number {
 
     if (hasWon(game, 'r')) {
         return Number.MAX_SAFE_INTEGER
@@ -107,10 +108,10 @@ function evaluation(game: GameState): number {
         return Number.MIN_SAFE_INTEGER
     }
 
-    return quality_of_position(game, 'r') - quality_of_position(game, 'y')
+    return QualityOfPosition(game, 'r') - QualityOfPosition(game, 'y')
 }
 
-function quality_of_position(game: GameState, player: 'r' | 'y'): number {
+export function QualityOfPosition(game: GameState, player: 'r' | 'y'): number {
     const THREE_IN_A_ROW_SCORE = 100;
     const TWO_IN_A_ROW_SCORE = 10;
     const CENTER_COLUMN_SCORE = 5;
@@ -166,7 +167,7 @@ function quality_of_position(game: GameState, player: 'r' | 'y'): number {
 
 // This function is not complete. Quality of position function is a bit wonky when
 // counting two streaks, but it's ok for now, it works. 
-function test_quality_of_position() {
+function test_QualityOfPosition() {
     const game1: GameState = {
         position: [
             ['', '', 'r', 'r', 'r', '', ''],
@@ -179,13 +180,13 @@ function test_quality_of_position() {
         turn: 'r'
     }
 
-    console.log("Quality of position: " + quality_of_position(game1, 'r'))
+    console.log("Quality of position: " + QualityOfPosition(game1, 'r'))
     printGame(game1)
 }
 
 // Maybe this should be a helper function in some other file
 // Fisher-Yates Shuffle
-function shuffleArray<T>(array: T[]): T[] {
+export function shuffleArray<T>(array: T[]): T[] {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random()*(i+1));
         [array[i], array[j]] = [array[j], array[i]];
@@ -194,7 +195,7 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 
-function minimax(game: GameState, depth: number, alpha: number, beta: number, evalFunc: (arg: GameState) => number): [number, number] {
+export function minimax(game: GameState, depth: number, alpha: number, beta: number, evalFunc: (arg: GameState) => number): [number, number] {
     if (gameIsOver(game) || depth == 0) {
         return [evalFunc(game), -1]
     }
@@ -230,7 +231,6 @@ function minimax(game: GameState, depth: number, alpha: number, beta: number, ev
     }
     return [best_value, best_move]
 }
-
 
 async function playGameAgainstComputer(initialState: GameState) {
     
@@ -276,11 +276,9 @@ async function playGameAgainstComputer(initialState: GameState) {
             break;
         }
 
-        console.log("Red: " + quality_of_position(game, 'r'))
-        console.log("Yellow: " + quality_of_position(game, 'y'))
+        console.log("Red: " + QualityOfPosition(game, 'r'))
+        console.log("Yellow: " + QualityOfPosition(game, 'y'))
         console.log("Evaluation: " + evaluation(game))
 
     }
 }
-
-playGameAgainstComputer(initGameState);
