@@ -1,3 +1,1 @@
-This is the source code for my personal portfolio website. This is version 2. The first version can be found here: https://github.com/arturchichorro/bolotaeu.
-
-This second version has the same idea as the first one: blog posts directly from markdown files. In this repository, I managed to fix some of the more annoying issues with the first implementation. I used Next.js instead of just React.js. Many of the improvements are possible because of this repository: [Nextjs velite blog template](https://github.com/jolbol1/nextjs-velite-blog-template) and its accompanying YouTube tutorial video.
+This is the source code for my personal portfolio website. This is version 2.
