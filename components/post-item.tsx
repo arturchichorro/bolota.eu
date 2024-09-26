@@ -19,8 +19,8 @@ export function PostItem({ slug, title, description, date }: PostItemProps) {
             <div className="flex justify-between items-center">
                 <dl className="flex flex-row">
                     <dt className="sr-only">Published On</dt>
-                    <dd className="text-sm flex items-center">
-                        <time dateTime={date}>{formatDate(date)}</time>
+                    <dd className="flex text-sm sm:text-xs">
+                        <time className=""dateTime={date}>{formatDate(date)}</time>
                     </dd>
                 </dl>
             </div>
