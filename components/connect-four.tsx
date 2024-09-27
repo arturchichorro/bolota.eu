@@ -46,7 +46,7 @@ const ConnectFour = () => {
                   position: newGameState.position.map(row => [...row])
               };
               
-              makeMove(aiGameState, minimax(aiGameState, 5, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, evaluation)[1]);
+              makeMove(aiGameState, minimax(aiGameState, 6, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, evaluation)[1]);
               setGameState(aiGameState);
               checkGameOver(aiGameState);
 
@@ -72,7 +72,7 @@ const ConnectFour = () => {
             position: initGameState.position.map(row => [...row])
         };
         
-        makeMove(aiGameState, minimax(aiGameState, 5, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, evaluation)[1]);
+        makeMove(aiGameState, minimax(aiGameState, 6, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, evaluation)[1]);
         setGameState(aiGameState);
         checkGameOver(aiGameState);
 
@@ -139,9 +139,9 @@ const ConnectFour = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex flex-col sm:flex-row">
       <div>{renderBoard()}</div>
-      <div className="flex flex-col justify-center align-middle gap-2">
+      <div className="flex flex-col justify-center gap-2">
         {message && <span className="text-lg text-center text-accent">{message}</span>}
         <p className="text-sm text-center">Play as:</p>
         <Button size="sm" variant="outline" onClick={() => restartGame('start')}>Player 1</Button>
