@@ -1,22 +1,24 @@
 "use client"
 
 import { useState } from 'react';
-import { GameState, initGameState, makeMove, hasWon, isDraw, minimax, evaluation, getValidMoves, wherePieceWouldLand } from '../lib/connect4/cfour';
+import { GameState, initGameState, makeMove, hasWon, hasWonPositions, isDraw, minimax, evaluation, getValidMoves, wherePieceWouldLand } from '../lib/connect4/cfour';
 import { Button } from './ui/button';
 import DArrow from '@/components/svg/darrow';
+import { init } from 'next/dist/compiled/webpack/webpack';
 
 const ConnectFour = () => {
   const [gameState, setGameState] = useState<GameState>(initGameState);
-  const [message, setMessage] = useState<string>('Your turn!');
+  const [message, setMessage] = useState<string>('');
   const [isProcessingMove, setIsProcessingMove] = useState(false);
   const [hoveredCol, setHoveredCol] = useState<number | null>(null);
+  const [humanVsHuman, setHumanVsHuman] = useState<boolean>(false);
 
   const checkGameOver = (game: GameState): boolean => {
       if (hasWon(game, 'r')) {
-          setMessage('Red wins!');
+          setMessage('Player 1 wins!');
           return true
       } else if (hasWon(game, 'y')) {
-          setMessage('Yellow wins!');
+          setMessage('Player 2 wins!');
           return true
       } else if (isDraw(game)) {
           setMessage('The game is a draw!');    
@@ -37,7 +39,7 @@ const ConnectFour = () => {
       makeMove(newGameState, col);
       setGameState(newGameState);
       
-      if (!checkGameOver(newGameState)) {
+      if (!checkGameOver(newGameState) && !humanVsHuman) {
           setTimeout(() => {
               const aiGameState = { 
                   ...newGameState, 
@@ -55,10 +57,14 @@ const ConnectFour = () => {
       }
   };
 
-  const restartGame = (start: boolean) => {
-    if (start) {
+  const restartGame = (option: string) => {
+    setMessage('')
+
+    if (option === 'start') {
+      setHumanVsHuman(false);
       setGameState(initGameState)
-    } else {
+    } else if (option === 'second') {
+      setHumanVsHuman(false);
       setIsProcessingMove(true);
       setTimeout(() => {
         const aiGameState = { 
@@ -72,6 +78,9 @@ const ConnectFour = () => {
 
         setIsProcessingMove(false);
     }, 250)
+    } else {
+      setHumanVsHuman(true);
+      setGameState(initGameState)
     }
   }
 
@@ -125,20 +134,20 @@ const ConnectFour = () => {
             {letter}
           </div>
         ))}
-      
-
       </div>
     );
   };
 
   return (
-    <div>
-      {/* <h1>Connect Four</h1>
-      <p>{message}</p> */}
-      <div >{renderBoard()}</div>
-      
-      <Button onClick={() => restartGame(true)} className="border mr-2">Start as player one</Button>
-      <Button onClick={() => restartGame(false)}className="border">Start as player two</Button>
+    <div className="flex">
+      <div>{renderBoard()}</div>
+      <div className="flex flex-col justify-center align-middle gap-2">
+        {message && <span className="text-lg text-center text-accent">{message}</span>}
+        <p className="text-sm text-center">Play as:</p>
+        <Button size="sm" variant="outline" onClick={() => restartGame('start')}>Player 1</Button>
+        <Button size="sm" variant="outline" onClick={() => restartGame('second')}>Player 2</Button>
+        <Button size="sm" variant="outline" onClick={() => restartGame('human')}>Human vs Human</Button>
+      </div>
     </div>
   );
   

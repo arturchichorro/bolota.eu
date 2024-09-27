@@ -83,6 +83,40 @@ export function hasWon(game: GameState, player: 'r' | 'y'): boolean {
     return false
 }
 
+export function hasWonPositions(game: GameState, player: 'r' | 'y'): [number, number][] | null {
+    const directions = [
+        {dx: 1, dy: 0}, 
+        {dx: 0, dy: 1}, 
+        {dx: 1, dy: 1}, 
+        {dx: 1, dy: -1}, 
+    ];
+
+    for (let i = 0; i<6; i++) {
+        for (let j = 0; j<7; j++) {
+            if (game.position[i][j] === player) {
+                
+                for (const {dx, dy} of directions) {
+                    let count = 1;
+                    for (let k=1; k<4; k++) {
+                        const x = i + k*dx;
+                        const y = j + k*dy;
+
+                        if (x >= 0 && x < 6 && y >= 0 && y < 7 && game.position[x][y] == player) {
+                            count++;
+                        } else {
+                            break;
+                        }
+                    }
+                    if (count >= 4) {
+                        return [[i, j], [i+count*dx, j+count*dy]]
+                    }
+                }
+            }
+        }
+    }
+    return null
+}
+
 export function isDraw(game: GameState): boolean {
     for (let j = 0; j<7; j++) {
         if (game.position[5][j] === '') {
