@@ -1,3 +1,5 @@
+import { shuffleArray } from "../utils";
+
 export interface GameState {
     position: ('r' | 'y' | '')[][],
     turn: 'r' | 'y',
@@ -184,17 +186,6 @@ function test_QualityOfPosition() {
     printGame(game1)
 }
 
-// Maybe this should be a helper function in some other file
-// Fisher-Yates Shuffle
-export function shuffleArray<T>(array: T[]): T[] {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random()*(i+1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array
-}
-
-
 export function minimax(game: GameState, depth: number, alpha: number, beta: number, evalFunc: (arg: GameState) => number): [number, number] {
     if (gameIsOver(game) || depth == 0) {
         return [evalFunc(game), -1]
@@ -231,6 +222,18 @@ export function minimax(game: GameState, depth: number, alpha: number, beta: num
     }
     return [best_value, best_move]
 }
+
+export function wherePieceWouldLand(game: GameState, col: number): [number, number] | void {
+    if(!getValidMoves(game).includes(col) || gameIsOver(game)) return;
+    
+    for (let i = 0; i<7; i++) {
+        if (game.position[i][col] === '') {
+            return [i, col]
+        } 
+    }
+    return;
+}
+
 
 async function playGameAgainstComputer(initialState: GameState) {
     
