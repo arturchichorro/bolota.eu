@@ -14,8 +14,8 @@ export function PostItem({ slug, title, description, date }: PostItemProps) {
     return (
         <article className="grid sm:grid-cols-3 grid-cols-4 border-border border-b py-2">
             <div className="sm:col-span-2 col-span-3">
-                <h2 className="link tracking-widest">
-                    <Link href={slug}># {title}</Link>
+                <h2 className="tracking-widest">
+                    <Link className="link" href={slug}># {title}</Link>
                 </h2>
             </div>
             <div className="col-span-1 text-right">

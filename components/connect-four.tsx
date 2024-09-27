@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import { GameState, initGameState, makeMove, hasWon, isDraw, minimax, evaluation, getValidMoves } from '../lib/connect4/cfour';
-
-const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+import DArrow from '@/components/svg/darrow';
 
 const ConnectFour = () => {
     const [gameState, setGameState] = useState<GameState>(initGameState);
     const [message, setMessage] = useState<string>('Your turn!');
     const [isProcessingMove, setIsProcessingMove] = useState(false);
+    const [hoveredCol, setHoveredCol] = useState<number | null>(null);
 
     const checkGameOver = (game: GameState): boolean => {
         if (hasWon(game, 'r')) {
@@ -52,7 +52,6 @@ const ConnectFour = () => {
         } else {
             setIsProcessingMove(false);
         }
-
     };
 
   const renderCell = (row: number, col: number) => {
@@ -62,36 +61,58 @@ const ConnectFour = () => {
       <div
         key={`${row}-${col}`}
         onClick={() => handleMove(col)}
-        className={cellValue ? 'fade-in' : ''}
-        style={{
-          width: 50,
-          height: 50,
-          backgroundColor: color,
-          border: '1px solid hsl(var(--border))',
-          borderRadius: 30,
-          display: 'inline-block',
-          cursor: cellValue === '' ? 'pointer' : 'default',
-          transition: 'background-color 0.3s ease',
-        }}
+        onMouseEnter={() => setHoveredCol(col)}
+        onMouseLeave={() => setHoveredCol(null)}
+        className={`
+          ${cellValue ? 'fade-in' : ''} 
+          w-12 
+          h-12 
+          bg-[${color}]
+          ${cellValue === 'r' ? "bg-secondary" : cellValue === 'y' ? "bg-secondary-foreground" : ""}
+          border border-border rounded-[30px]
+          ${cellValue === '' ? "cursor-pointer" : "cursor-default"}
+          transition-colors duration-300 ease-in
+        `}
       />
+    );
+  };
+
+  const renderArrow = (col: number) => {
+    return (
+        <div
+            key={`arrow-${col}`}
+            className={`arrow ${hoveredCol === col ? 'visible' : 'invisible'} flex justify-center`}
+        >
+          <DArrow size={20} color="text-accent"/>
+        </div>
     );
   };
 
   const renderBoard = () => {
     return (
-      <div className="grid grid-cols-7 grid-rows-6 gap-2 p-4 rounded-xl border-[1.5px]">
+      <div className="grid grid-cols-7 grid-rows-[auto, repeat(7, 1fr)] gap-2 p-4">
+        {[...Array(7)].map((_, col) => renderArrow(col))}
+        
         {gameState.position.flatMap((row, i) =>
           row.map((_, j) => renderCell(5 - i, j))
         )}
+
+        {['a', 'b', 'c', 'd', 'e', 'f', 'g'].map((letter, index) => (
+          <div key={index} className="text-center text-accent">
+            {letter}
+          </div>
+        ))}
+      
+
       </div>
     );
   };
-  
+
   return (
     <div>
       <h1>Connect Four</h1>
       <p>{message}</p>
-      <div className="">{renderBoard()}</div>
+      <div >{renderBoard()}</div>
     </div>
   );
   
