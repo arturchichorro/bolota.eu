@@ -97,8 +97,8 @@ const ConnectFour = () => {
         onMouseLeave={() => setHoveredCol(null)}
         className={`
           ${cellValue ? 'fade-in' : ''} 
-          w-12 
-          h-12
+          w-8 sm:w-12 
+          h-8 sm:h-12
           ${cellValue === 'r' ? "bg-secondary-foreground" : cellValue === 'y' ? "bg-secondary" : ""}
           border border-border rounded-[30px]
           ${cellValue === '' ? "cursor-pointer" : "cursor-default"}
