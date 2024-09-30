@@ -143,6 +143,9 @@ export function evaluation(game: GameState): number {
     if (hasWon(game, 'y')) {
         return Number.MIN_SAFE_INTEGER
     }
+    if (isDraw(game)) {
+        return 0
+    }
 
     return QualityOfPosition(game, 'r') - QualityOfPosition(game, 'y')
 }
