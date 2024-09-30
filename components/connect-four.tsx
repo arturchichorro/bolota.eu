@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { GameState, initGameState, makeMove, hasWon, hasWonPositions, isDraw, minimax, evaluation, getValidMoves, wherePieceWouldLand } from '../lib/connect4/cfour';
 import { Button } from './ui/button';
+import { Switch } from './ui/switch';
 import DArrow from '@/components/svg/darrow';
 import { init } from 'next/dist/compiled/webpack/webpack';
 
@@ -12,6 +13,8 @@ const ConnectFour = () => {
   const [isProcessingMove, setIsProcessingMove] = useState(false);
   const [hoveredCol, setHoveredCol] = useState<number | null>(null);
   const [humanVsHuman, setHumanVsHuman] = useState<boolean>(false);
+  const [evalScore, setEvalScore] = useState<number>(0);
+  const [showEvalBar, setShowEvalBar] = useState<boolean>(true);
 
   const checkGameOver = (game: GameState): boolean => {
       if (hasWon(game, 'r')) {
@@ -38,6 +41,10 @@ const ConnectFour = () => {
       };
       makeMove(newGameState, col);
       setGameState(newGameState);
+
+      const plEvalMove = minimax(newGameState, 6, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, evaluation);
+
+      setEvalScore(plEvalMove[0]);
       
       if (!checkGameOver(newGameState) && !humanVsHuman) {
           setTimeout(() => {
@@ -46,9 +53,13 @@ const ConnectFour = () => {
                   position: newGameState.position.map(row => [...row])
               };
               
-              makeMove(aiGameState, minimax(aiGameState, 6, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, evaluation)[1]);
+              const aiEvalMove = minimax(aiGameState, 6, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, evaluation);
+
+              makeMove(aiGameState, aiEvalMove[1]);
               setGameState(aiGameState);
               checkGameOver(aiGameState);
+
+              setEvalScore(aiEvalMove[0]);
 
               setIsProcessingMove(false);
           }, 250)
@@ -61,6 +72,8 @@ const ConnectFour = () => {
     setMessage('')
 
     if (option === 'start') {
+      setEvalScore(0);
+
       setHumanVsHuman(false);
       setGameState(initGameState)
     } else if (option === 'second') {
@@ -72,13 +85,19 @@ const ConnectFour = () => {
             position: initGameState.position.map(row => [...row])
         };
         
-        makeMove(aiGameState, minimax(aiGameState, 6, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, evaluation)[1]);
+        const aiEvalMove = minimax(aiGameState, 6, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, evaluation);
+
+        makeMove(aiGameState, aiEvalMove[1]);
         setGameState(aiGameState);
         checkGameOver(aiGameState);
+
+        setEvalScore(aiEvalMove[0]);
 
         setIsProcessingMove(false);
     }, 250)
     } else {
+      setEvalScore(0);
+
       setHumanVsHuman(true);
       setGameState(initGameState)
     }
@@ -97,8 +116,8 @@ const ConnectFour = () => {
         onMouseLeave={() => setHoveredCol(null)}
         className={`
           ${cellValue ? 'fade-in' : ''} 
-          w-8 sm:w-12 
-          h-8 sm:h-12
+          w-10 sm:w-12 
+          h-10 sm:h-12
           ${cellValue === 'r' ? "bg-secondary-foreground" : cellValue === 'y' ? "bg-secondary" : ""}
           border border-border rounded-[30px]
           ${cellValue === '' ? "cursor-pointer" : "cursor-default"}
@@ -120,6 +139,35 @@ const ConnectFour = () => {
     );
   };
 
+  const renderEval = () => {
+    const MAX_EVAL = 500
+    const MIN_EVAL = -500
+
+    const actualEval = evalScore > MAX_EVAL ? 500 : evalScore < MIN_EVAL ? -500 : evalScore; 
+
+    const normalizedScore = (actualEval - MIN_EVAL) / (MAX_EVAL - MIN_EVAL);
+
+    const redValue = `${normalizedScore * 100}%`;
+    const yellowValue = `${(1 - normalizedScore) * 100}%`;
+
+    
+    
+    return (
+      <div className="flex items-center justify-center">
+        <div className="w-6 h-[80%] relative border-border border-2">
+          <div
+            className="absolute bottom-0 w-full transition-all duration-300 bg-secondary-foreground"
+            style={{ height: redValue}}
+          />
+          <div
+            className="absolute top-0 w-full transition-all duration-300 bg-secondary"
+            style={{ height: yellowValue}}
+          />
+        </div>
+      </div>
+    )
+  }
+
   const renderBoard = () => {
     return (
       <div className="grid grid-cols-7 grid-rows-[auto, repeat(7, 1fr)] gap-2 p-4">
@@ -140,13 +188,17 @@ const ConnectFour = () => {
 
   return (
     <div className="flex flex-col sm:flex-row">
-      <div>{renderBoard()}</div>
+      <div className="flex flex-row">
+        {showEvalBar && renderEval()}
+        {renderBoard()}
+      </div>
       <div className="flex flex-col justify-center gap-2">
         {message && <span className="text-lg text-center text-accent">{message}</span>}
         <p className="text-sm text-center">Play as:</p>
         <Button size="sm" variant="outline" onClick={() => restartGame('start')}>Player 1</Button>
         <Button size="sm" variant="outline" onClick={() => restartGame('second')}>Player 2</Button>
         <Button size="sm" variant="outline" onClick={() => restartGame('human')}>Human vs Human</Button>
+        <Switch checked={showEvalBar} onCheckedChange={(checked) => {setShowEvalBar(checked)}}/>
       </div>
     </div>
   );
