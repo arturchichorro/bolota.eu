@@ -8,7 +8,7 @@ interface MediaItem {
 }
 
 interface ThreeImagesProps {
-    mediaItems: MediaItem[]; // Array de links para fotos
+    mediaItems: MediaItem[];
 }
 
 export function ThreeMedias({
