@@ -5,7 +5,6 @@ import { GameState, initGameState, makeMove, hasWon, hasWonPositions, isDraw, mi
 import { Button } from './ui/button';
 import { Switch } from './ui/switch';
 import DArrow from '@/components/svg/darrow';
-import { init } from 'next/dist/compiled/webpack/webpack';
 
 const ConnectFour = () => {
   const [gameState, setGameState] = useState<GameState>(initGameState);
@@ -192,13 +191,16 @@ const ConnectFour = () => {
         {showEvalBar && renderEval()}
         {renderBoard()}
       </div>
-      <div className="flex flex-col justify-center gap-2">
+      <div className="flex flex-col justify-center items-center gap-2">
         {message && <span className="text-lg text-center text-accent">{message}</span>}
         <p className="text-sm text-center">Play as:</p>
-        <Button size="sm" variant="outline" onClick={() => restartGame('start')}>Player 1</Button>
-        <Button size="sm" variant="outline" onClick={() => restartGame('second')}>Player 2</Button>
-        <Button size="sm" variant="outline" onClick={() => restartGame('human')}>Human vs Human</Button>
-        <Switch checked={showEvalBar} onCheckedChange={(checked) => {setShowEvalBar(checked)}}/>
+        <Button className="w-60 sm:w-40" size="sm" variant="outline" onClick={() => restartGame('start')}>Player 1</Button>
+        <Button className="w-60 sm:w-40" size="sm" variant="outline" onClick={() => restartGame('second')}>Player 2</Button>
+        <Button className="w-60 sm:w-40" size="sm" variant="outline" onClick={() => restartGame('human')}>Human vs Human</Button>
+        <div className="text-sm flex flex-row items-center justify-center gap-2">
+          Eval Bar:
+          <Switch className="my-2" checked={showEvalBar} onCheckedChange={(checked) => {setShowEvalBar(checked)}}/>
+        </div>
       </div>
     </div>
   );
