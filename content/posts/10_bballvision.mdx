@@ -9,7 +9,7 @@ published: true
 
 Over the past year, I’ve been playing a lot of basketball in my free time. This inspired me to explore computer vision and create a simple program to count attempted and made shots. Here’s how it turned out:
 <div className="flex justify-center">
-    <video width="350" controls>
+    <video className="border-2 border-border rounded-md" width="350" controls>
         <source src="/assets/demo_bballvision.mp4" type="video/mp4" />
 Your browser does not support the video tag.
     </video>
@@ -48,7 +48,7 @@ This clearly isn't perfect, and I've already played around trying to add more an
 
 To keep track of made shots, the logic is a bit more complex, but still pretty simple. Basically, every frame, we try to figure out if the ball is above the rim or not. If it is, we save it's position. This way, whenever the ball goes back below the rim, we'll have stored the last position of the ball above the rim. Then, when we detect that the ball is below the rim, we draw a line between the ball's current position, and the last position of the ball above the rim. If that line intersects with the upper part of the rim, then it's a made shot. Here's a drawing to explain what's going on:
 <div className="flex justify-center">
-    <img className="border-border" src="/assets/bballvision_png.png" width="600" alt="Explanation of made shot logic" />
+    <img className="border-2 border-border rounded-md" src="/assets/bballvision_png.png" width="600" alt="Explanation of made shot logic" />
 </div>
 ### Future Improvements
 
