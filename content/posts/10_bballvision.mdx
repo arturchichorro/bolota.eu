@@ -1,0 +1,65 @@
+---
+title: Basketball Shot Counter with Computer Vision
+description: Diving into computer vision to create a basketball shot counter using YOLO.
+date: 2024-10-14
+published: true
+---
+
+### What is it?
+
+Over the past year, I’ve been playing a lot of basketball in my free time. This inspired me to explore computer vision and create a simple program to count attempted and made shots. Here’s how it turned out:
+<div className="flex justify-center">
+    <video width="350" controls>
+        <source src="/assets/demo_bballvision.mp4" type="video/mp4" />
+Your browser does not support the video tag.
+    </video>
+</div>
+And here's the <a className="link" href="https://github.com/arturchichorro/bballvision" target="_blank">GitHub repo</a>. I'd appreciate it if you gave it a star.
+
+### Background 
+
+I started this project during the summer while participating in buildspace, where I began researching what I needed to learn. You can check out a <Link className="link" href="posts/7_sharing_and_buildspace">previous post</Link> I wrote about my experience. During that time, I learned a lot about machine learning and computer vision and completed the <a className="link" href="https://www.codecademy.com/profiles/achichorro/certificates/6f8e0510ca91437a847b53aa9e9aa3f1" target="_blank">Machine Learning/AI Engineer career path</a> on <a className="link" href="https://www.codecademy.com/" target="_blank"></a>Codecademy. I explored several resources, including Kaggle, but after some vacations and other projects, I didn’t get back to the basketball vision project until now.
+
+### Actual Implementation
+
+To my surprise, implementing the project wasn’t that difficult. I found an <a className="link" href="https://universe.roboflow.com/test-datset/basketball-bs0zc/dataset/1" target="_blank">excellent dataset</a> on <a className="link" href="https://roboflow.com/" target="_blank">Roboflow</a> and trained my model for 50 epochs using Google Colab. This dataset enabled my model to detect the following classes:
+```python
+classnames = ["ball", "made", "person", "rim", "shoot"]
+```
+
+Once the model was trained, most of the groundwork was done. All that remained was to implement the shot counting logic.
+
+While experimenting with my trained model, I discovered two important insights. First, the "made" class wasn’t detected frequently enough, so I decided not to use it due to its inconsistency. I needed a more reliable indicator. On the other hand, the "shoot" class was consistently detected, regardless of the shooting form. Therefore, I decided that it made sense to use it to count attempted shots.
+
+##### Counting Attempted Shots
+
+The logic I developed for counting attempts is straightforward. Each time the "shoot" class is detected, I wait five frames. If the ball's distance from the shoot position increases over those five frames, it indicates an attempt was made:
+```python
+if shoot_position and shoot_position[-1][2] == frame - 5:
+    last_ball_pos = [(cx, cy) for cx, cy, frame in list(ball_position)[-5:]]
+
+    if is_increasing_distances((shoot_position[-1][0], shoot_position[-1][1]), last_ball_pos):
+        total_attempts += 1
+```
+
+This clearly isn't perfect, and I've already played around trying to add more and better conditions. But so far, in videos of just one person shooting the ball, it is pretty reliable, and has only failed when half of the person shooting was out of frame, resulting in the "shoot" class not getting detected. I still want to add some sort of secondary check to try to increase the accuracy of the predictions. Interestingly, the "increasing distances" condition helps prevent the program from being fooled by pump fakes.
+
+##### Counting Made Shots
+
+To keep track of made shots, the logic is a bit more complex, but still pretty simple. Basically, every frame, we try to figure out if the ball is above the rim or not. If it is, we save it's position. This way, whenever the ball goes back below the rim, we'll have stored the last position of the ball above the rim. Then, when we detect that the ball is below the rim, we draw a line between the ball's current position, and the last position of the ball above the rim. If that line intersects with the upper part of the rim, then it's a made shot. Here's a drawing to explain what's going on:
+<div className="flex justify-center">
+    <img className="border-border" src="/assets/bballvision_png.png" width="600" alt="Explanation of made shot logic" />
+</div>
+### Future Improvements
+
+Currently, there are several issues. The code works best when only one person is playing. In tests with videos of my brother and me playing 1v1, I encountered problems with passes being counted as shots. Here are some areas I plan to improve:
+
+- Enhance attempt counting. If the "shoot" class isn't detected, attempts won’t be counted — I need a failsafe.
+- Enable support for videos with multiple players without bugs.
+- Allow the code to run from the terminal with arguments like "input_vid_path" and booleans for display options (bounding boxes, recent ball positions, etc.).
+- Test the code on actual NBA games by adding capabilities like detecting "player" instead of "person" to avoid crowd interference.
+- A bit ambitious, but I’d love to set up a wide GoPro to record the hoop and automatically count all shots attempted and made over a period of time. It would be exciting to connect an ESP32 to the camera to transmit the video to a server for automatic processing, allowing me to integrate this project with the skills I learned while building the <Link className="link" href="posts/8_embedded_programming">Spotify Controller</Link>.
+
+### Final Thoughts
+
+Thanks to the YOLO algorithm, computer vision feels like a really accessible technology, and the barrier to entry doesn't seem super big. Personally, I learned a lot from a bunch of youtube videos, namely <a className="link" href="https://www.youtube.com/watch?v=WgPbbWmnXJ8&t=3564s" target="_blank">this</a> one, that gave me the practical skills to tackle a project like this one. I'm definitely going to do more projects around this topic!

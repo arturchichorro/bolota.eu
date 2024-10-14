@@ -3,6 +3,7 @@ import * as runtime from "react/jsx-runtime";
 import { Callout } from "./callout";
 import { ThreeMedias } from "./three-medias";
 import ConnectFour from "./connect-four";
+import Link from "next/link";
 
 const useMDXComponent = (code: string) => {
     const fn = new Function(code);
@@ -13,7 +14,8 @@ const components = {
     Image,
     Callout,
     ThreeMedias,
-    ConnectFour
+    ConnectFour,
+    Link
 };
 
 interface MdxProps {
