@@ -11,7 +11,8 @@
       --card-foreground: 222.2 84% 4.9%;
 
       --popover: 0 0% 100%;
-      --popover-foreground: 222.2 84% 4.9%;
+      /* Link hover color */
+      --popover-foreground: 140 70% 20%;
 
       --primary: 222.2 47.4% 11.2%;
       --primary-foreground: 210 40% 98%;
@@ -45,7 +46,8 @@
       --card-foreground: 130 40% 98%;
 
       --popover: 142.2 84% 4.9%;
-      --popover-foreground: 130 40% 98%;
+      /* Link hover color */
+      --popover-foreground: 140 33% 7%;
 
       --primary: 130 40% 98%;
       --primary-foreground: 142.2 47.4% 11.2%;
@@ -79,7 +81,7 @@
   }
 
   .link {
-    @apply underline underline-offset-4 decoration-accent/[0.5] decoration-2 text-accent hover:no-underline hover:bg-destructive hover:text-accent-foreground
+    @apply underline underline-offset-4 decoration-accent/[0.5] decoration-2 text-accent hover:no-underline hover:bg-destructive hover:text-popover-foreground
  }
 
 
