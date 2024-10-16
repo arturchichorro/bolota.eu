@@ -1,27 +1,24 @@
 import Link from "next/link";
-import { cn} from "@/lib/utils";
 import { Icons } from "./icons";
-import { buttonVariants } from "./ui/button";
-import { siteConfig } from "@/config/site";
+import { ExternalLinkIcon } from "lucide-react";
 
 interface ProjectItemProps {
     title: string;
     description?: string;
     years: string;
     gh?: string;
-    posts?: string[]
+    posts?: { post_title: string, external: boolean, url: string }[]
 }
-
 
 export function ProjectItem({ title, description, years, gh, posts}: ProjectItemProps ) {
 
 
     return (
-        <article className="border-2 border-border rounded-md w-full p-2 min-h-40 flex flex-col justify-between">
+        <article className="bg-popover border-2 border-border rounded-md p-4 w-full min-h-44 flex flex-col justify-between">
             <div className="flex flex-row justify-between px-1">
                 <div className="flex flex-col gap-1">
                     <h1 className="text-accent text-sm">{years}</h1>
-                    <h1 className="text-primary">{title}</h1>
+                    <h1 className="text-primary underline underline-offset-[5px] hover:text-accent hover:cursor-default">{title}</h1>
                     <p className="prose prose-base dark:prose-invert prose-p:text-primary text-sm">{description}</p>
                 </div>
                 <div>
@@ -41,14 +38,15 @@ export function ProjectItem({ title, description, years, gh, posts}: ProjectItem
                 </div>
             </div>
             <div className="flex gap-2 flex-row">
-                {posts?.map((url, index) => (
-                    <Link key={index} href={url} target="_blank" rel="noreferrer" className="border-border border rounded-md text-sm px-2">
-                        Article
+                {posts?.map((item, index) => (
+                    <Link key={index} href={item.url} target="_blank" className="border-border border rounded-md text-sm text-muted-foreground px-2 py-1 hover:bg-input">
+                        <div className="flex flex-row gap-1 items-center">
+                            {item.post_title}
+                            {item.external && <ExternalLinkIcon size="12"/>}
+                        </div>
                     </Link>
                 ))}
             </div>
         </article>
     )
 }
-
-// ghost: "hover:bg-accent hover:text-accent-foreground",

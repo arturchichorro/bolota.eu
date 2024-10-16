@@ -14,14 +14,20 @@ const projects = [
         description: "Counting attempted/made Basketball shots.",
         years: "2024",
         gh: "https://github.com/arturchichorro/bballvision",
-        posts: ["https://bolota.eu/posts/7_sharing_and_buildspace", "https://bolota.eu/posts/10_bballvision"]
+        posts: [
+            {post_title: "How it works", external: false, url: "posts/10_bballvision"},
+            {post_title: "Introduction", external: false, url: "posts/7_sharing_and_buildspace"},
+        ]
     },
     {
         title: "Learn Anything (Lanny)",
         description: "Turn any text document into a Quizz using AI.",
         years: "2024",
         gh: undefined,
-        posts: ["http://localhost:3000/posts/5_shift_appens"]
+        posts: [
+            {post_title: "Article", external: false, url:"posts/5_shift_appens"},
+            {post_title: "Behance", external: true, url:"https://www.behance.net/gallery/198170575/Lanny"}
+        ]
     },
 ]
 
