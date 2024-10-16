@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { ProjectItem } from "@/components/project-item";
 
 export const metadata: Metadata = {
-    title: "My Projects",
-    description: "List of all of the relevant projects built by arturchichorro.",
+    title: "bolotaeu Projects",
+    description: "List of all relevant projects built by arturchichorro.",
 }
 
 const projects = [
