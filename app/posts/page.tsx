@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "List of all posts in bolota.eu.",
 }
 
-const POSTS_PER_PAGE = 10;
+const POSTS_PER_PAGE = 20;
 
 interface BlogPageProps {
     searchParams: {
