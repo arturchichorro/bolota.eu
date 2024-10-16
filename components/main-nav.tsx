@@ -19,6 +19,9 @@ export function MainNav() {
             <Link href="/posts" className={cn("px-1 text-sm text-accent sm:inline-block border-b-2 border-accent/[0.6] hover:border-transparent hover:bg-destructive hover:text-popover-foreground", pathname === "/blog" ? "text-accent-foreground bg-destructive border-transparent" : "text-accent")}>
                 Posts
             </Link>
+            <Link href="/projects" className={cn("px-1 text-sm text-accent sm:inline-block border-b-2 border-accent/[0.6] hover:border-transparent hover:bg-destructive hover:text-popover-foreground", pathname === "/about" ? "text-accent-foreground bg-destructive border-transparent" : "text-accent")}>
+                Projects
+            </Link>
             <Link href="/about" className={cn("px-1 text-sm text-accent sm:inline-block border-b-2 border-accent/[0.6] hover:border-transparent hover:bg-destructive hover:text-popover-foreground", pathname === "/about" ? "text-accent-foreground bg-destructive border-transparent" : "text-accent")}>
                 About
             </Link>
