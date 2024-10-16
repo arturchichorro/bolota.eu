@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { siteConfig } from "@/config/site";
 import { Metadata } from "next";
+import Link from "next/link"
 
 export const metadata: Metadata = {
     title: "About Me",
@@ -8,6 +9,11 @@ export const metadata: Metadata = {
 }
 
 export default async function AboutPage() {
+
+    const res = await fetch("https://leetcode-api-faisalshohag.vercel.app/arturchichorro")
+    const leetCodeData = await res.json();
+
+
     return (
         <div className="container max-w-4xl space-y-6 pb-8 pt-6 md:pb-2 md:mt-2 lg:py-2">
 
@@ -31,13 +37,23 @@ export default async function AboutPage() {
                 <div className="prose prose-base dark:prose-invert prose-p:text-primary">
                     <p> Hey, I&apos;m Artur. I&apos;ve been fiddling with mathematics since I can remember. </p>
                     <p>
-                        This website exists because I like the idea of having my corner of the internet where I can express myself and talk about what I care about, whatever that may be. Developing it was also my introduction to web development, and the whole world surrounding that.
+                        This website exists because I like the idea of having my corner of the internet where I can express myself and talk about what I care about, whatever that may be. At the moment, it seems to mostly be the things I&apos;m learning about.
                     </p>
                     <p>
-                        Currently, I&apos;m taking a gap year to spend time exploring my interests, which involve mathematics, coding, videography, cooking, basketball and chess.
+                        Currently, I&apos;m transitioning from my background in mathematics to software engineering. I try to spend my free time exploring my interests, which involve coding, math, videography, cooking, basketball and chess.
                     </p>
                     <p> Feel free to mail me at <a className="link">arturchichorro [at] gmail.com</a> to say hello! </p>
                 </div>
+            </div>
+
+            <hr></hr>
+            
+            <div className="flex justify-center gap-2 mt-4 text-primary text-sm">
+                <Link target="_blank" className="link" href="https://leetcode.com/u/arturchichorro/">LeetCode Stats</Link>
+                <p>Total Solved: {leetCodeData.totalSolved}</p>
+                <p>Easy: {leetCodeData.easySolved}</p>
+                <p>Medium: {leetCodeData.mediumSolved}</p>
+                <p>Hard: {leetCodeData.hardSolved}</p>
             </div>
         </div>
     )
