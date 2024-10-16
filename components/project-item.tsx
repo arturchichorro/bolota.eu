@@ -11,12 +11,10 @@ interface ProjectItemProps {
 }
 
 export function ProjectItem({ title, description, years, gh, posts}: ProjectItemProps ) {
-
-
     return (
         <article className="bg-popover border-2 border-border rounded-md p-4 w-full min-h-44 flex flex-col justify-between">
             <div className="flex flex-row justify-between px-1">
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-2">
                     <h1 className="text-accent text-sm">{years}</h1>
                     <h1 className="text-primary underline underline-offset-[5px] hover:text-accent hover:cursor-default">{title}</h1>
                     <p className="prose prose-base dark:prose-invert prose-p:text-primary text-sm">{description}</p>
@@ -24,7 +22,7 @@ export function ProjectItem({ title, description, years, gh, posts}: ProjectItem
                 <div>
                 {gh ? (
                     <Link href={gh} target="_blank" rel="noreferrer">
-                        <div className="w-8 h-8 hover:bg-accent hover:text-accent-foreground inline-flex items-center justify-center rounded-md">
+                        <div className="w-8 h-8 hover:bg-accent text-destructive-foreground hover:text-accent-foreground inline-flex items-center justify-center rounded-md">
                             <Icons.gitHub className="h-5 w-5" />
                             <span className="sr-only">GitHub</span>
                         </div>
