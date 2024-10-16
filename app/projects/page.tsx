@@ -11,7 +11,7 @@ const projects = [
         title: "Bolota.eu",
         description: "This website's source code.",
         years: "2023-2024",
-        gh: "https://github.com/arturchichorro/bolota-v2",
+        gh: "https://github.com/arturchichorro/bolota.eu",
         posts: [
             {post_title: "Version 2", external: false, url: "posts/6_bolotaeuv2"},
             {post_title: "Version 1", external: false, url: "posts/1_bolotaeuv1"},
