@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { siteConfig } from "@/config/site";
 import { Metadata } from "next";
 import Link from "next/link"
+import LeetCodeStats from "@/components/leetcode-stats";
 
 export const metadata: Metadata = {
     title: "About Me",
@@ -47,13 +48,8 @@ export default async function AboutPage() {
             </div>
 
             <hr></hr>
-            
-            <div className="flex justify-center gap-2 mt-4 text-primary text-sm">
-                <Link target="_blank" className="link" href="https://leetcode.com/u/arturchichorro/">LeetCode Stats</Link>
-                <p>Total Solved: {leetCodeData.totalSolved}</p>
-                <p>Easy: {leetCodeData.easySolved}</p>
-                <p>Medium: {leetCodeData.mediumSolved}</p>
-                <p>Hard: {leetCodeData.hardSolved}</p>
+            <div className="flex justify-center">
+            <LeetCodeStats />
             </div>
         </div>
     )
