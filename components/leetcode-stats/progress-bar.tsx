@@ -23,7 +23,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
                 <p>{difficulty}</p>
                 <p>{solvedNumber} / {totalNumber}</p>
             </div>
-            <div className={`relative w-full min-w-20 h-2 ${bgColor} rounded`}>
+            <div className={`relative w-full min-w-10 h-2 ${bgColor} rounded`}>
                 <div
                     className={`absolute h-2 ${barColor} rounded-md inset-0`}
                     style={{ width: `${solvedPercentage}%` }}

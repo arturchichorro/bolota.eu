@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ProgressBar from './progress-bar';
+import CircularProgress from './circular-progress';
 
 type LeetCodeData = {
     totalSolved: number;
@@ -63,71 +64,42 @@ export default function LeetCodeStats() {
         return <p>Failed to load LeetCode stats.</p>;
     }
 
-    const solvedPercentage = (leetCodeData.totalSolved / leetCodeData.totalQuestions) * 100;
-
-    const easySolvedPercentage = (leetCodeData.easySolved / leetCodeData.totalEasy) * 100;
-    const mediumSolvedPercentage = (leetCodeData.mediumSolved / leetCodeData.totalMedium) * 100;
-    const hardSolvedPercentage = (leetCodeData.hardSolved / leetCodeData.totalHard) * 100;
-
-
-    const radius = 40;
-    const circumference = 2 * Math.PI * radius;
-    const strokeDashoffset = circumference - (solvedPercentage / 100) * circumference;
-
     return (
         <div className="bg-popover border-2 border-border rounded-md px-4 py-2 w-full max-w-96">
             
             <div className="grid grid-cols-3 gap-4">
                 <div className="flex flex-col justify-center items-center">
-                    <Link target="_blank" href="https://leetcode.com/u/arturchichorro/" className="link text-sm">
+                    <Link target="_blank" href="https://leetcode.com/u/arturchichorro/" className="link text-sm text-nowrap">
                         LeetCode Stats
                     </Link>
-                    <div className="relative">
-                        <svg height="120" width="120">
-                            <circle
-                                cx="60"
-                                cy="60"
-                                r={radius}
-                                stroke="#e5e7eb"
-                                strokeWidth="10"
-                                fill="transparent"
-                            />
-                            <circle
-                                cx="60"
-                                cy="60"
-                                r={radius}
-                                stroke="#22c55e"
-                                strokeWidth="10"
-                                fill="transparent"
-                                strokeDasharray={circumference}
-                                strokeDashoffset={strokeDashoffset}
-                                strokeLinecap="round"
-                                transform="rotate(-90 60 60)"
-                            />
-                        </svg>
-
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <p className="text-xl font-bold">{leetCodeData.totalSolved}</p>
-                        </div>
-                    </div>
+                    <CircularProgress
+                        radius={40}
+                        progress={leetCodeData.totalSolved}
+                        total={leetCodeData.totalQuestions}
+                        bgColor="text-input"
+                        barColor="text-accent"
+                    />
                 </div>
                 <div className="col-span-2 flex flex-col gap-2">
                     <ProgressBar
                         difficulty='Easy'
                         solvedNumber={leetCodeData.easySolved}
                         totalNumber={leetCodeData.totalEasy}
+                        bgColor='bg-input'
                         barColor="bg-green-500"
                     />
                     <ProgressBar
                         difficulty='Medium'
                         solvedNumber={leetCodeData.mediumSolved}
                         totalNumber={leetCodeData.totalMedium}
+                        bgColor='bg-input'
                         barColor="bg-yellow-500"
                     />
                     <ProgressBar
                         difficulty='Hard'
                         solvedNumber={leetCodeData.hardSolved}
                         totalNumber={leetCodeData.totalHard}
+                        bgColor='bg-input'
                         barColor="bg-red-500"
                     />
                 </div>
