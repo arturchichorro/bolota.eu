@@ -57,11 +57,11 @@ export default function LeetCodeStats() {
     }, []);
 
     if (loading) {
-        return <p>Loading LeetCode stats...</p>;
+        return <p className="text-sm">Loading LeetCode stats...</p>;
     }
 
     if (!leetCodeData) {
-        return <p>Failed to load LeetCode stats.</p>;
+        return;
     }
 
     return (
