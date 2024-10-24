@@ -2,7 +2,7 @@ import Image from "next/image";
 import * as runtime from "react/jsx-runtime";
 import { Callout } from "./callout";
 import { ThreeMedias } from "./three-medias";
-import ConnectFour from "./connect-four";
+import ConnectFour from "./connect-four/connect-four";
 import Link from "next/link";
 
 const useMDXComponent = (code: string) => {

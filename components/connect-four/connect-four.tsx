@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from 'react';
-import { GameState, initGameState, makeMove, hasWon, hasWonPositions, isDraw, minimax, evaluation, getValidMoves, wherePieceWouldLand } from '../lib/connect4/cfour';
-import { Button } from './ui/button';
-import { Switch } from './ui/switch';
+import { GameState, initGameState, makeMove, hasWon, hasWonPositions, isDraw, minimax, evaluation, getValidMoves, wherePieceWouldLand } from '../../lib/connect4/cfour';
+import { Button } from '../ui/button';
+import { Switch } from '../ui/switch';
 import DArrow from '@/components/svg/darrow';
 
 const ConnectFour = () => {

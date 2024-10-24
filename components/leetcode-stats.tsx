@@ -1,5 +1,6 @@
-"use client"
+"use client";
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 type LeetCodeData = {
@@ -7,6 +8,10 @@ type LeetCodeData = {
     easySolved: number;
     mediumSolved: number;
     hardSolved: number;
+    totalEasy: number;
+    totalMedium: number;
+    totalHard: number;
+    totalQuestions: number;
 };
 
 export default function LeetCodeStats() {
@@ -14,15 +19,35 @@ export default function LeetCodeStats() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchLeetCodeStats() {
+        const cacheKey = 'leetCodeData';
+        const cacheExpirationKey = 'leetCodeDataExpiration';
+        const cacheDuration = 60 * 60 * 1000; // 1 hour in milliseconds
+
+        const fetchLeetCodeStats = async () => {
             try {
                 const res = await fetch("https://leetcode-api-faisalshohag.vercel.app/arturchichorro");
                 const data = await res.json();
-                setLeetCodeData(data);
+                setLeetCodeData({ ...data});
+
+                localStorage.setItem(cacheKey, JSON.stringify({ ...data, totalQuestions: 3329 }));
+                localStorage.setItem(cacheExpirationKey, Date.now().toString());
             } catch (error) {
                 console.error("Failed to fetch LeetCode stats:", error);
             } finally {
                 setLoading(false);
+            }
+        };
+
+        const cachedData = localStorage.getItem(cacheKey);
+        const cachedTime = localStorage.getItem(cacheExpirationKey);
+
+        if (cachedData && cachedTime) {
+            const expirationTime = parseInt(cachedTime) + cacheDuration;
+
+            if (Date.now() < expirationTime) {
+                setLeetCodeData(JSON.parse(cachedData));
+                setLoading(false);
+                return;
             }
         }
 
@@ -30,22 +55,69 @@ export default function LeetCodeStats() {
     }, []);
 
     if (loading) {
-        return <p className="text-sm">Loading LeetCode stats...</p>;
+        return <p>Loading LeetCode stats...</p>;
     }
 
     if (!leetCodeData) {
-        return <p className="text-sm">Failed to load LeetCode stats.</p>;
+        return <p>Failed to load LeetCode stats.</p>;
     }
 
+    const solvedPercentage = (leetCodeData.totalSolved / leetCodeData.totalQuestions) * 100;
+
+    const easySolvedPercentage = (leetCodeData.easySolved / leetCodeData.totalEasy) * 100;
+    const mediumSolvedPercentage = (leetCodeData.mediumSolved / leetCodeData.totalMedium) * 100;
+    const hardSolvedPercentage = (leetCodeData.hardSolved / leetCodeData.totalHard) * 100;
+
+
+    const radius = 40;
+    const circumference = 2 * Math.PI * radius;
+    const strokeDashoffset = circumference - (solvedPercentage / 100) * circumference;
+
     return (
-        <div className="flex flex-row items-center gap-4 text-primary text-sm">
+        <div className="bg-popover border-2 border-border rounded-md px-4 py-2 w-full max-w-96 flex flex-col justify-center">
             
-            <a target="_blank" className="link" href="https://leetcode.com/u/arturchichorro/">LeetCode Stats</a>
-            <p>Total Solved: {leetCodeData.totalSolved}</p>
-            <p>Easy: {leetCodeData.easySolved}</p>
-            <p>Medium: {leetCodeData.mediumSolved}</p>
-            <p>Hard: {leetCodeData.hardSolved}</p>
-            
+            <div className="flex">
+                <Link target="_blank" className="link text-sm tracking-wider" href="https://leetcode.com/u/arturchichorro/">
+                    LeetCode Stats
+                </Link>
+            </div>
+
+            <div className="flex flex-row gap-2 items-center">
+                <div className="relative">
+                    <svg height="120" width="120">
+                        <circle
+                            cx="60"
+                            cy="60"
+                            r={radius}
+                            stroke="#e5e7eb"
+                            strokeWidth="10"
+                            fill="transparent"
+                        />
+                        <circle
+                            cx="60"
+                            cy="60"
+                            r={radius}
+                            stroke="#22c55e"
+                            strokeWidth="10"
+                            fill="transparent"
+                            strokeDasharray={circumference}
+                            strokeDashoffset={strokeDashoffset}
+                            strokeLinecap="round"
+                            transform="rotate(-90 60 60)"
+                        />
+                    </svg>
+
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <p className="text-xl font-bold">{leetCodeData.totalSolved}</p>
+                    </div>
+                </div>
+                <div className="text-sm flex flex-col gap-1">
+                    <p>Easy: {leetCodeData.easySolved} / {leetCodeData.totalEasy}</p>
+                    <p>Medium: {leetCodeData.mediumSolved} / {leetCodeData.totalMedium}</p>
+                    <p>Hard: {leetCodeData.hardSolved} / {leetCodeData.totalHard}</p>
+                </div>
+            </div>
+        
         </div>
     );
 }
