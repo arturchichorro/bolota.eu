@@ -75,60 +75,62 @@ export default function LeetCodeStats() {
     const strokeDashoffset = circumference - (solvedPercentage / 100) * circumference;
 
     return (
-        <div className="bg-popover border-2 border-border rounded-md px-4 py-2 w-full max-w-96 flex flex-col justify-center">
+        <div className="bg-popover border-2 border-border rounded-md px-4 py-2 w-full max-w-96">
             
-            <div className="flex">
-                <Link target="_blank" className="link text-sm tracking-wider" href="https://leetcode.com/u/arturchichorro/">
-                    LeetCode Stats
-                </Link>
-            </div>
+            <div className="grid grid-cols-3 gap-4">
+                <div className="flex flex-col justify-center items-center">
+                    <Link target="_blank" href="https://leetcode.com/u/arturchichorro/" className="link text-sm">
+                        LeetCode Stats
+                    </Link>
+                    <div className="relative">
+                        <svg height="120" width="120">
+                            <circle
+                                cx="60"
+                                cy="60"
+                                r={radius}
+                                stroke="#e5e7eb"
+                                strokeWidth="10"
+                                fill="transparent"
+                            />
+                            <circle
+                                cx="60"
+                                cy="60"
+                                r={radius}
+                                stroke="#22c55e"
+                                strokeWidth="10"
+                                fill="transparent"
+                                strokeDasharray={circumference}
+                                strokeDashoffset={strokeDashoffset}
+                                strokeLinecap="round"
+                                transform="rotate(-90 60 60)"
+                            />
+                        </svg>
 
-            <div className="flex flex-row gap-2 items-center">
-                <div className="relative">
-                    <svg height="120" width="120">
-                        <circle
-                            cx="60"
-                            cy="60"
-                            r={radius}
-                            stroke="#e5e7eb"
-                            strokeWidth="10"
-                            fill="transparent"
-                        />
-                        <circle
-                            cx="60"
-                            cy="60"
-                            r={radius}
-                            stroke="#22c55e"
-                            strokeWidth="10"
-                            fill="transparent"
-                            strokeDasharray={circumference}
-                            strokeDashoffset={strokeDashoffset}
-                            strokeLinecap="round"
-                            transform="rotate(-90 60 60)"
-                        />
-                    </svg>
-
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <p className="text-xl font-bold">{leetCodeData.totalSolved}</p>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <p className="text-xl font-bold">{leetCodeData.totalSolved}</p>
+                        </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-2">
-                <ProgressBar
-                    solvedNumber={leetCodeData.easySolved}
-                    totalNumber={leetCodeData.totalEasy}
-                    barColor="bg-green-500"
-                />
-                <ProgressBar
-                    solvedNumber={leetCodeData.mediumSolved}
-                    totalNumber={leetCodeData.totalMedium}
-                    barColor="bg-yellow-500"
-                />
-                <ProgressBar
-                    solvedNumber={leetCodeData.hardSolved}
-                    totalNumber={leetCodeData.totalHard}
-                    barColor="bg-red-500"
-                />
-            </div>
+                <div className="col-span-2 flex flex-col gap-2">
+                    <ProgressBar
+                        difficulty='Easy'
+                        solvedNumber={leetCodeData.easySolved}
+                        totalNumber={leetCodeData.totalEasy}
+                        barColor="bg-green-500"
+                    />
+                    <ProgressBar
+                        difficulty='Medium'
+                        solvedNumber={leetCodeData.mediumSolved}
+                        totalNumber={leetCodeData.totalMedium}
+                        barColor="bg-yellow-500"
+                    />
+                    <ProgressBar
+                        difficulty='Hard'
+                        solvedNumber={leetCodeData.hardSolved}
+                        totalNumber={leetCodeData.totalHard}
+                        barColor="bg-red-500"
+                    />
+                </div>
             </div>
         
         </div>
