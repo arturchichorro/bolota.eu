@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import ProgressBar from './progress-bar';
 
 type LeetCodeData = {
     totalSolved: number;
@@ -111,11 +112,23 @@ export default function LeetCodeStats() {
                         <p className="text-xl font-bold">{leetCodeData.totalSolved}</p>
                     </div>
                 </div>
-                <div className="text-sm flex flex-col gap-1">
-                    <p>Easy: {leetCodeData.easySolved} / {leetCodeData.totalEasy}</p>
-                    <p>Medium: {leetCodeData.mediumSolved} / {leetCodeData.totalMedium}</p>
-                    <p>Hard: {leetCodeData.hardSolved} / {leetCodeData.totalHard}</p>
-                </div>
+                <div className="flex flex-col gap-2">
+                <ProgressBar
+                    solvedNumber={leetCodeData.easySolved}
+                    totalNumber={leetCodeData.totalEasy}
+                    barColor="bg-green-500"
+                />
+                <ProgressBar
+                    solvedNumber={leetCodeData.mediumSolved}
+                    totalNumber={leetCodeData.totalMedium}
+                    barColor="bg-yellow-500"
+                />
+                <ProgressBar
+                    solvedNumber={leetCodeData.hardSolved}
+                    totalNumber={leetCodeData.totalHard}
+                    barColor="bg-red-500"
+                />
+            </div>
             </div>
         
         </div>
