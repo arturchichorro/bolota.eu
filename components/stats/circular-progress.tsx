@@ -3,6 +3,7 @@ type CircularProgressProps = {
     segments: { value: number; color: string }[];
     total: number;
     label?: string
+    labelClasses?: string,
     bgColor?: string;
 };
 
@@ -11,6 +12,7 @@ export default function CircularProgress({
     segments,
     total,
     label = "",
+    labelClasses = "",
     bgColor = "text-gray-300",
 }: CircularProgressProps) {
     
@@ -59,10 +61,8 @@ export default function CircularProgress({
                 })}
             </svg>
 
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <p className="text-xl font-bold text-secondary-foreground">
-                    {label}
-                </p>
+            <div className="absolute inset-0 flex items-center justify-center">
+                <p className={labelClasses}>{label}</p>
             </div>
         </div>
     );

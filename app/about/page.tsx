@@ -1,8 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { siteConfig } from "@/config/site";
 import { Metadata } from "next";
-import Link from "next/link"
 import LeetCodeStats from "@/components/stats/leetcode-stats";
+import ChessStats from "@/components/stats/chess-stats";
 
 export const metadata: Metadata = {
     title: "About Me",
@@ -48,8 +48,9 @@ export default async function AboutPage() {
             </div>
 
             <hr></hr>
-            <div className="flex justify-center">
+            <div className="flex justify-center gap-2">
                 <LeetCodeStats />
+                {/* <ChessStats /> */}
             </div>
         </div>
     )

@@ -79,6 +79,7 @@ export default function LeetCodeStats() {
                             { value: leetCodeData.totalSolved, color: "text-accent"},
                         ]}
                         label= {`${leetCodeData.totalSolved}`}
+                        labelClasses="text-xl font-bold text-secondary-foreground"
                         bgColor="text-input"
                     />
                 </div>
