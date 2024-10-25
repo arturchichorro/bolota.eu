@@ -103,7 +103,7 @@ export default function ChessStats() {
                 <div className="flex flex-col justify-evenly items-center">
                     <p className="link text-sm whitespace-nowrap relative hover:cursor-default group">
                         Chess.com Stats
-                        <span className="absolute bottom-3/4 left-1/2 transform -translate-x-1/2 border border-border hidden text-xs bg-popover text-primary p-2 rounded-md group-hover:block">
+                        <span className="absolute bottom-full transform border border-border hidden text-xs bg-popover text-primary p-2 rounded-md group-hover:block">
                             I don&apos;t want to reveal my chess.com username.
                         </span>
                     </p>
