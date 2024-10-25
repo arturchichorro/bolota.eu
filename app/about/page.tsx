@@ -48,9 +48,9 @@ export default async function AboutPage() {
             </div>
 
             <hr></hr>
-            <div className="flex justify-center gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <LeetCodeStats />
-                {/* <ChessStats /> */}
+                <ChessStats />
             </div>
         </div>
     )

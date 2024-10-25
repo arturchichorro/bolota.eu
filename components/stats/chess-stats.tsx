@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import ProgressBar from './progress-bar';
 import CircularProgress from './circular-progress';
+import WDLBar from './win-draw-loss-bar';
 
 type ChessData = {
     blitzWins: number;
@@ -56,7 +56,7 @@ export default function ChessStats() {
                 };
                 setChessData(transformedData);
 
-                localStorage.setItem(cacheKey, JSON.stringify({ ...data}));
+                localStorage.setItem(cacheKey, JSON.stringify(transformedData));
                 localStorage.setItem(cacheExpirationKey, Date.now().toString());
 
             } catch (error) {
@@ -91,46 +91,56 @@ export default function ChessStats() {
     }
 
     console.log(chessData)
+    const totalWins = chessData.blitzWins + chessData.rapidWins + chessData.bulletWins
+    const totalDraws = chessData.blitzDraws + chessData.rapidDraws + chessData.bulletDraws
+    const totalLosses = chessData.blitzLosses + chessData.rapidLosses + chessData.bulletLosses
+    const totalGames = totalWins + totalDraws + totalLosses
+
 
     return (
         <div className="bg-popover border-2 border-border rounded-md px-4 py-2 w-full max-w-96">
             <div className="grid grid-cols-3 gap-4">
-                <div className="flex flex-col justify-center items-center">
+                <div className="flex flex-col justify-evenly items-center">
                     <p className="link text-sm text-nowrap">Chess.com Stats</p>
-                    {/* <CircularProgress
+                    <CircularProgress
                         radius={40}
-                        total={chessData.}
+                        total={totalGames}
                         segments={[
-                            { value: chessData.win, color: "text-green-500" },
-                            { value: chessData.draw, color: "text-yellow-500" },
-                            { value: chessData.loss, color: "text-red-500" },
+                            { value: totalWins, color: "text-green-500"},
+                            { value: totalDraws, color: "hidden" },
+                            { value: totalLosses, color: "text-red-500"},
                         ]}
-                        label={`${chessData.win}W/${chessData.draw}D/${chessData.loss}L`}
+                        label={`${totalGames}`}
+                        labelClasses="text-xl font-bold text-secondary-foreground"
                         bgColor="text-input"
                     />
+                    <p className="text-sm text-center">W/D/L: {totalWins}/{totalDraws}/{totalLosses}</p>
                 </div>
-                <div className="col-span-2 flex flex-col gap-2">
-                    <ProgressBar
-                        label='Wins'
-                        solvedNumber={chessData.win}
-                        totalNumber={chessData.totalGames}
-                        bgColor='bg-input'
-                        barColor="bg-green-500"
+                <div className="col-span-2 flex flex-col gap-y-6 py-4">
+                    <WDLBar 
+                        label="Rapid" 
+                        wins={chessData.rapidWins} 
+                        draws={chessData.rapidDraws} 
+                        losses={chessData.rapidLosses}
+                        rating={chessData.rapidRating}
+                        highest={chessData.rapidHighest}
                     />
-                    <ProgressBar
-                        label='Draws'
-                        solvedNumber={chessData.draw}
-                        totalNumber={chessData.totalGames}
-                        bgColor='bg-input'
-                        barColor="bg-yellow-500"
+                    <WDLBar 
+                        label="Blitz" 
+                        wins={chessData.blitzWins} 
+                        draws={chessData.blitzDraws} 
+                        losses={chessData.blitzLosses}
+                        rating={chessData.blitzRating}
+                        highest={chessData.blitzHighest}
                     />
-                    <ProgressBar
-                        label='Losses'
-                        solvedNumber={chessData.loss}
-                        totalNumber={chessData.totalGames}
-                        bgColor='bg-input'
-                        barColor="bg-red-500"
-                    /> */}
+                    <WDLBar 
+                        label="Bullet" 
+                        wins={chessData.bulletWins} 
+                        draws={chessData.bulletDraws} 
+                        losses={chessData.bulletLosses}
+                        rating={chessData.bulletRating}
+                        highest={chessData.bulletHighest}
+                    />
                 </div>
             </div>
         </div>

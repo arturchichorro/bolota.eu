@@ -65,10 +65,10 @@ export default function LeetCodeStats() {
     }
 
     return (
-        <div className="bg-popover border-2 border-border rounded-md px-4 py-2 w-full max-w-96">
+        <div className="bg-popover border-2 border-border rounded-md px-4 py-2 w-full max-w-96 flex justify-center items-center">
             
-            <div className="grid grid-cols-3 gap-4">
-                <div className="flex flex-col justify-center items-center">
+            <div className="grid grid-cols-3 gap-4 h-full">
+                <div className="flex flex-col justify-evenly items-center">
                     <Link target="_blank" href="https://leetcode.com/u/arturchichorro/" className="link text-sm text-nowrap">
                         LeetCode Stats
                     </Link>
@@ -83,7 +83,7 @@ export default function LeetCodeStats() {
                         bgColor="text-input"
                     />
                 </div>
-                <div className="col-span-2 flex flex-col gap-2">
+                <div className="col-span-2 flex flex-col justify-around gap-2">
                     <ProgressBar
                         label='Easy'
                         solvedNumber={leetCodeData.easySolved}
