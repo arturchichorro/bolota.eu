@@ -6,10 +6,21 @@ import ProgressBar from './progress-bar';
 import CircularProgress from './circular-progress';
 
 type ChessData = {
-    win: number;
-    loss: number;
-    draw: number;
-    totalGames: number;
+    blitzWins: number;
+    blitzLosses: number;
+    blitzDraws: number;
+    blitzRating: number;
+    blitzHighest: number;
+    rapidWins: number;
+    rapidLosses: number;
+    rapidDraws: number;
+    rapidRating: number;
+    rapidHighest: number;
+    bulletWins: number;
+    bulletLosses: number;
+    bulletDraws: number;
+    bulletRating: number;
+    bulletHighest: number;
 };
 
 export default function ChessStats() {
@@ -19,24 +30,35 @@ export default function ChessStats() {
     useEffect(() => {
         const cacheKey = 'chessData';
         const cacheExpirationKey = 'chessDataExpiration';
-        const cacheDuration = 60 * 60 * 1000; // 1 hour in milliseconds
+        const cacheDuration = 60 * 60 * 1000;
 
         const fetchChessStats = async () => {
             try {
                 const res = await fetch("https://api.chess.com/pub/player/rook_three_pointer/stats");
                 const data = await res.json();
 
-                // Extract the relevant stats
-                const win = data.chess_blitz.record.win;
-                const loss = data.chess_blitz.record.loss;
-                const draw = data.chess_blitz.record.draw;
-                const totalGames = win + loss + draw;
+                const transformedData: ChessData = {
+                    blitzWins: data.chess_blitz.record.win,
+                    blitzLosses: data.chess_blitz.record.loss,
+                    blitzDraws: data.chess_blitz.record.draw,
+                    blitzRating: data.chess_blitz.last.rating,
+                    blitzHighest: data.chess_blitz.best.rating,
+                    rapidWins: data.chess_rapid.record.win,
+                    rapidLosses: data.chess_rapid.record.loss,
+                    rapidDraws: data.chess_rapid.record.draw,
+                    rapidRating: data.chess_rapid.last.rating,
+                    rapidHighest: data.chess_rapid.best.rating,
+                    bulletWins: data.chess_bullet.record.win,
+                    bulletLosses: data.chess_bullet.record.loss,
+                    bulletDraws: data.chess_bullet.record.draw,
+                    bulletRating: data.chess_bullet.last.rating,
+                    bulletHighest: data.chess_bullet.best.rating,
+                };
+                setChessData(transformedData);
 
-                setChessData({ win, loss, draw, totalGames });
-
-                // Store data in local storage with an expiration time
-                localStorage.setItem(cacheKey, JSON.stringify({ win, loss, draw, totalGames }));
+                localStorage.setItem(cacheKey, JSON.stringify({ ...data}));
                 localStorage.setItem(cacheExpirationKey, Date.now().toString());
+
             } catch (error) {
                 console.error("Failed to fetch Chess.com stats:", error);
             } finally {
@@ -68,16 +90,16 @@ export default function ChessStats() {
         return;
     }
 
+    console.log(chessData)
+
     return (
         <div className="bg-popover border-2 border-border rounded-md px-4 py-2 w-full max-w-96">
             <div className="grid grid-cols-3 gap-4">
                 <div className="flex flex-col justify-center items-center">
-                    <Link target="_blank" href="https://www.chess.com/member/rook_three_pointer" className="link text-sm text-nowrap">
-                        Chess.com Stats
-                    </Link>
-                    <CircularProgress
+                    <p className="link text-sm text-nowrap">Chess.com Stats</p>
+                    {/* <CircularProgress
                         radius={40}
-                        total={chessData.totalGames}
+                        total={chessData.}
                         segments={[
                             { value: chessData.win, color: "text-green-500" },
                             { value: chessData.draw, color: "text-yellow-500" },
@@ -108,7 +130,7 @@ export default function ChessStats() {
                         totalNumber={chessData.totalGames}
                         bgColor='bg-input'
                         barColor="bg-red-500"
-                    />
+                    /> */}
                 </div>
             </div>
         </div>

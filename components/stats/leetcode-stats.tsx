@@ -23,7 +23,7 @@ export default function LeetCodeStats() {
     useEffect(() => {
         const cacheKey = 'leetCodeData';
         const cacheExpirationKey = 'leetCodeDataExpiration';
-        const cacheDuration = 60 * 60 * 1000; // 1 hour in milliseconds
+        const cacheDuration = 60 * 60 * 1000;
 
         const fetchLeetCodeStats = async () => {
             try {
@@ -31,7 +31,7 @@ export default function LeetCodeStats() {
                 const data = await res.json();
                 setLeetCodeData({ ...data});
 
-                localStorage.setItem(cacheKey, JSON.stringify({ ...data, totalQuestions: 3329 }));
+                localStorage.setItem(cacheKey, JSON.stringify({ ...data}));
                 localStorage.setItem(cacheExpirationKey, Date.now().toString());
             } catch (error) {
                 console.error("Failed to fetch LeetCode stats:", error);
