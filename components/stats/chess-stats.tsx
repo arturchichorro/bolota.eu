@@ -114,7 +114,7 @@ export default function ChessStats() {
                         labelClasses="text-xl font-bold text-secondary-foreground"
                         bgColor="text-input"
                     />
-                    <p className="text-sm text-center">W/D/L: {totalWins}/{totalDraws}/{totalLosses}</p>
+                    <p className="text-sm text-center text-secondary-foreground">W/D/L: {totalWins}/{totalDraws}/{totalLosses}</p>
                 </div>
                 <div className="col-span-2 flex flex-col gap-y-6 py-4">
                     <WDLBar 
