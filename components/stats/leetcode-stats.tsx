@@ -57,7 +57,7 @@ export default function LeetCodeStats() {
     }, []);
 
     if (loading) {
-        return <p className="text-sm">Loading LeetCode stats...</p>;
+        return <p className="text-sm flex justify-center">Loading LeetCode stats...</p>;
     }
 
     if (!leetCodeData) {
@@ -67,13 +67,13 @@ export default function LeetCodeStats() {
     return (
         <div className="bg-popover border-2 border-border rounded-md px-4 py-2 w-full max-w-96 flex justify-center items-center">
             
-            <div className="grid grid-cols-3 gap-4 h-full">
-                <div className="flex flex-col justify-evenly items-center">
+            <div className="grid grid-cols-5 gap-4 h-full">
+                <div className="col-span-2 flex flex-col justify-evenly items-center">
                     <Link target="_blank" href="https://leetcode.com/u/arturchichorro/" className="link text-sm text-nowrap">
                         LeetCode Stats
                     </Link>
                     <CircularProgress
-                        radius={40}
+                        radius={50}
                         total={leetCodeData.totalQuestions}
                         segments={[
                             { value: leetCodeData.totalSolved, color: "text-accent"},
@@ -83,7 +83,7 @@ export default function LeetCodeStats() {
                         bgColor="text-input"
                     />
                 </div>
-                <div className="col-span-2 flex flex-col justify-around gap-2">
+                <div className="col-span-3 flex flex-col justify-around gap-2">
                     <ProgressBar
                         label='Easy'
                         solvedNumber={leetCodeData.easySolved}

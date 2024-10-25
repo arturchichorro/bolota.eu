@@ -15,7 +15,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     bgColor = 'bg-gray-300',
     barColor = 'bg-green-500',
 }) => {
-    const solvedPercentage = solvedNumber > 0 ? (solvedNumber / totalNumber) * 100 : 2;
+    const solvedPercentage = solvedNumber > 0 ? Math.ceil((solvedNumber / totalNumber) * 100) : 2;
 
     return (
         <div className="grid grid-rows-2 items-center">

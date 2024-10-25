@@ -83,7 +83,7 @@ export default function ChessStats() {
     }, []);
 
     if (loading) {
-        return <p className="text-sm">Loading Chess.com stats...</p>;
+        return <p className="text-sm flex justify-center">Loading Chess.com stats...</p>;
     }
 
     if (!chessData) {
@@ -101,7 +101,12 @@ export default function ChessStats() {
         <div className="bg-popover border-2 border-border rounded-md px-4 py-2 w-full max-w-96">
             <div className="grid grid-cols-3 gap-4">
                 <div className="flex flex-col justify-evenly items-center">
-                    <p className="link text-sm text-nowrap">Chess.com Stats</p>
+                    <p className="link text-sm whitespace-nowrap relative hover:cursor-default group">
+                        Chess.com Stats
+                        <span className="absolute bottom-3/4 left-1/2 transform -translate-x-1/2 border border-border hidden text-xs bg-popover text-primary p-2 rounded-md group-hover:block">
+                            I don&apos;t want to reveal my chess.com username.
+                        </span>
+                    </p>
                     <CircularProgress
                         radius={40}
                         total={totalGames}
