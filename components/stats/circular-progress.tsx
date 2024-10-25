@@ -60,11 +60,9 @@ export default function CircularProgress({
             </svg>
 
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-                
-                <p className="text-xl font-bold">
+                <p className="text-xl font-bold text-secondary-foreground">
                     {label}
                 </p>
-                
             </div>
         </div>
     );

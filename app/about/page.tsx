@@ -49,7 +49,7 @@ export default async function AboutPage() {
 
             <hr></hr>
             <div className="flex justify-center">
-            <LeetCodeStats />
+                <LeetCodeStats />
             </div>
         </div>
     )

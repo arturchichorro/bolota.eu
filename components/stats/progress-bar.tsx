@@ -1,7 +1,7 @@
 import React from 'react';
 
 type ProgressBarProps = {
-    difficulty: string;
+    label: string;
     solvedNumber: number;
     totalNumber: number;
     bgColor?: string; 
@@ -9,7 +9,7 @@ type ProgressBarProps = {
 };
 
 const ProgressBar: React.FC<ProgressBarProps> = ({
-    difficulty,
+    label,
     solvedNumber,
     totalNumber,
     bgColor = 'bg-gray-300',
@@ -20,7 +20,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     return (
         <div className="grid grid-rows-2 items-center">
             <div className={`flex flex-row justify-between text-sm`}>
-                <p>{difficulty}</p>
+                <p>{label}</p>
                 <p>{solvedNumber} / {totalNumber}</p>
             </div>
             <div className={`relative w-full min-w-10 h-2 ${bgColor} rounded`}>

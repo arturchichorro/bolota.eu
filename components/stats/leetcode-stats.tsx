@@ -84,21 +84,21 @@ export default function LeetCodeStats() {
                 </div>
                 <div className="col-span-2 flex flex-col gap-2">
                     <ProgressBar
-                        difficulty='Easy'
+                        label='Easy'
                         solvedNumber={leetCodeData.easySolved}
                         totalNumber={leetCodeData.totalEasy}
                         bgColor='bg-input'
                         barColor="bg-green-500"
                     />
                     <ProgressBar
-                        difficulty='Medium'
+                        label='Medium'
                         solvedNumber={leetCodeData.mediumSolved}
                         totalNumber={leetCodeData.totalMedium}
                         bgColor='bg-input'
                         barColor="bg-yellow-500"
                     />
                     <ProgressBar
-                        difficulty='Hard'
+                        label='Hard'
                         solvedNumber={leetCodeData.hardSolved}
                         totalNumber={leetCodeData.totalHard}
                         bgColor='bg-input'
