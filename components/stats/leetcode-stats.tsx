@@ -74,10 +74,12 @@ export default function LeetCodeStats() {
                     </Link>
                     <CircularProgress
                         radius={40}
-                        progress={leetCodeData.totalSolved}
                         total={leetCodeData.totalQuestions}
+                        segments={[
+                            { value: leetCodeData.totalSolved, color: "text-accent"},
+                        ]}
+                        label= {`${leetCodeData.totalSolved}`}
                         bgColor="text-input"
-                        barColor="text-accent"
                     />
                 </div>
                 <div className="col-span-2 flex flex-col gap-2">

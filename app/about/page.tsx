@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { siteConfig } from "@/config/site";
 import { Metadata } from "next";
 import Link from "next/link"
-import LeetCodeStats from "@/components/leetcode-stats/leetcode-stats";
+import LeetCodeStats from "@/components/stats/leetcode-stats";
 
 export const metadata: Metadata = {
     title: "About Me",
