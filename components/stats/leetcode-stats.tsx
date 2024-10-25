@@ -73,7 +73,7 @@ export default function LeetCodeStats() {
                         LeetCode Stats
                     </Link>
                     <CircularProgress
-                        radius={50}
+                        radius={40}
                         total={leetCodeData.totalQuestions}
                         segments={[
                             { value: leetCodeData.totalSolved, color: "text-accent"},
