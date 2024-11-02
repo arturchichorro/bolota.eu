@@ -1,6 +1,6 @@
-import BballSVG from "@/components/svg/bball";
-import BuildspaceSVG from "@/components/svg/buildspace";
-import ManimSVG from "@/components/svg/manim";
+import BballSVG from "@/components/svg/bballSvg";
+import BuildspaceSVG from "@/components/svg/buildspaceSvg";
+import ManimSVG from "@/components/svg/manimSvg";
 import ReactIconSVG from "@/components/svg/reactSvg";
 
 
