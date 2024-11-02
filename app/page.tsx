@@ -17,7 +17,7 @@ export default function Home() {
       <section className="container max-w-4xl space-y-6 pb-8 pt-6 md:pb-2 md:mt-2 lg:py-2">
         <div className="flex flex-col gap-4">
           <h3 className="text-2xl font-black text-accent">
-            ** Welcome.
+            ** Welcome
           </h3>
           <p className="sm:text-lg">
             Hello, I&apos;m Artur, a mathematician / coder. Welcome to my corner of the internet, where I talk about whatever I spend my energy on. If you wish to find out more about me check the <a href="/about" className="link">about me</a> page.
@@ -25,10 +25,13 @@ export default function Home() {
         </div>
       </section>
       <section className="container max-w-4xl flex flex-col py-6 gap-10">
-        <div>
-          <h2 className="text-2xl font-black text-accent py-2">
-            ** Latest Posts.
-          </h2>
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-black text-accent py-2">
+              ** Latest Posts
+            </h2>
+            <Link className="link text-sm" href="/posts">All Posts</Link>
+          </div>
           <ul className="flex flex-col gap-2">
             {latestPosts.map((post) => (
               <li key={post.slug}>
@@ -42,10 +45,13 @@ export default function Home() {
             ))}
           </ul>
         </div>
-        <div>
-          <h2 className="text-2xl font-black text-accent py-2">
-            ** Projects.
-          </h2>
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-black text-accent py-2">
+              ** Recent Projects
+            </h2>
+            <Link className="link text-sm" href="/projects">All Projects</Link>
+          </div>
           <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {topProjects.map((project, index) => (
               <li key={index}>
