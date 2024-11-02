@@ -1,11 +1,11 @@
 import * as React from "react"
 
 interface RustIconProps {
-    size?: string,
+    size?: number,
     color?: string,
 }
 
-function RustIconSVG({size = 24, color = "text-accent"}) {
+function RustIconSVG({size = 24, color = "text-accent"}: RustIconProps) {
   return (
     <svg
      xmlns="http://www.w3.org/2000/svg" 

@@ -1,11 +1,11 @@
 import * as React from "react"
 
 interface NextIconProps {
-    size?: string,
+    size?: number,
     color?: string,
 }
 
-function NextIconSVG({size = 24, color = "text-accent"}) {
+function NextIconSVG({size = 24, color = "text-accent"}: NextIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
