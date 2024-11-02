@@ -3,7 +3,7 @@ import * as React from "react"
 interface BballProps {
     size?: number,
     color?: string;
-  }
+}
 
 function BballSVG({size = 24, color = "text-accent"}: BballProps) {
   return (
