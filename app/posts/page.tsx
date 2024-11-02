@@ -53,7 +53,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                             }
                             acc.posts.push(
                                 <li key={post.slug}>
-                                    <PostItem slug={post.slug} date={post.date} title={post.title} description={post.description}
+                                    <PostItem slug={post.slug} date={post.date} title={post.title} description={post.description} icon={post.icon}
                                     />
                                 </li>
                             );
