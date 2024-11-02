@@ -48,7 +48,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                             if (!acc.currentYear || acc.currentYear !== postYear) {
                                 acc.currentYear = postYear;
                                 acc.posts.push(
-                                    <p className="text-xl font-black pt-4" key={postYear}>{postYear}</p>
+                                    <li className="text-xl font-black pt-4" key={postYear}>{postYear}</li   >
                                 );
                             }
                             acc.posts.push(

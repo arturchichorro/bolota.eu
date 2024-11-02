@@ -19,14 +19,15 @@ export default async function AboutPage() {
                 </div>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {projects.map((project, index) => (
-                    <ProjectItem 
-                        key={index}
-                        title={project.title} 
-                        description={project.description} 
-                        years={project.years} 
-                        gh={project.gh} 
-                        posts={project.posts} 
-                    />
+                    <li key={index}>
+                        <ProjectItem
+                            title={project.title} 
+                            description={project.description} 
+                            years={project.years} 
+                            gh={project.gh} 
+                            posts={project.posts} 
+                        />
+                    </li>
                 ))}
             </ul>
         </div>
