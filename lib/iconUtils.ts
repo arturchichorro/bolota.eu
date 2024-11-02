@@ -3,6 +3,7 @@ import BuildspaceSVG from "@/components/svg/buildspaceSvg";
 import ManimSVG from "@/components/svg/manimSvg";
 import NextIconSVG from "@/components/svg/nextjsSvg";
 import ReactIconSVG from "@/components/svg/reactSvg";
+import RustIconSVG from "@/components/svg/rustSvg";
 
 
 const iconMap: Record<string, React.FC<any>> = {
@@ -11,6 +12,7 @@ const iconMap: Record<string, React.FC<any>> = {
   manim: ManimSVG,
   react: ReactIconSVG,
   next: NextIconSVG,
+  rust: RustIconSVG,
 };
 
 export const getIcon = (iconName: string): React.FC<any> | null => {
