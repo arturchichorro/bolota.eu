@@ -7,6 +7,7 @@ import RustIconSVG from "@/components/svg/rustSvg";
 import ShiftAppensSVG from "@/components/svg/shiftAppensSvg";
 import SpotifyIconSVG from "@/components/svg/spotifySvg";
 import { Icons } from "@/components/icons";
+import SocketIoSVG from "@/components/svg/socketIoSvg";
 
 
 const iconMap: Record<string, React.FC<any>> = {
@@ -18,7 +19,8 @@ const iconMap: Record<string, React.FC<any>> = {
   rust: RustIconSVG,
   sa: ShiftAppensSVG,
   spotify: SpotifyIconSVG,
-  logo: Icons.logo
+  logo: Icons.logo,
+  socketio: SocketIoSVG,
 };
 
 export const getIcon = (iconName: string): React.FC<any> | null => {
