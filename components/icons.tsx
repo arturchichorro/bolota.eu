@@ -2,11 +2,11 @@ type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons = {
     logo: (props: IconProps) => (
-        <svg height="23" width="23" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512">
+        <svg height="24" width="24" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512" className="text-accent">
             <g>
                 <g>
-                    <path className="accent" fill="currentColor" d="M353.178,91.779h-77.512v-6.556c0-25.304,20.586-45.89,45.89-45.89V0c-46.992,0-85.224,38.231-85.224,85.224v6.556
+                    <path fill="currentColor" d="M353.178,91.779h-77.512v-6.556c0-25.304,20.586-45.89,45.89-45.89V0c-46.992,0-85.224,38.231-85.224,85.224v6.556
 			h-77.512c-58.475,0-106.047,47.573-106.047,106.047c0,13.456,2.532,26.328,7.129,38.178h392.194
 			c4.597-11.85,7.129-24.721,7.129-38.178C459.226,139.352,411.654,91.779,353.178,91.779z"/>
                 </g>
