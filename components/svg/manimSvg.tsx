@@ -5,7 +5,7 @@ interface ManimProps {
     color?: string;
 }
 
-function ManimSVG({size = 24, color = "text-accent"}: ManimProps) {
+function ManimSVG({size = 24, color = "text-iconmanim"}: ManimProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ function ManimSVG({size = 24, color = "text-accent"}: ManimProps) {
         fill="#81b29a"
         transform="scale(5.55556) translate(-23.42 -23.96)scale(2.03535) matrix(1.14155 0 0 1.12765 -4.7 -4.05)"
       />
-      <g fill="none" stroke="#343434" strokeWidth=".55px">
+      <g fill="none" stroke="currentColor" strokeWidth=".55px">
         <path
           d="M17.468 25.477s-3.471-8.361-3.738-8.411l-.1 7.826"
           transform="scale(5.55556) translate(-23.42 -23.96)scale(2.03535)"
