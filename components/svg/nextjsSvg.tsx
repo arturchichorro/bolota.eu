@@ -5,7 +5,7 @@ interface NextIconProps {
     color?: string,
 }
 
-function NextIconSVG({size = 24, color = "text-accent"}: NextIconProps) {
+function NextIconSVG({size = 24, color = "text-iconblackwhite"}: NextIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -5,7 +5,7 @@ interface BuildspaceProps {
     color?: string;
 }
 
-function BuildspaceSVG({size = 24, color = "text-accent"}: BuildspaceProps) {
+function BuildspaceSVG({size = 24, color = "text-iconblackwhite"}: BuildspaceProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

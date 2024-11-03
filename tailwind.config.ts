@@ -58,7 +58,7 @@ const config = {
         },
         // ICONS
         iconreact: "hsl(var(--iconreact))",
-        iconmanim: "hsl(var(--iconmanim))",
+        iconblackwhite: "hsl(var(--iconblackwhite))",
       },
       borderRadius: {
         lg: "var(--radius)",
