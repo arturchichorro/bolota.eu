@@ -1,4 +1,3 @@
-import BballSVG from "@/components/svg/bballSvg";
 import BuildspaceSVG from "@/components/svg/buildspaceSvg";
 import ManimSVG from "@/components/svg/manimSvg";
 import NextIconSVG from "@/components/svg/nextjsSvg";
@@ -8,10 +7,10 @@ import ShiftAppensSVG from "@/components/svg/shiftAppensSvg";
 import SpotifyIconSVG from "@/components/svg/spotifySvg";
 import { Icons } from "@/components/icons";
 import SocketIoSVG from "@/components/svg/socketIoSvg";
+import PythonIconSVG from "@/components/svg/pythonSvg";
 
 
 const iconMap: Record<string, React.FC<any>> = {
-  bball: BballSVG,
   buildspace: BuildspaceSVG,
   manim: ManimSVG,
   react: ReactIconSVG,
@@ -21,6 +20,7 @@ const iconMap: Record<string, React.FC<any>> = {
   spotify: SpotifyIconSVG,
   logo: Icons.logo,
   socketio: SocketIoSVG,
+  python: PythonIconSVG
 };
 
 export const getIcon = (iconName: string): React.FC<any> | null => {
