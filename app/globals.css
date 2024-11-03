@@ -50,8 +50,12 @@
       */
       --input: 137 70% 80%;
       --ring: 222.2 84% 4.9%;
-
       --radius: 0.5rem;
+
+      /* Cores dos icons */
+      /* React Icon */
+      --iconreact: 194.7 91% 34%;
+      
     }
 
     .dark {
@@ -84,6 +88,12 @@
       --border: 137.2 32.6% 17.5%;
       --input: 137.2 32.6% 17.5%;
       --ring: 132.7 26.8% 83.9%;
+
+      /* Cores dos icons */
+      /* React Icon */
+      --iconreact: 191 65% 60%;
+
+
     }
   }
 

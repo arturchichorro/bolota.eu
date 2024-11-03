@@ -56,6 +56,8 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // ICONS
+        iconreact: "hsl(var(--iconreact))"
       },
       borderRadius: {
         lg: "var(--radius)",
