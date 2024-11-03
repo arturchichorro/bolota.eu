@@ -53,9 +53,9 @@
       --radius: 0.5rem;
 
       /* Cores dos icons */
-      /* React Icon */
       --iconblackwhite: 180 10% 6%;
       --iconreact: 194.7 91% 34%;
+      --iconspotify: 145 90% 30%;
       
     }
 
@@ -94,7 +94,7 @@
       /* React Icon */
       --iconblackwhite: 0 0% 98%;
       --iconreact: 191 65% 60%;
-
+      --iconspotify: 145 100% 43%;
 
     }
   }

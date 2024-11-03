@@ -57,8 +57,10 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         // ICONS
-        iconreact: "hsl(var(--iconreact))",
         iconblackwhite: "hsl(var(--iconblackwhite))",
+        iconreact: "hsl(var(--iconreact))",
+        iconspotify: "hsl(var(--iconspotify))"
+
       },
       borderRadius: {
         lg: "var(--radius)",
