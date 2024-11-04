@@ -3,7 +3,7 @@ type IconProps = React.HTMLAttributes<SVGElement>;
 export const Icons = {
     logo: (props: IconProps) => (
         <svg height="24" width="24" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512" className="text-accent">
+            viewBox="0 0 512 512" className="currentColor">
             <g>
                 <g>
                     <path fill="currentColor" d="M353.178,91.779h-77.512v-6.556c0-25.304,20.586-45.89,45.89-45.89V0c-46.992,0-85.224,38.231-85.224,85.224v6.556
