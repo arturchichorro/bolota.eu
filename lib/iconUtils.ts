@@ -8,6 +8,7 @@ import SpotifyIconSVG from "@/components/svg/spotifySvg";
 import { Icons } from "@/components/icons";
 import SocketIoSVG from "@/components/svg/socketIoSvg";
 import PythonIconSVG from "@/components/svg/pythonSvg";
+import ReactTogetherSVG from "@/components/svg/reacttogetherSvg";
 
 
 const iconMap: Record<string, React.FC<any>> = {
@@ -20,7 +21,8 @@ const iconMap: Record<string, React.FC<any>> = {
   spotify: SpotifyIconSVG,
   logo: Icons.logo,
   socketio: SocketIoSVG,
-  python: PythonIconSVG
+  python: PythonIconSVG,
+  reactTogether: ReactTogetherSVG,
 };
 
 export const getIcon = (iconName: string): React.FC<any> | null => {
