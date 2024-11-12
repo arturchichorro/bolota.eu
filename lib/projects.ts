@@ -10,6 +10,16 @@ export const projects = [
         ]
     },
     {
+        title: "Scratch Map",
+        description: "Light weight collaborative maps",
+        years: "2024",
+        gh: undefined,
+        posts: [
+            {post_title: "Try it out", external: true, url: "https://scratch-map.pages.dev/"},
+            {post_title: "Article", external: false, url: "/posts/12_hacktogether"},
+        ]
+    },
+    {
         title: "Basketball Vision",
         description: "Counting attempted/made Basketball shots w/ Python.",
         years: "2024",
