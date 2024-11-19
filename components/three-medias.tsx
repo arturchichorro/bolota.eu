@@ -32,7 +32,7 @@ export function ThreeMedias({
                         <video
                             src={item.src}
                             controls
-                            className="object-cover rounded-md border-2 border-border w-full"
+                            className="object-cover rounded-md border-2 border-border"
                         />
                     )}
                     {item.caption && (
