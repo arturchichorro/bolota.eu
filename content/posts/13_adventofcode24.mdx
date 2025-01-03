@@ -1,0 +1,506 @@
+---
+title: Solving Advent Of Code 2024
+description: Spending December solving problems with Python
+date: 2024-12-31
+published: true
+icon: python
+---
+
+
+### What is Advent of Code
+<a className="link" href="https://adventofcode.com/" target="_blank">Advent of Code</a> is a yearly set of 25 problems, each divided in two parts, with one being released every day since the 1st of December all the way until Christmas day. Quite literally an advent calendar for coding. As we approach Christmas, the problems become harder and harder. 
+
+This year, I decided to take part. I had a three day workshop on using Python for Data Science at the beginning of the month, so it felt fitting to stick with Python for the rest of the month as well. Turns out that by the time I got to the last few problems, I was taking well over 6 hours to complete some of them. Here's some of my favorite problems:
+
+<hr></hr>
+
+#### Day 13
+This problem involved trying to find the minimum amount of tokens to spend on a bunch of claw machines. A claw machine looks like this:
+
+```txt
+Button A: X+94, Y+34
+Button B: X+22, Y+67
+Prize: X=8400, Y=5400
+```
+
+Pressing the A button costs 3 tokens, and pressing the B button costs 1 token. We start at (0,0).
+
+At first, I thought this would end up being a Linear Programming problem, in which we had to minimize the **objective function $3a + b$**. Turns out, none of that was necessary, because there was only ever **one possible solution to each claw machine problem** (basically the intersection of two lines in $\mathbb{R}^2$). All there was to be done was to solve a bunch of systems of equations.
+
+In order to solve this particular example, I started out by rewriting the data in this system of equations:
+
+$$
+\left\{
+\begin{array}{ll}
+94a + 22b = 8400 \\
+34a + 67b = 5400
+\end{array}
+\right.
+$$
+
+By rewritting the problem this way, we can now use **Cramer's Rule** to solve for $a$ and $b$. Since the matrix of the system of equations is 2x2, calculating determinants is straightforward. Here's the three determinants I had to calculate in the present example:
+
+$$
+det_A =
+\begin{vmatrix}
+94 & 22 \\
+34 & 67
+\end{vmatrix}
+\quad
+det_{A1} =
+\begin{vmatrix}
+8400 & 22 \\
+5400 & 67
+\end{vmatrix}
+\quad
+det_{A2} =
+\begin{vmatrix}
+94 & 8400 \\
+34 & 5400
+\end{vmatrix}
+$$
+
+Now, the value of $a$ is simply $\frac{det_{A1}}{det_A}$ and the value of b is $\frac{det_{A2}}{det_A}$. If these values are integers, we have the only combination of A button presses and B button presses that solves this problem. For this specific claw machine, the solution is $a = 80$ and $b = 40$.
+
+Now all we have to do is just rinse and repeat for all the different claw machines that are in the input. Then, we can add **$3\times a+b \hspace{0.5mm}$ to a "token" variable** to figure out how many tokens we need. Here's how I did it in code:
+
+<details>
+<summary><span className="link cursor-pointer">Python Code</span></summary>
+```python
+def det_2x2(a, b, c, d):
+    return a * d - b * c
+
+def solve_part2(input):
+    problems = parse_input(input)
+    tokens = 0
+    for prob in problems:
+        x1, y1, x2, y2, x_goal, y_goal = prob
+
+        det_A = det_2x2(x1, x2, y1, y2)
+        det_A1 = det_2x2(x_goal, x2, y_goal, y2)
+        det_A2 = det_2x2(x1, x_goal, y1, y_goal)
+
+        if det_A != 0 and det_A1 % det_A == 0 and det_A2 % det_A == 0:
+            a = det_A1 // det_A
+            b = det_A2 // det_A
+            tokens += a*3 + b
+    return tokens
+```
+</details>
+
+
+I liked this problem because of the simplicity of the solution. It's all very basic Linear Algebra. You can read the full problem statement <a className="link" href="https://adventofcode.com/2024/day/13" target="_blank">here</a>.
+
+<hr></hr>
+
+#### Day 19
+<a className="link" href="https://adventofcode.com/2024/day/19" target="_blank">Day 19's</a> problem was about arranging "towel" patterns into some desired designs. Here's an example of what the input looks like:
+
+```txt
+r, wr, b, g, bwu, rb, gb, br
+brwrr
+bggr
+gbbr
+ubwu
+```
+The first line represents each of the towel patterns to be used. I'll call these **"towels"**. We have unlimited access to each of them. The remaining lines represent the desired patterns we're trying to achieve. I'll call these our **"goals"**. For example the first one, `brwrr`, can be built by using `br` + `wr` + `r`, all towels that we have access to.
+
+The task is to figure out all the different ways we can produce the goals. In the present example, we can achieve `brwrr` like `br` + `wr` + `r` but we can also achieve it using `b` + `r` + `wr` + `r`. On the other hand, the goal `ubwu` is actually impossible to achieve with the given towels.
+
+To solve this problem, I used depth first search. The `dfs` function takes the following inputs:
+- A `towels` array (e.g., `["r", "wr", "b", "g", "bwu", "rb", "gb", "br"]`),
+- A `target` string (e.g., `brwrr`),
+- An `index` indicating the current position in the `target`.
+
+The base case happens if the index is the length of our target goal: in this scenario we've reached the end of the word and we return 1.
+
+```python
+def dfs(towels, target, index):
+    if index == len(target):
+        return 1
+```
+
+Then, for each towel in the `towels` array, if the substring of the `target` starting at `index` matches the towel, we recursively call `dfs` with the updated index (`index + len(towel)`). This process allows us to explore all possible ways to build the `target` using the towels.
+
+```python
+ways = 0
+    for towel in towels:
+        if target.startswith(towel, index):
+            ways += dfs(towels, target, index + len(towel), memo)
+```
+
+There is one issue though: if our input is too large, with a lot of different towels, the program takes a long time to run. For context, the input that I had to use had:
+- **447** different towels
+- **400 goals**, each averaging around **50 characters**
+
+With this large of an input, the number of recursive calls grows exponentially. This happens because the function repeatedly solves the same subproblems (e.g., starting at the same index in the target) in different branches of the recursion.
+
+The solution is surprisingly simple: by adding three lines of code and a `memo` dictionary input to the `dfs` function, we enable memoization. This allows the reuse of previously computed results, drastically reducing recursive calls and making the code run almost instantly.
+
+<details>
+<summary><span className="link cursor-pointer">Full dfs function with memoization</span></summary>
+```python {4, 5, 10}
+def dfs(towels, target, index, memo):
+    if index == len(target):
+        return 1
+    if index in memo:
+        return memo[index]
+    ways = 0
+    for towel in towels:
+        if target.startswith(towel, index):
+            ways += dfs(towels, target, index + len(towel), memo)
+    memo[index] = ways
+    return ways
+```
+</details>
+
+Now we just call dfs on all goals present in the input:
+```python
+count = 0
+for goal in goals:
+    memo = {}
+    count += dfs(towels, goal, 0, memo)
+```
+If you're curious, the answer to my specific (very large) input was 691316989225259 (computed instantly). 
+
+I loved this problem for its elegant solution (a recurring theme for me). Memoization transformed the DFS from overwhelming my computer to running instantly. It was fascinating. You can read the full problem statement <a className="link" href="https://adventofcode.com/2024/day/19" target="_blank">here</a>.
+
+<hr></hr>
+#### Day 23
+For <a className="link" href="https://adventofcode.com/2024/day/23" target="_blank">day 23</a>, the input looked something like this:
+
+<div className="prose">
+<table className="prose">
+<tbody>
+<tr className="flex gap-2 justify-center">
+<td>
+```txt
+kh-tc
+qp-kh
+de-cg
+ka-co
+yn-aq
+qp-ub
+cg-tb
+vc-aq
+tb-ka
+wh-tc
+yn-cg
+```
+</td>
+<td>
+```txt
+ta-co
+de-co
+tc-td
+tb-wq
+wh-td
+ta-ka
+td-qp
+aq-cg
+wq-ub
+ub-vc
+kh-ub
+```
+</td>
+<td>
+```txt
+
+de-ta
+wq-aq
+wq-vc
+wh-yn
+ka-de
+kh-ta
+co-tc
+wh-qp
+tb-vc
+td-yn
+```
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+Each line of text represents a non-directional connection in a graph. The task is to find the largest set of nodes that are **all connected to each other**. In other words, the task is to find the largest **clique** (new term I learned). Here's the wikipedia definition:
+
+> In graph theory, a clique is a subset of vertices of an undirected graph such that every two distinct vertices in the clique are adjacent.
+
+This is a visualization of the graph from the example shown above:
+
+<div className="flex justify-center">
+    <img className="border-2 border-border rounded-md" src="https://utfs.io/f/If0ZI6Cx8kn0y8tBq9l80UEDefc5O9rNHguPAI2XiKCb6kdS" width="600" alt="My team during Hack Together." />
+</div>
+
+If you look closely, you can see that the nodes `co`, `de`, `ka`, `ta` form a clique: they are all connected pair by pair. There are more cliques in this graph, but this group of four is actually the largest one and is, therefore, the answer to the problem at hand.
+
+Now for this small of an example, it's reasonable enough to solve the problem just by looking at the graph. But what if the input is much larger? For comparison, the input that I received had **3380 different edges**. Here's an attempt at visualizing the resulting graph:
+
+<div className="flex justify-center">
+    <img className="border-2 border-border rounded-md" src="https://utfs.io/f/If0ZI6Cx8kn0ljQKqlMlsUvHt4wE5ZGKI9b7XR6x1hpA0SYe" width="600" alt="My team during Hack Together." />
+</div>
+
+Clearly, we need a better approach. For that, I found the <a className="link" href="https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm" target="_blank">Bron-Kerbosch Algorithm</a>: an algorithm precisely to find **maximal cliques** in graphs.
+
+A **maximal clique** is a set of nodes where adding any other node from the graph would break the clique property. The largest clique in our graph has to be a maximal clique.
+
+The **Bron-Kerbosch Algorithm** uses three sets to look for maximal cliques:
+- $R$: the set of nodes of a maximal clique.
+- $P$: the set of possible nodes in a maximal clique.
+- $X$: the set of nodes that are excluded.
+
+We start by initializing the algorithm with $R$ and $X$ empty, and $P$ with all the nodes in the graph. Our base case is if $P \cup X = \{\}$. In this scenario, $R$ is a **maximal clique**.
+
+```python
+def bron_kerbosch(R, P, X, adj_list):
+    if not P and not X:
+        return [R]
+```
+
+Then, for every node $v$ in $P$, we recursively call the `bron_kerbosch` function with new sets: $P$ becomes $P \cap \{v\}$, $X$ becomes $X \cap \{v\}$ and we also add $v$ to our potential clique $R$: $R \cup \{v\}$.
+
+After the recursive call but still within the for loop, we update our sets again: $P$ becomes $P$ - $\{v\}$ and we add $v$ to our set of processed nodes $X$: $X \cup \{v\}$. And that's it: about 10 lines of code for the whole function.
+
+Here's the whole code with an optimization to make it run a bit faster (called the Bron-Kerbosch with pivot), where instead of iterating over all nodes in $P$ we instead iterate over $P - adj\_list[u]$ where $u$ is the node with the most neighbors in $P \cup X$.
+
+<details>
+<summary><span className="link cursor-pointer">Bron-Kerbosch with pivot function</span></summary>
+```python 
+def bron_kerbosch_pivot(R, P, X, adj_list):
+    if not P and not X:
+        return [R]
+    cliques = []
+    u = max(P | X, key= lambda vertex: len(P & adj_list[vertex]))
+    for v in P - adj_list[u]:
+        P_v = P & adj_list[v]
+        X_v = X & adj_list[v]
+        cliques.extend(bron_kerbosch_pivot(R | {v}, P_v, X_v, adj_list))
+        P = P - {v}
+        X = X | {v}
+    return cliques
+```
+For the curious, the algorithm takes 0.3836s without pivot and 0.0159s with pivot (on the large graph).
+</details>
+
+It's always really nice when you find these concise algorithms that solve exactly the problem you're facing: that's why I thoroughly enjoyed day 23's problem. You can read the full problem statement <a className="link" href="https://adventofcode.com/2024/day/23" target="_blank">here</a>. Also, <a href="https://www.youtube.com/watch?v=132XR-RLNoY&t=63s" className="link" target="_blank">here's the video</a> that I used to properly understand the algorithm step by step.
+
+<hr></hr>
+### Honorable Mentions
+
+#### Day 11
+
+Part 1 of <a className="link" href="https://adventofcode.com/2024/day/11" target="_blank">Day 11</a> was easily solved by brute force as it only involved doing a bunch of calculations on a loop with **25 iterations**. For part 2, the rules didn't change as they usually did every other day. Instead, we simply had to do a bigger loop: **75 iterations**. 
+
+```python
+counts = Counter(line)
+for _ in range(75):
+    counts = change_stone_counts(counts)
+```
+
+My part 1 solution used a list and my computer really struggled to run the code (which I never even let it end). The solution was clear: by **switching from a list to a dictionary**, the code ran instantly without significantly increasing complexity. 
+
+<details>
+<summary><span className="link cursor-pointer">Day 11 Part 2 solution</span></summary>
+```python 
+def change_stone_counts(counts):
+    new_counts = Counter()
+    for digit, freq in counts.items():
+        if digit == 0:
+            new_counts[1] += freq
+        elif len(str(digit)) % 2 == 0: 
+            d_str = str(digit)
+            mid = len(d_str) // 2
+            part1, part2 = int(d_str[:mid]), int(d_str[mid:])
+            new_counts[part1] += freq
+            new_counts[part2] += freq
+        else:
+            transformed = digit * 2024
+            new_counts[transformed] += freq
+    return new_counts
+```
+</details>
+
+By recognizing a pattern, all of the computational overhead of the problem disappears. Isn't that neat?
+
+<hr></hr>
+
+#### Day 14
+
+I wanted to mention <a className="link" href="https://adventofcode.com/2024/day/14" target="_blank">Day 14</a> because it was such a curveball compared to all other problems.
+
+In these kind of programming "puzzles", from both Advent of Code or <a className="link" href="https://leetcode.com/" target="_blank">Leetcode</a>, I've learnt to expect writting code that outputs the response, and then maybe optimize it if I want to have it run faster. 
+
+But there are some areas, and some *times*, in which that isn't necessarily the case: sometimes we need to do more **investigative work**: Data Science is a good example of this: we just need to find any insight in the middle of all that we have access to. Day 14 part 2 was just like that: we were given a 2d grid in which "robots" moved at constant speeds and wrapped around the grid, and were told to find when they arrange themselves into a picture of a Christmas tree.
+
+I spent a lot of time trying to come up with an algorithm, but nothing clicked. Eventually, I started reviewing individual frames of the grid manually. When I got tired of that, I decided to use a metric from part 1 of the problem: the **safety factor**, which is calculated by multiplying the number of robots in each of the four quadrants, ignoring the central rows and columns. Take this example from a smaller grid:
+
+```txt
+..... 2..1.
+..... .....
+1.... .....
+           
+..... .....
+...12 .....
+.1... 1....
+```
+Here, the safety factor is $1 \times 3 \times 4 \times 1 = 12$. By calculating this for the first 10,000 frames and sorting them, I found the first frame with the lowest safety factor. Here's what I saw:
+
+<details>
+<summary><span className="link cursor-pointer">Spoiler</span></summary>
+<div className="flex justify-center">
+    <img className="border-2 border-border rounded-md" src="https://utfs.io/f/If0ZI6Cx8kn00zxsuoNLNmz7d5qZgfWVMDh3KH2ux9CGwseb" width="600" alt="My team during Hack Together." />
+</div>
+</details>
+
+
+Found it! Since the safety factor calculation **ignores robots in the central columns and rows**, the **frame with the minimum value for the safety factor should have a bunch more robots in the center**. If the picture is centered, maybe the minimum safety factor happens when the robots arrange themselves into a Christmas tree! It almost feels like some sort of measure of entropy.
+
+ After staring at random dots scattered across a 2D grid, seeing this result was incredibly satisfying, especially since it came from a hunch I didn\'t have much faith in. I thoroughly enjoyed the concept behind this exercise. <a href="https://www.youtube.com/watch?v=hhRC8XrXY1o" target="_blank" className="link">Here's a video</a> I saw of someone being a much better detective than me.
+
+<hr></hr>
+
+#### Parsing Strings
+
+Every day, the input of the problem was a very large string. It quickly became a habit to write a `parse_input` function at the start of each problem. As surprising as it sounds, it actually became one of my favorite parts of solving each problem. Here's some examples:
+
+For <a href="https://adventofcode.com/2024/day/3" className="link" target="_blank">day 3</a>, the input looked something like this:
+```txt
+xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))
+```
+
+Here's how I parsed it (using Python's regular expressions library):
+```python
+def parse_input(input):
+    do = True
+    pattern = r"mul\(\d+,\d+\)|do\(\)|don't\(\)"
+    matches = re.findall(pattern, input)
+    n_pairs = []
+    for s in matches:
+        if s == "do()":
+            do = True
+            continue
+        elif s == "don't()":
+            do = False
+            continue
+        elif do:
+            n = s[s.find("(") + 1:s.find(")")]
+            n_pairs.append([int(x) for x in n.split(",")])
+```
+From the input above, the result of the parsing becomes `[[2,4], [8,5]]`. The rest of the exercise is basically solved.
+
+
+For <a href="https://adventofcode.com/2024/day/16" className="link" target="_blank">day 16</a> and <a href="https://adventofcode.com/2024/day/20" className="link" target="_blank">day 20</a>, the input looked something like this:
+<details>
+<summary><span className="link cursor-pointer">Day 16 and 20 input</span></summary>
+```txt
+# # # # # # # # # # # # # # #
+# . . . # . . . # . . . . . #
+# . # . # . # . # . # # # . #
+# S # . . . # . # . # . . . #
+# # # # # # # . # . # . # # #
+# # # # # # # . # . # . . . #
+# # # # # # # . # . # # # . #
+# # # . . E # . . . # . . . #
+# # # . # # # # # # # . # # #
+# . . . # # # . . . # . . . #
+# . # # # # # . # . # # # . # 
+# . # . . . # . # . # . . . # 
+# . # . # . # . # . # . # # #
+# . . . # . . . # . . . # # #
+# # # # # # # # # # # # # # #
+```
+</details>
+
+And here's how I parsed it:
+
+```python
+def parse_input(input):
+    maze = input.strip().split("\n")
+    height, width = len(maze), len(maze[0])
+    start, end = (0,0), (0,0)
+    for y in range(height):
+        for x in range(width):
+            if maze[y][x] == "S": start = (x, y)
+            elif maze[y][x] == "E": end = (x, y)
+    return maze, start, end
+```
+
+This year, there were a lot of 2D grids in Advent Of Code. I ended up with a bunch of parsings of different inputs that look like this. 
+
+For <a href="https://adventofcode.com/2024/day/18" className="link" target="_blank">day 18</a>, the input looks like:
+
+<details>
+<summary><span className="link cursor-pointer">Day 18 example input</span></summary>
+<div className="prose">
+<table className="prose">
+<tbody>
+<tr className="flex gap-2 justify-center">
+<td>
+```txt
+5,4
+4,2
+4,5
+3,0
+2,1
+6,3
+2,4
+1,5
+0,6
+```
+</td>
+<td>
+```txt
+
+3,3
+2,6
+5,1
+1,2
+5,5
+2,5
+6,5
+1,4
+```
+</td>
+<td>
+```txt
+
+0,4
+6,4
+1,1
+6,1
+1,0
+0,5
+1,6
+2,0
+```
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+
+Which can be parsed in one line:
+
+```python
+def parse_input(input):
+    return [(int(x), int(y)) for line in input.strip().split("\n") for x, y in [line.split(",")]]
+```
+
+And become something like this:
+```python
+[(5, 4), (4, 2), (4, 5), (3, 0), (2, 1), (6, 3), (2, 4), (1, 5), (0, 6), (3, 3), (2, 6), (5, 1), (1, 2), (5, 5), (2, 5), (6, 5), (1, 4), (0, 4), (6, 4), (1, 1), (6, 1), (1, 0), (0, 5), (1, 6), (2, 0)]
+```
+
+<hr></hr>
+
+### Final Remarks
+
+Of course, there were also some exercises that truly stumped me. Without checking out <a className="link" target="_blank" href="https://www.reddit.com/r/adventofcode/">Advent of Code's reddit</a>, I doubt I would have managed to finish all exercises before the end of the year. Parts 2 from both <a className="link" target="_blank" href="https://adventofcode.com/2024/day/16">day 16</a> and <a className="link" target="_blank" href="https://adventofcode.com/2024/day/24">day 24</a> were the ones that eluded me the most.
+
+I also want to mention that solving the problems each day was made considerably easier simply because my friend Afonso was doing them alongside me. He finished all exercises before me, and I couldn't not complete the 25 days with him having finished them all too.
+
+Finally, <a href="https://github.com/arturchichorro/AdventOfCode" target="_blank" className="link">here's the Github repository</a> with my solutions. I structured the folders like `2024 > Day 2 > solution.py` because I'm sure I'll come back for next year, and who knows, also come back for the problems of previous years. I think next time I give Advent of Code a shot, I'll try to do it in Rust.
+
+I highly recommend trying out Advent of Code!

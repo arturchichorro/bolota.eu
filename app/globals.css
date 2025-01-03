@@ -60,7 +60,7 @@
     }
 
     .dark {
-      --background: 140 33% 7%;
+      --background: 140 33% 7%; /* Hex: #0c1810*/
       --foreground: 140 40% 98%;
 
       --card: 142 84% 4.9%;
@@ -80,7 +80,7 @@
       --muted: 137.2 32.6% 17.5%;
       --muted-foreground: 135 20.2% 65.1%;
 
-      --accent: 140 40% 50%;
+      --accent: 140 40% 50%; /* Hex: 	#4db36f*/
       --accent-foreground: 140, 33%, 7%;
 
       --destructive: 140 70% 50%;
