@@ -40,25 +40,36 @@ $$
 
 By rewritting the problem this way, we can now use **Cramer's Rule** to solve for $a$ and $b$. Since the matrix of the system of equations is 2x2, calculating determinants is straightforward. Here's the three determinants I had to calculate in the present example:
 
-$$
-det_A =
-\begin{vmatrix}
-94 & 22 \\
-34 & 67
-\end{vmatrix}
-\quad
-det_{A1} =
-\begin{vmatrix}
-8400 & 22 \\
-5400 & 67
-\end{vmatrix}
-\quad
-det_{A2} =
-\begin{vmatrix}
-94 & 8400 \\
-34 & 5400
-\end{vmatrix}
-$$
+<div className="grid grid-cols-1 sm:grid-cols-3">
+  <div>
+    $$
+    det_A =
+    \begin{vmatrix}
+    94 & 22 \\
+    34 & 67
+    \end{vmatrix}
+    $$
+  </div>
+  <div>
+    $$
+    det_{A1} =
+    \begin{vmatrix}
+    8400 & 22 \\
+    5400 & 67
+    \end{vmatrix}
+    $$
+  </div>
+  <div>
+    $$
+    det_{A2} =
+    \begin{vmatrix}
+    94 & 8400 \\
+    34 & 5400
+    \end{vmatrix}
+    $$
+  </div>
+</div>
+
 
 Now, the value of $a$ is simply $\frac{det_{A1}}{det_A}$ and the value of b is $\frac{det_{A2}}{det_A}$. If these values are integers, we have the only combination of A button presses and B button presses that solves this problem. For this specific claw machine, the solution is $a = 80$ and $b = 40$.
 
