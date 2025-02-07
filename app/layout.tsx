@@ -7,7 +7,6 @@ import { Providers } from "@/components/providers";
 import { SiteFooter } from "@/components/site-footer";
 import "../node_modules/katex/dist/katex.min.css";
 import { siteConfig } from "@/config/site";
-import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 
@@ -42,7 +41,6 @@ export default function RootLayout({
             <SiteFooter />
           </div>
         </Providers>
-        <Analytics />
       </body>
     </html>
   );
