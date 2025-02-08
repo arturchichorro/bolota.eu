@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useRef } from 'react';
 import { SudokuGrid } from './SudokuGrid';
 import { SudokuControls } from './SudokuControls';
