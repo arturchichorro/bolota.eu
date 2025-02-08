@@ -1,0 +1,47 @@
+---
+title: Solving Sudoku Puzzles with Matrices
+description: Implementing Algorithm X to solve Sudoku puzzles
+date: 2025-02-08
+published: false
+icon: python
+---
+
+While working on a different project, I fell down the rabbit hole of trying to generate my own sudokus programmatically. Turns out, this rabbit hole had turns, crossings, twists and required a lot of backtracking.
+### Generating Sudokus
+
+To generate Sudokus, I first needed to define my success criteria: a well-constructed puzzle must have exactly one solution. Here's the algorithm I landed at (inspired by <a className="link" href="https://stackoverflow.com/questions/6924216/how-to-generate-sudoku-boards-with-unique-solutions" target="_blank">this stack overflow discussion</a>):
+
+<span className="text-red-600">TODO: melhorar este algoritmo</span>
+
+```plaintext
+1. Start with complete, valid board (filled with 81 numbers)
+2. Randomly select a cell and remove its number
+3. Use a sudoku solver to find all possible solutions
+4. If the current board only has one solution, go back to step 2 and repeat
+5. If the current board has more than one solution, undo the last 
+removal and continue step 2 with the next position from the list
+6. Stop when all 81 positions have been tested
+```
+
+This means that in order to write an algorithm that generates sudokus, I first had to write an algorithm that solved sudokus.
+
+### Backtracking
+
+The simplest algorithm you can write to solve a sudoku puzzle is a backtracking algorithm. All it does is it attempts to fill the next empty square with the next valid number. If at some point there are no valid placements possible, it goes back and attempts the next valid number. It's as brute force as it gets. 
+
+```python
+def solve_sudoku_backtracking(sudoku_grid):
+    def backtrack(sudoku_grid):
+        for row in range(9):
+            for col in range(9):
+                if sudoku_grid[row, col] == 0:
+                    for num in range(1, 10):
+                        if is_valid_placement(sudoku_grid, row, col, num):
+                            sudoku_grid[row, col] = num
+                            if backtrack(sudoku_grid):
+                                return True
+                            sudoku_grid[row, col] = 0
+                    return False
+        return True
+    backtrack(sudoku_grid)
+```
