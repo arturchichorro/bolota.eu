@@ -74,6 +74,10 @@ const SudokuComparison: React.FC<SudokuComparisonProps> = ({ initialGrid }) => {
 
   return (
     <div className="flex flex-col gap-4">
+      <div className="flex gap-8 items-start">
+        <SudokuGrid grid={backtrackGrid} initialGrid={initialGrid} isPlayable={false} />
+        <SudokuGrid grid={algXGrid} initialGrid={initialGrid} isPlayable={false} />
+      </div>
       <SudokuControls
         solving={solving}
         isPaused={solverRef.current.pause}
@@ -82,11 +86,6 @@ const SudokuComparison: React.FC<SudokuComparisonProps> = ({ initialGrid }) => {
         onReset={resetGrids}
         onSpeedChange={handleSpeedChange}
       />
-
-      <div className="flex gap-8 items-start">
-        <SudokuGrid grid={backtrackGrid} initialGrid={initialGrid} isPlayable={false} />
-        <SudokuGrid grid={algXGrid} initialGrid={initialGrid} isPlayable={false} />
-      </div>
     </div>
   );
 };
