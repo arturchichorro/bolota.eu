@@ -1,4 +1,6 @@
 import React from 'react';
+import { Button } from '../ui/button';
+import { Slider } from '../ui/slider';
 
 interface SudokuControlsProps {
   solving: boolean;
@@ -17,28 +19,27 @@ export const SudokuControls: React.FC<SudokuControlsProps> = ({
   onReset,
   onSpeedChange,
 }) => (
-  <div className="flex gap-4 mb-6">
-    <button
+  <div className="flex gap-4 justify-center">
+    <Button
       onClick={onToggleSolving}
-      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+      variant="secondary"
     >
       {solving ? (isPaused ? 'Resume' : 'Pause') : 'Start'}
-    </button>
-    <button
+    </Button>
+    <Button
       onClick={onReset}
-      className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+      variant="outline"
     >
       Reset
-    </button>
+    </Button>
     <div className="flex items-center gap-2">
-      <span className="text-sm text-gray-500">Speed:</span>
-      <input
-        type="range"
-        min="1"
-        max="100"
-        value={speed}
-        onChange={(e) => onSpeedChange(parseInt(e.target.value))}
-        className="w-24"
+      <span className="text-sm">Speed:</span>
+      <Slider
+        value={[speed]} 
+        onValueChange={(value) => onSpeedChange(value[0])}
+        max={100}
+        step={1}
+        className="w-24 text-accent"
       />
     </div>
   </div>

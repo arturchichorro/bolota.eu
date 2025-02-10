@@ -28,21 +28,17 @@ const SudokuNumberPad: React.FC<SudokuNumberPadProps> = ({ onNumberSelect, onRes
         {numbers.map((num) => (
           <Button
             variant="outline"
+            className="w-12 h-12 p-2 text-md font-semibold rounded"
             key={num}
             onClick={() => onNumberSelect(num)}
-            className={`w-12 h-12
-              p-2 text-md font-semibold rounded
-            `}
           >
             {num}
           </Button>
         ))}
         <Button
           variant="outline"
+          className="w-12 h-12 p-2 text-md font-semibold rounded col-start-2"
           onClick={() => onNumberSelect(0)}
-          className={`w-12 h-12
-            p-2 text-md font-semibold rounded col-start-2
-          `}
         >
           ⌫
         </Button>
