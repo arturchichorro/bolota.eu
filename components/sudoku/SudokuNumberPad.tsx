@@ -4,12 +4,11 @@ import { Button } from '../ui/button';
 interface SudokuNumberPadProps {
   onNumberSelect: (num: number) => void;
   onReset: () => void;
-  disabled?: boolean;
   isCorrect?: boolean;
   padRef?: Ref<HTMLDivElement>;
 }
 
-const SudokuNumberPad: React.FC<SudokuNumberPadProps> = ({ onNumberSelect, onReset, disabled = false, isCorrect = false, padRef = null }) => {
+const SudokuNumberPad: React.FC<SudokuNumberPadProps> = ({ onNumberSelect, onReset, isCorrect = false, padRef = null }) => {
   const numbers = Array.from({ length: 9 }, (_, i) => i + 1);
 
   return (
@@ -22,35 +21,27 @@ const SudokuNumberPad: React.FC<SudokuNumberPadProps> = ({ onNumberSelect, onRes
       <div ref= {padRef} className="grid grid-cols-3 gap-2 max-w-md">
         <Button 
                 onClick={onReset}
-                className="col-span-3" size="sm" variant="outline"
+                className="col-span-3 h-10" size="sm" variant="secondary"
             >
                 Reset Game
         </Button>
         {numbers.map((num) => (
           <Button
+            variant="outline"
             key={num}
             onClick={() => onNumberSelect(num)}
-            disabled={disabled}
             className={`w-12 h-12
               p-2 text-md font-semibold rounded
-              ${disabled 
-                ? 'bg-gray-200 text-gray-400 border-gray-300'
-                : 'bg-white border-2 border-gray-300 hover:bg-gray-100 active:bg-gray-200'
-              }
             `}
           >
             {num}
           </Button>
         ))}
         <Button
+          variant="outline"
           onClick={() => onNumberSelect(0)}
-          disabled={disabled}
           className={`w-12 h-12
             p-2 text-md font-semibold rounded col-start-2
-            ${disabled
-              ? 'bg-gray-200 text-gray-400'
-              : 'bg-sudoku-warning border-2 hover:bg-red-200 active:bg-red-300'
-            }
           `}
         >
           ⌫

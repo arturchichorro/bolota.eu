@@ -127,7 +127,6 @@ const PlayableSudoku: React.FC<PlayableSudokuProps> = ({ initialGrid, solutionGr
       <SudokuNumberPad 
         onNumberSelect={handleNumberSelect}
         onReset={handleReset}
-        disabled={!selectedCell || isCorrect}
         isCorrect={isCorrect}
         padRef={padRef}
       />
