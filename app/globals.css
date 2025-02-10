@@ -56,7 +56,12 @@
       --iconblackwhite: 180 10% 6%;
       --iconreact: 194.7 91% 34%;
       --iconspotify: 145 90% 30%;
-      
+
+      --sudoku: 142 100% 98%;
+      --sudoku-foreground: 141 89% 93%;
+      --sudoku-borders: 140 28% 85%;
+      --sudoku-warning: 9 80% 95%;
+      --sudoku-textwarning: 0 84% 60%;
     }
 
     .dark {

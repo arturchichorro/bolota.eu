@@ -26,15 +26,16 @@ export const SudokuCell: React.FC<SudokuCellProps> = ({
   <div
     onClick={onClick}
     className={`
-      w-12 h-12 flex items-center justify-center
-      border border-gray-200 text-xl
-      ${isAlternateBox ? 'bg-gray-50' : ''}
-      ${isOriginal ? 'font-bold text-black' : 'text-blue-600'}
-      ${borderRight ? 'border-r-2 border-r-gray-400' : ''}
-      ${borderBottom ? 'border-b-2 border-b-gray-400' : ''}
-      ${isSelected ? 'bg-blue-100 border-purple-800 border-2' : ''}
-      ${!isValid ? 'bg-red-200' : ''}
-      ${isPlayable ? 'hover:bg-blue-50 cursor-pointer' : ''}
+      w-10 h-10 flex items-center justify-center
+      border border-sudoku-borders text-xl
+      ${isAlternateBox ? 'bg-sudoku' : 'bg-sudoku-foreground'}
+      ${isOriginal ? 'font-bold text-primary' : 'text-secondary-foreground'}
+      ${borderRight && 'border-r-2 border-r-border'}
+      ${borderBottom && 'border-b-2 border-b-border'}
+      ${isSelected && '!border-border border-2'}
+      ${!isValid && '!bg-sudoku-warning'}
+      ${!isValid && !isOriginal && '!text-sudoku-textwarning'}
+      ${isPlayable && 'hover:!bg-secondary cursor-pointer'}
     `}
   >
     {value !== 0 ? value : ''}

@@ -59,7 +59,15 @@ const config = {
         // ICONS
         iconblackwhite: "hsl(var(--iconblackwhite))",
         iconreact: "hsl(var(--iconreact))",
-        iconspotify: "hsl(var(--iconspotify))"
+        iconspotify: "hsl(var(--iconspotify))",
+
+        sudoku: {
+          DEFAULT: "hsl(var(--sudoku))",
+          foreground: "hsl(var(--sudoku-foreground))",
+          borders: "hsl(var(--sudoku-borders))",
+          warning: "hsl(var(--sudoku-warning))",
+          textwarning: "hsl(var(--sudoku-textwarning))"
+        }
 
       },
       borderRadius: {

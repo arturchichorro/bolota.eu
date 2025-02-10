@@ -65,7 +65,7 @@ const SudokuAlgX: React.FC<SudokuProps> = ({ initialGrid }) => {
         onReset={resetGrid}
         onSpeedChange={handleSpeedChange}
       />
-      <SudokuGrid grid={grid} initialGrid={initialGrid} />
+      <SudokuGrid grid={grid} initialGrid={initialGrid} isPlayable={false} />
     </div>
   );
 };
