@@ -87,13 +87,13 @@ const SudokuComparison: React.FC<SudokuComparisonProps> = ({ initialGrid }) => {
 
       <div className="flex gap-8 items-start">
         <div className="flex-1">
-          <div className="bg-white rounded-lg shadow-md p-6 max-w-fit mx-auto">
+          <div className="rounded-lg shadow-md p-6 max-w-fit mx-auto">
             <SudokuGrid grid={backtrackGrid} initialGrid={initialGrid} isPlayable={false} />
           </div>
         </div>
 
         <div className="flex-1">
-          <div className="bg-white rounded-lg shadow-md p-6 max-w-fit mx-auto">
+          <div className="rounded-lg shadow-md p-6 max-w-fit mx-auto">
             <SudokuGrid grid={algXGrid} initialGrid={initialGrid} isPlayable={false} />
           </div>
         </div>

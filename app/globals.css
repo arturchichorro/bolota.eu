@@ -57,8 +57,10 @@
       --iconreact: 194.7 91% 34%;
       --iconspotify: 145 90% 30%;
 
+      /* Sudoku colors */
       --sudoku: 142 100% 98%;
       --sudoku-foreground: 141 89% 93%;
+      --sudoku-text: 130 60% 30%;
       --sudoku-borders: 140 28% 85%;
       --sudoku-warning: 9 80% 95%;
       --sudoku-textwarning: 0 84% 60%;
@@ -100,6 +102,14 @@
       --iconblackwhite: 0 0% 98%;
       --iconreact: 191 65% 60%;
       --iconspotify: 145 100% 43%;
+
+      /* Sudoku colors */
+      --sudoku: 140 40% 20%;
+      --sudoku-foreground: 141 16% 36%;
+      --sudoku-text: 130 60% 30%;
+      --sudoku-borders: 140 33% 7%;
+      --sudoku-warning: 9 80% 95%;
+      --sudoku-textwarning: 0 84% 60%;
 
     }
   }

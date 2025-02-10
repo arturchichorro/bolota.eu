@@ -35,7 +35,7 @@ export const SudokuCell: React.FC<SudokuCellProps> = ({
       ${isSelected && '!border-border border-2'}
       ${!isValid && '!bg-sudoku-warning'}
       ${!isValid && !isOriginal && '!text-sudoku-textwarning'}
-      ${isPlayable && 'hover:!bg-secondary cursor-pointer'}
+      ${isPlayable && 'hover:!bg-accent cursor-pointer'}
     `}
   >
     {value !== 0 ? value : ''}

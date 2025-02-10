@@ -56,7 +56,7 @@ const SudokuAlgX: React.FC<SudokuProps> = ({ initialGrid }) => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md max-w-fit">
+    <div className="p-6rounded-lg shadow-md max-w-fit">
       <SudokuControls
         solving={solving}
         isPaused={solverRef.current.pause}
