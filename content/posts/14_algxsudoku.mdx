@@ -45,13 +45,240 @@ def solve_sudoku_backtracking(sudoku_grid):
         return True
     backtrack(sudoku_grid)
 ```
+<div className="flex justify-center">
+    <SudokuBacktrack initialGrid={[
+        [5, 3, 0, 0, 7, 0, 0, 0, 0],
+        [6, 0, 0, 1, 9, 5, 0, 0, 0],
+        [0, 9, 8, 0, 0, 0, 0, 6, 0],
+        [8, 0, 0, 0, 6, 0, 0, 0, 3],
+        [4, 0, 0, 8, 0, 3, 0, 0, 1],
+        [7, 0, 0, 0, 2, 0, 0, 0, 6],
+        [0, 6, 0, 0, 0, 0, 2, 8, 0],
+        [0, 0, 0, 4, 1, 9, 0, 0, 5],
+        [0, 0, 0, 0, 8, 0, 0, 7, 9],
+    ]} />
+</div>
 
-<SudokuBacktrack initialGrid={[[5, 3, 0, 0, 7, 0, 0, 0, 0],
-  [6, 0, 0, 1, 9, 5, 0, 0, 0],
-  [0, 9, 8, 0, 0, 0, 0, 6, 0],
-  [8, 0, 0, 0, 6, 0, 0, 0, 3],
-  [4, 0, 0, 8, 0, 3, 0, 0, 1],
-  [7, 0, 0, 0, 2, 0, 0, 0, 6],
-  [0, 6, 0, 0, 0, 0, 2, 8, 0],
-  [0, 0, 0, 4, 1, 9, 0, 0, 5],
-  [0, 0, 0, 0, 8, 0, 0, 7, 9],]} />
+<div className="flex justify-center">
+    <SudokuAlgX initialGrid={[
+        [5, 3, 0, 0, 7, 0, 0, 0, 0],
+        [6, 0, 0, 1, 9, 5, 0, 0, 0],
+        [0, 9, 8, 0, 0, 0, 0, 6, 0],
+        [8, 0, 0, 0, 6, 0, 0, 0, 3],
+        [4, 0, 0, 8, 0, 3, 0, 0, 1],
+        [7, 0, 0, 0, 2, 0, 0, 0, 6],
+        [0, 6, 0, 0, 0, 0, 2, 8, 0],
+        [0, 0, 0, 4, 1, 9, 0, 0, 5],
+        [0, 0, 0, 0, 8, 0, 0, 7, 9],
+    ]} />
+</div>
+
+<div className="flex justify-center">
+    <SudokuComparison initialGrid={[
+        [5, 3, 0, 0, 7, 0, 0, 0, 0],
+        [6, 0, 0, 1, 9, 5, 0, 0, 0],
+        [0, 9, 8, 0, 0, 0, 0, 6, 0],
+        [8, 0, 0, 0, 6, 0, 0, 0, 3],
+        [4, 0, 0, 8, 0, 3, 0, 0, 1],
+        [7, 0, 0, 0, 2, 0, 0, 0, 6],
+        [0, 6, 0, 0, 0, 0, 2, 8, 0],
+        [0, 0, 0, 4, 1, 9, 0, 0, 5],
+        [0, 0, 0, 0, 8, 0, 0, 7, 9],
+    ]} />
+</div>
+
+<div className="flex justify-center">
+    <SudokuBacktrack initialGrid={[
+        [5, 3, 0, 0, 7, 0, 0, 0, 0],
+        [6, 0, 0, 1, 9, 5, 0, 0, 0],
+        [0, 9, 8, 0, 0, 0, 0, 6, 0],
+        [8, 0, 0, 0, 6, 0, 0, 0, 3],
+        [4, 0, 0, 8, 0, 3, 0, 0, 1],
+        [7, 0, 0, 0, 2, 0, 0, 0, 6],
+        [0, 6, 0, 0, 0, 0, 2, 8, 0],
+        [0, 0, 0, 4, 1, 9, 0, 0, 5],
+        [0, 0, 0, 0, 8, 0, 0, 7, 9],
+    ]} />
+</div>
+
+<div className="flex justify-center">
+    <PlayableSudoku initialGrid={[
+            [5, 3, 0, 0, 7, 0, 0, 0, 0],
+            [6, 0, 0, 1, 9, 5, 0, 0, 0],
+            [0, 9, 8, 0, 0, 0, 0, 6, 0],
+            [8, 0, 0, 0, 6, 0, 0, 0, 3],
+            [4, 0, 0, 8, 0, 3, 0, 0, 1],
+            [7, 0, 0, 0, 2, 0, 0, 0, 6],
+            [0, 6, 0, 0, 0, 0, 2, 8, 0],
+            [0, 0, 0, 4, 1, 9, 0, 0, 5],
+            [0, 0, 0, 0, 8, 0, 0, 7, 9],
+        ]} 
+        solutionGrid= {[
+            [5, 3, 4, 6, 7, 8, 9, 1, 2],
+            [6, 7, 2, 1, 9, 5, 3, 4, 8],
+            [1, 9, 8, 3, 4, 2, 5, 6, 7],
+            [8, 5, 9, 7, 6, 1, 4, 2, 3],
+            [4, 2, 6, 8, 5, 3, 7, 9, 1],
+            [7, 1, 3, 9, 2, 4, 8, 5, 6],
+            [9, 6, 1, 5, 3, 7, 2, 8, 4],
+            [2, 8, 7, 4, 1, 9, 6, 3, 5],
+            [3, 4, 5, 2, 8, 6, 1, 7, 9],
+        ]}
+    />
+</div>
+
+Turns out, this approach is actually really good at solving sudokus. It solves most sudokus instantly! However, sometimes, the configuration of certain sudokus forces the algorithm to backtrack extensively, making the algorithm take much longer than we'd like.
+
+This annoying setback made me try to find more sophisticated algorithms that were better prepared to handle all kinds of edge cases. This is how I stumbled upon the <a className="link" href="https://en.wikipedia.org/wiki/Exact_cover" target="_blank">Exact Cover Problem</a>.
+
+### Exact Cover Problem
+
+The exact cover problem appears to have no obvious connection to Sudoku. In his [paper](https://www.ocf.berkeley.edu/~jchu/publicportal/sudoku/0011047.pdf) about the Dancing Links algorithm, [Donald Knuth](https://pt.wikipedia.org/wiki/Donald_Knuth) provides a particularly instructive example of an exact cover problem. He introduces the concept using the following matrix of 1s and 0s:
+
+$$
+\begin{bmatrix}
+0 & 0 & 1 & 0 & 1 & 1 & 0 \\
+1 & 0 & 0 & 1 & 0 & 0 & 1 \\
+0 & 1 & 1 & 0 & 0 & 1 & 0 \\
+1 & 0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 1 & 1 & 0 & 1
+\end{bmatrix}
+$$
+The goal is to find an exact cover: a set of rows such that they contain exactly one 1 in each column. An analogous way of thinking of it is to find a set of rows such that when summed, the result is exactly $\begin{bmatrix} 1 & 1 & 1 & 1 & 1 & 1 & 1 \end{bmatrix}$ .  In this present example, the only solution is the set of rows $\{1, 4, 5\}$. Note that
+
+$$
+ \begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \\ 1 \\ 1 \\ 0 \end{bmatrix}^T + \begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}^T + \begin{bmatrix} 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \end{bmatrix}^T = \begin{bmatrix} 1 \\ 1 \\ 1 \\ 1 \\ 1 \\ 1 \\ 1 \end{bmatrix}^T
+$$
+
+Now why is any of this relevant? What does it have to do with sudoku at all?
+
+<span className="text-red-600">TODO: acho que posso introduzir melhor este problema</span>
+
+### Translating Sudoku into an Exact Cover Problem
+
+I'll build a very custom matrix. Each of the rows will be named in the following way: $R_iC_jD_k$ where $0 \leq i \leq 8$, $0 \leq j \leq 8$, $1 \leq k \leq 9$, and $i, j, k \in \mathbb{Z}$ , $R$ stands for rows, $C$ for columns and $D$ for digits. There's a total of $9^3 = 729$ rows. Here's a list of all the rows:
+
+```txt
+R0C0D1
+R0C0D2
+...
+R0C0D7
+R0C0D8
+R0C0D9
+R0C1D1
+...
+```
+
+Note that each row represents putting a certain digit in a certain position of a sudoku grid! If I pick 81 rows out of the 729, I might just have a completed sudoku puzzle.
+
+ Now the columns: It's easier to think of the columns as the constraints that exist in a sudoku game. Consider the same integers as before, $0 \leq i \leq 8$, $0 \leq j \leq 8$, $1 \leq k \leq 9$, and $i, j, k \in \mathbb{Z}$. There's four different constraints to worry about:
+
+ - There needs to be exactly one digit in every cell of the sudoku board. I'll represent each of these constraints like this: $R_iC_j$.
+ -  In every row, there can only be one of each digit: $R_iD_k$. 
+ - Analogous to the rows, there can only be one of each digit per column. Therefore, we get these constraints: $C_jD_k$.
+ - Finally, there can only be one of each digit per box: $B_iD_k$, where $B$ represents each of the nine boxes.
+
+In total, this adds up to $4 \times 9^2 = 324$ columns.
+
+Alright! Now where should the 1s in the matrix be? It's pretty intuitive. I'll focus on the following row: $R3C5D5$. It'll take this form:
+
+
+$
+\begin{array}{cccccccccccc} & R_0C_0 & ... & R_3C_5 & ... & R_3D_4 & R_3D_5 & ... & C_5D_5 & ... & B_4D_5 & ... \\ \hline R_3C_5D_1 & 0 & ... & 1 & ... & 0 & 1 & ... & 1 & ... & 1 & ... \end{array}
+$
+
+
+For each row, there will be exactly four 1s: one for each of the constraints. Every other element of the row will be a 0. Note that this works! Let's compare the rows $R_3C_5D_1$ and $R_3C_5D_2$. Both of these rows have 1s in the column $R_3C_5$. Therefore, they can't both belong in the same solution. It makes sense: there can't be both a $1$ and a $2$ in $R_3C_5$. 
+
+<span className="text-red-600">TODO: adicionar cena acerca de como transformar um número (row number) nos lugares onde estão os 1s</span>
+
+--
+
+<span className="text-red-600">TODO: adicionar site para visualizar matriz</span>
+
+Now why does any of this help at all? Well, turns out working with this very sparse matrix can be more efficient than brute forcing the problem.
+
+### Algorithm X
+
+[Algorithm X](link maybe) is the name of the algorithm presented by [Donald Knuth](https://pt.wikipedia.org/wiki/Donald_Knuth) to solve exact cover problems. In his words:
+
+> Algorithm X is simply a statement of the obvious trial-and-error approach.
+
+Here's how it works. Given a matrix A of 0s and 1s:
+
+```plaintext
+If A is empty, the problem is solved
+Otherwise choose a column c
+For each row, r, such that A[r,c] = 1
+	Include r in the partial solution
+	For each j such that A[r,j] = 1
+		for each i such that A[i, j] = 1,
+			delete row i from matrix A
+		delete column j from matrix A
+Repeat this algorithm recursively on the reduced matrix A
+```
+
+And that's exactly what I implemented. Now, using the matrix obtained from translating sudoku into an exact cover problem, I can solve any sudoku problem I want simply by writting a sudoku in this 729x324 matrix format.
+
+The question now is: Why would it be more efficient to solve this exact cover problem than to simply use a brute force backtracking algorithm? The answer lies in how to choose which column to check next: by simply picking the column with the least 1s, we guarantee that the number of rows (numbers to try next) is minimized. This greatly reduces the amount of necessary recursive calls. A lot of problems are solved in less than 81 choices! 
+
+I think this visualization does a great job of explaining exactly what is happening during the algorithm:
+
+<span className="text-red-600">TODO: acho que era fixe contar nodes no Alg X q demora a resolver certos problemas, e comprar com o backtracking; Exato tipo tabela com tempo para resolver, number of nodes, etc</span>
+
+--
+
+<span className="text-red-600">TODO: visualization backtracking vs alg X</span>
+
+
+### Back to generating Sudoku puzzles
+
+Surely I can now use my shiny new algorithm to solve and subsequently generate thousands of great sudokus on the fly. Right? I implemented the sudoku generating code, and gave it a shot. The results were not what I had expected. Here's some of the puzzles I generated:
+
+ <span className="text-red-600">TODO: display alguns dos sudokus que gerei</span>
+
+Notice something? The first thing I realized was that the sudokus I was generating had way too many clues on them. They were all too easy! But remember, removing any of the clues made the puzzles lose their uniqueness of solutions.
+
+In retrospect, this makes total sense. Of course I'll find tons of puzzles with around 40~ clues. Getting to the 20~ clue sudoku puzzles is much harder: they are definetely much more uncommon!
+
+Turns out, I had a misconception from the start: I believed that the problem of generating sudokus was an optimization problem. And to some extent, I was right. But finding really good sudokus, those that are good enough for humans to play them, is actually a much more difficult endeavor, and almost a completely new task in of itself: it's like finding needles in haystacks. 
+
+Sudoku puzzles that are ready to be solved by humans require uniqueness of solutions, yes, but they also require a lot more than just that. Difficulty rating, whether they can be solved without any guesses, which techniques are necessary to solve them, etc. While searching for how people actually do this, I found this incredible comment on a forum from someone who seems to own a sudoku mobile app. It's a bit long, but I think the read is worth it.
+
+<details>
+<summary><span className="link cursor-pointer">How a Sudoku app dev generates puzzles</span></summary>
+
+> I have a top selling Sudoku game on the iOS app store. Here's how I generated puzzles.
+> First I do have a puzzle generator application. But it's not part of the game's code. It's a stand alone app that I use to make puzzles. It's highly modified so I can set it to create different pattern types, difficulty ratings, number of givens, etc. Generating puzzles and getting a consistent difficulty level is hard to do on the fly and takes more time than a player would want to wait. So, I generate what I call "seed puzzles" and that is what is used by the game's code to generate the puzzles that people play.
+> I'm not answering how to code a generator here. You can google and find tons of puzzle generator code online. Start there. But to make a good game you need to make a good game. My game does not generate puzzles on the fly.
+
+> The way my puzzle generator app works is that it generates thousands of puzzles per minute, but they're not all good and they don't all match a specific difficulty rating. The generator creates a puzzle, then solves it and figures out a difficulty rating, and scores the puzzle based on the techniques needed to solve the puzzle, and determines if guessing is required to solve it (which is usually bad). It tosses out any puzzles that don't match a criteria. For hard but not impossible puzzles, on a fast machine, it can take an hour to generate 100 puzzles that match my exact specifications. This is why I don't do this in the app. Generating puzzles on the fly with those tough specifications wouldn't work for the quality of puzzles that I have in my app. So I run that app in 10 windows at a time all night to get the number of puzzles I need.
+
+> The puzzles are strings, 162 characters long, 81 characters with numbers and dashes or dots where the blanks are going to be, then another 81 with the solution. Then columns for each of the stats, like how many singles, doubles, etc.
+
+My output from all the generation sessions are comma delimited lines with the stats as columns. I'll take maybe 10,000 puzzles, bring them in to excel, and sort them by difficulty. Then bring them into an app to see them on the game board. I also look at them for visual appeal and the visible patterns to the puzzle. Then I hand pick from those.
+
+I call them seed puzzles and here's what I mean. The numbers in a sudoku game are really just tokens. Instead of being the numbers 1-9 they could be colors or symbols or letters. So my seed puzzles are not numbers they are the letters a-i. Each seed puzzle gets changed on the fly to make a playable puzzle:
+
+1. Randomize the numbers/tokens. When I turn the letters a-i back to into the numbers 1-9 the lookup table is randomized. Meaning that a isn't always 1. That alone creates about 300,000 variations on each puzzle.
+2. Rotate the puzzle by 90, 180 or 270 degrees. That adds 4 more variations.
+3. Flop the puzzle horizontally, vertically, or both. That adds 4 more variations.
+
+Each seed puzzle therefore can create 5,806,080 variations. I've tested this in the field with real players. People do not know they're essentially playing the same puzzle. It's impossible actually. Only if they were to notice that the pattern the givens are in are the same each time. But with even 100 different seeds no one will notice. A million users of my game haven't. I've also tested it with solver apps. A solver app won't solve a puzzle the same way when it's rotated or flopped. It will even sometimes analyze it as a different difficulty rating even though it's technically the same puzzle.
+(...)
+</details>
+
+ <span className="text-red-600">TODO: fix esta porcaria toda ^</span>
+
+ ### Final Remarks
+
+Seems like I have a lot of work to do before I actually start generating interesting puzzles. In the meantime, I decided it was a good idea to put my puzzle generator to work. I added a daily sudoku to this website. Here it is:
+
+ <span className="text-red-600">TODO: daily sudoku aqui</span>
+
+The generated puzzles might not be the best, but who knows, my generator might just get better. <a className="link" href="https://github.com/arturchichorro/Exact-Covers" target="_blank">Here's the github repo</a> in which I have been playing around with these algorithms. 
+
+###### Notes:
+- My code is very quick and dirty: I had fun reading about these algorithms, but there's a lot of polishing and refactoring work that could be made. In the future, I want to implement all of this in a more performant programming language, like C, C++ or Rust.
+- I haven't implemented Dancing Links, which is an implementation of Algorithm X that Donald Knuth proposes in his <a className="link" href="https://www.ocf.berkeley.edu/~jchu/publicportal/sudoku/0011047.pdf" target="_blank">paper</a>. It's definetely the next step though!

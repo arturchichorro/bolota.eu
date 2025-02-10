@@ -3,6 +3,9 @@ import * as runtime from "react/jsx-runtime";
 import { Callout } from "./callout";
 import { ThreeMedias } from "./three-medias";
 import SudokuBacktrack from "./sudoku/SudokuBacktrack";
+import SudokuAlgX from "./sudoku/SudokuAlgX";
+import SudokuComparison from "./sudoku/SudokuComparison";
+import PlayableSudoku from "./sudoku/PlayableSudoku";
 import ConnectFour from "./connect-four/connect-four";
 import Link from "next/link";
 
@@ -17,6 +20,9 @@ const components = {
     ThreeMedias,
     ConnectFour,
     SudokuBacktrack,
+    SudokuAlgX,
+    SudokuComparison,
+    PlayableSudoku,
     Link
 };
 

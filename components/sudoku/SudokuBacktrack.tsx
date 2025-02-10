@@ -5,6 +5,7 @@ import { SudokuControls } from './SudokuControls';
 import { SudokuGrid } from './SudokuGrid';
 import { createBacktrackingSolver } from '@/lib/sudoku/sudokuSolverBacktracking';
 import type { SolverRef } from '@/lib/sudoku/types';
+import { speedToDelay } from '@/lib/sudoku/sudokuUtils';
 
 interface SudokuProps {
   initialGrid: number[][];
@@ -13,17 +14,17 @@ interface SudokuProps {
 const SudokuBacktrack: React.FC<SudokuProps> = ({ initialGrid }) => {
   const [grid, setGrid] = useState<number[][]>(JSON.parse(JSON.stringify(initialGrid)));
   const [solving, setSolving] = useState(false);
-  const [delay, setDelay] = useState(100);
+  const [speed, setSpeed] = useState(50);
   const solverRef = useRef<SolverRef>({
     pause: false,
     abort: false,
-    currentDelay: delay
+    currentDelay: speedToDelay(50) 
   });
 
   async function solveSudokuBacktracking() {
     setSolving(true);
     solverRef.current.abort = false;
-    solverRef.current.currentDelay = delay;
+    solverRef.current.currentDelay = speedToDelay(speed);
     const sudokuGrid = JSON.parse(JSON.stringify(grid));
     
     const backtrack = createBacktrackingSolver(setGrid, solverRef);
@@ -50,9 +51,9 @@ const SudokuBacktrack: React.FC<SudokuProps> = ({ initialGrid }) => {
     setSolving(false);
   };
 
-  const handleDelayChange = (newDelay: number) => {
-    setDelay(newDelay);
-    solverRef.current.currentDelay = newDelay;
+  const handleSpeedChange = (newSpeed: number) => {
+    setSpeed(newSpeed);
+    solverRef.current.currentDelay = speedToDelay(newSpeed);
   };
 
   return (
@@ -60,10 +61,10 @@ const SudokuBacktrack: React.FC<SudokuProps> = ({ initialGrid }) => {
       <SudokuControls
         solving={solving}
         isPaused={solverRef.current.pause}
-        delay={delay}
+        speed={speed}
         onToggleSolving={toggleSolving}
         onReset={resetGrid}
-        onDelayChange={handleDelayChange}
+        onSpeedChange={handleSpeedChange}
       />
       <SudokuGrid grid={grid} initialGrid={initialGrid} />
     </div>
