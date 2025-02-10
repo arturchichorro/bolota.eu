@@ -305,7 +305,7 @@ To benchmark both algorithms, I generated 50 puzzles, each starting with around 
 
 Note: When I refer to "Nodes," I mean recursive calls: essentially, the number of times each algorithm needs to backtrack before solving a puzzle.
 
-<table>
+<table className="text-center">
   <thead>
     <tr>
       <th></th>
@@ -382,11 +382,35 @@ I was curious about getting more extensive data on Algorithm X. Therefore, I had
 
 ### Back to generating Sudoku puzzles
 
-And with that, I can now generate my own puzzles! Here are some of them:
+Having finished the puzzle solver, I can generate my own puzzles quickly! Here are a few of them:
 
- <span className="text-red-600">TODO: display alguns dos sudokus que gerei</span>
+<div className="flex gap-8 justify-center">
+    <SudokuGrid initialGrid={[
+        [5, 0, 0, 0, 4, 0, 1, 0, 0],
+        [1, 8, 0, 0, 9, 0, 0, 7, 0],
+        [0, 0, 6, 0, 2, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 2, 1, 0],
+        [0, 9, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 5, 6],
+        [0, 0, 0, 0, 0, 0, 0, 8, 2],
+        [7, 0, 0, 1, 5, 0, 9, 0, 0],
+        [0, 2, 0, 0, 0, 7, 0, 0, 0],
+    ]} />
 
-And now that I've gotten here, I realise that I've only just arrived at the tip of the iceberg of this topic. Right now, my only criteria is that the puzzles I generate only have one solution. But in order to generate a puzzle that's pleasant for a human to solve, there's a lot of other challenges: can the generated puzzles be solved without having to take any guess at each time? Can the algorithm generate puzzles of all difficulties?
+    <SudokuGrid initialGrid={[
+        [9, 0, 0, 0, 0, 0, 0, 0, 0],
+        [6, 0, 2, 0, 0, 0, 0, 0, 5],
+        [0, 7, 3, 0, 2, 4, 0, 1, 0],
+        [0, 0, 6, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 5, 9, 8, 0],
+        [0, 0, 0, 8, 6, 0, 3, 0, 0],
+        [0, 0, 0, 2, 0, 0, 0, 0, 0],
+        [0, 0, 9, 0, 5, 0, 0, 0, 0],
+        [4, 1, 0, 0, 7, 3, 0, 5, 0],
+    ]} />
+</div>
+
+Now that I've reached this point, I realize I've only scratched the surface of this topic. Right now, my only criteria is that the puzzles I generate only have one solution. But in order to generate a puzzle that's pleasant for a human to solve, there's a lot of other challenges: can the generated puzzles be solved without having to make any guesses? Can the algorithm generate puzzles of all difficulties?
 
 While searching around for answers to my questions in this realm, I found this <a target="_blank" className="link" href="https://gamedev.stackexchange.com/questions/56149/how-can-i-generate-sudoku-puzzles">incredibly interesting comment</a> from someone who seems to be the dev of a sudoku mobile app. It's a bit long, but I think the read is worth it.
 

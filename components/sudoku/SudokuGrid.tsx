@@ -1,9 +1,11 @@
+"use client"
+
 import React from 'react';
 import { SudokuCell } from './SudokuCell';
 
 interface SudokuGridProps {
-  grid: number[][];
   initialGrid: number[][];
+  grid?: number[][];
   selectedCell?: [number, number] | null;
   onCellClick?: (rowIndex: number, colIndex: number) => void;
   isPlayable?: boolean;
@@ -12,11 +14,11 @@ interface SudokuGridProps {
 }
 
 export const SudokuGrid: React.FC<SudokuGridProps> = ({
-  grid,
   initialGrid,
+  grid = initialGrid,
   selectedCell = null,
   onCellClick,
-  isPlayable = true,
+  isPlayable = false,
   checkValidity = false,
   isValidMove = () => true,
 }) => (

@@ -8,6 +8,7 @@ import SudokuComparison from "./sudoku/SudokuComparison";
 import PlayableSudoku from "./sudoku/PlayableSudoku";
 import ConnectFour from "./connect-four/connect-four";
 import Link from "next/link";
+import { SudokuGrid } from "./sudoku/SudokuGrid";
 
 const useMDXComponent = (code: string) => {
     const fn = new Function(code);
@@ -23,6 +24,7 @@ const components = {
     SudokuAlgX,
     SudokuComparison,
     PlayableSudoku,
+    SudokuGrid,
     Link
 };
 
