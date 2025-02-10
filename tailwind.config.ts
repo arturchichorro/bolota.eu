@@ -64,6 +64,7 @@ const config = {
         sudoku: {
           DEFAULT: "hsl(var(--sudoku))",
           foreground: "hsl(var(--sudoku-foreground))",
+          highlight: "hsl(var(--sudoku-highlight))",
           text: "hsl(var(--sudoku-text))",
           borders: "hsl(var(--sudoku-borders))",
           warning: "hsl(var(--sudoku-warning))",

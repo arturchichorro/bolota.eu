@@ -60,6 +60,7 @@
       /* Sudoku colors */
       --sudoku: 142 100% 98%;
       --sudoku-foreground: 141 89% 93%;
+      --sudoku-highlight: 140 100% 30%;
       --sudoku-text: 130 60% 30%;
       --sudoku-borders: 140 28% 85%;
       --sudoku-warning: 9 80% 95%;
@@ -106,6 +107,7 @@
       /* Sudoku colors */
       --sudoku: 140 40% 20%;
       --sudoku-foreground: 140 28% 32%;
+      --sudoku-highlight: 140 30% 60%;
       --sudoku-text: 140 69% 51%;
       --sudoku-borders: 140 33% 7%;
       --sudoku-warning: 8 60% 65%;

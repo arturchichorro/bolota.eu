@@ -30,9 +30,9 @@ export const SudokuCell: React.FC<SudokuCellProps> = ({
       border border-sudoku-borders text-xl
       ${isAlternateBox ? 'bg-sudoku' : 'bg-sudoku-foreground'}
       ${isOriginal ? 'font-bold text-primary' : 'text-sudoku-text'}
-      ${borderRight && 'border-r-2 border-r-border'}
-      ${borderBottom && 'border-b-2 border-b-border'}
-      ${isSelected && '!border-border border-2'}
+      ${borderRight && 'border-r-2 border-r-sudoku-highlight'}
+      ${borderBottom && 'border-b-2 border-b-sudoku-highlight'}
+      ${isSelected && '!border-sudoku-highlight border-2'}
       ${!isValid && '!bg-sudoku-warning'}
       ${!isValid && !isOriginal && '!text-sudoku-textwarning'}
       ${isPlayable && 'hover:!bg-accent cursor-pointer'}
