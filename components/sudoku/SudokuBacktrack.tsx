@@ -57,7 +57,7 @@ const SudokuBacktrack: React.FC<SudokuProps> = ({ initialGrid }) => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 my-4">
       <SudokuGrid grid={grid} initialGrid={initialGrid} isPlayable={false} />
       <SudokuControls
         solving={solving}
