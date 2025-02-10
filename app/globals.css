@@ -105,11 +105,11 @@
 
       /* Sudoku colors */
       --sudoku: 140 40% 20%;
-      --sudoku-foreground: 141 16% 36%;
-      --sudoku-text: 130 60% 30%;
+      --sudoku-foreground: 140 28% 32%;
+      --sudoku-text: 140 69% 51%;
       --sudoku-borders: 140 33% 7%;
-      --sudoku-warning: 9 80% 95%;
-      --sudoku-textwarning: 0 84% 60%;
+      --sudoku-warning: 8 60% 65%;
+      --sudoku-textwarning: 0 100% 37%;
 
     }
   }
