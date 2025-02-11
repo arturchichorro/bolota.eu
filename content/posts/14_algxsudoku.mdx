@@ -33,15 +33,15 @@ The simplest algorithm you can write to solve a sudoku puzzle is a backtracking 
 
 <div className="flex justify-center">
     <SudokuBacktrack initialGrid={[
-        [5, 3, 0, 0, 7, 0, 0, 0, 0],
-        [6, 0, 0, 1, 9, 5, 0, 0, 0],
-        [0, 9, 8, 0, 0, 0, 0, 6, 0],
-        [8, 0, 0, 0, 6, 0, 0, 0, 3],
-        [4, 0, 0, 8, 0, 3, 0, 0, 1],
-        [7, 0, 0, 0, 2, 0, 0, 0, 6],
-        [0, 6, 0, 0, 0, 0, 2, 8, 0],
-        [0, 0, 0, 4, 1, 9, 0, 0, 5],
-        [0, 0, 0, 0, 8, 0, 0, 7, 9],
+        [0, 0, 0, 0, 9, 0, 4, 1, 2],
+        [0, 0, 0, 4, 7, 0, 0, 0, 0],
+        [0, 0, 6, 5, 0, 2, 9, 0, 0],
+        [4, 0, 0, 7, 0, 0, 0, 2, 0],
+        [0, 0, 0, 0, 0, 8, 7, 0, 0],
+        [5, 8, 0, 0, 0, 0, 6, 0, 0],
+        [0, 2, 0, 0, 0, 5, 0, 0, 0],
+        [8, 0, 0, 0, 0, 0, 0, 0, 1],
+        [6, 0, 0, 2, 0, 0, 0, 3, 0],
     ]} />
 </div>
 
@@ -67,7 +67,24 @@ def solve_sudoku_backtracking(sudoku_grid):
 
 Turns out, this approach is actually really good at solving Sudoku. It solves most puzzles really fast! However, sometimes, the configuration of certain puzzles forces the algorithm to backtrack extensively, making the algorithm take much longer than we'd like.
 
-<span className="text-red-500">TODO: Adicionar aqui numa details tag um exemplo de um puzzle que demore muito tempo</span>
+<details>
+<summary><span className="link cursor-pointer">Puzzle that is very hard for the Backtracking Solver</span></summary>
+
+This puzzle will force the Backtracking algorithm to make almost two million recursive calls before being solved. Without the visualization, it takes my python code about two minutes to solve. With the visualization, which slows things down immensively, I doubt you can leave it running for long enough to see it getting solved.
+<div className="flex justify-center">
+    <SudokuBacktrack initialGrid={[
+        [0, 1, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 3, 0, 0, 4],
+        [6, 0, 0, 0, 0, 0, 9, 0, 0],
+        [0, 0, 0, 0, 0, 0, 2, 8, 0],
+        [7, 0, 0, 9, 0, 2, 0, 3, 6],
+        [0, 8, 0, 7, 0, 0, 4, 0, 0],
+        [0, 0, 0, 0, 6, 0, 5, 1, 8],
+        [0, 0, 2, 0, 0, 0, 0, 0, 0],
+        [0, 7, 0, 0, 3, 5, 0, 0, 0],
+    ]} />
+</div>
+</details>
 
 This annoying setback made me try to find more sophisticated algorithms that were better prepared to handle all kinds of edge cases. This is how I stumbled upon the <a className="link" href="https://en.wikipedia.org/wiki/Exact_cover" target="_blank">Exact Cover Problem</a>.
 
@@ -287,15 +304,15 @@ The secret is step 2: choosing a column. If in this step we choose the column wi
 
 <div className="flex justify-center">
     <SudokuAlgX initialGrid={[
-        [5, 3, 0, 0, 7, 0, 0, 0, 0],
-        [6, 0, 0, 1, 9, 5, 0, 0, 0],
-        [0, 9, 8, 0, 0, 0, 0, 6, 0],
-        [8, 0, 0, 0, 6, 0, 0, 0, 3],
-        [4, 0, 0, 8, 0, 3, 0, 0, 1],
-        [7, 0, 0, 0, 2, 0, 0, 0, 6],
-        [0, 6, 0, 0, 0, 0, 2, 8, 0],
-        [0, 0, 0, 4, 1, 9, 0, 0, 5],
-        [0, 0, 0, 0, 8, 0, 0, 7, 9],
+        [0, 0, 0, 0, 9, 0, 4, 1, 2],
+        [0, 0, 0, 4, 7, 0, 0, 0, 0],
+        [0, 0, 6, 5, 0, 2, 9, 0, 0],
+        [4, 0, 0, 7, 0, 0, 0, 2, 0],
+        [0, 0, 0, 0, 0, 8, 7, 0, 0],
+        [5, 8, 0, 0, 0, 0, 6, 0, 0],
+        [0, 2, 0, 0, 0, 5, 0, 0, 0],
+        [8, 0, 0, 0, 0, 0, 0, 0, 1],
+        [6, 0, 0, 2, 0, 0, 0, 3, 0],
     ]} />
 </div>
 
