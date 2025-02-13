@@ -62,8 +62,7 @@ export const createAlgorithmXSolver = (
     }
 
     for await (const partial of solveSudokuWithYield(initialGrid)) {
-      if (solverRef.current.abort) break;
-      solutions.push(partial);
+      break; // Stops after finding first solution
     }
     
     return solutions;
