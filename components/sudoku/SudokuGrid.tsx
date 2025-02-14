@@ -22,7 +22,7 @@ export const SudokuGrid: React.FC<SudokuGridProps> = ({
   checkValidity = false,
   isValidMove = () => true,
 }) => (
-  <div className="border-2 border-sudoku-highlight">
+  <div className="border-2 border-sudoku-highlight max-w-max">
     {grid.map((row, rowIndex) => (
       <div key={rowIndex} className="flex">
         {row.map((_, colIndex) => {

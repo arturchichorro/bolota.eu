@@ -141,3 +141,47 @@ function emptySudokuExactCover(size: number = 9): number[][] {
 
     return matrix;
 }
+
+export function solveSudokuMatrixExactCover(sudokuGrid: number[][]): Set<number>[] {
+    const result = sudokuMatrixToExactCover(sudokuGrid);
+    if (!result) return [];
+    const [sudokuMatrix, partialSolution] = result;
+    const solutions: Set<number>[] = [];
+    solve(sudokuMatrix, partialSolution, solutions);
+    return solutions;
+}
+
+
+function solve(npMatrix: npMatrix, partialSolution: Set<number>, solutions: Set<number>[]): void {
+    
+    if (npMatrix.numCols === 1) {
+        solutions.push(partialSolution);
+        return;
+    }
+
+    const columnSums = sumColumnsExcludingFirst(npMatrix);
+    const minColIdx = columnSums.indexOf(Math.min(...columnSums)) + 1;
+    const candidateRows = npMatrix.data
+        .map((row, rIdx) => (row[minColIdx] === 1 ? rIdx : -1))
+        .filter(rIdx => rIdx !== -1);
+
+    if (candidateRows.length === 0) return;
+
+    for (const rowIdx of candidateRows) {
+        const newPartialSolution = new Set(partialSolution);
+        newPartialSolution.add(npMatrix.data[rowIdx][0]);
+        const reducedMatrix = chooseRow(npMatrix, rowIdx);
+        solve(reducedMatrix, newPartialSolution, solutions);
+    }
+}
+
+export function translateSolutionToSudoku(solutions: Set<number>[]): string[] {
+    return solutions.map(sol => {
+        const sortedSol = Array.from(sol).sort((a, b) => a - b);
+        let sudoString = "";
+        for (let i = 0; i < sortedSol.length; i++) {
+            sudoString += (i === 0) ? sortedSol[i].toString() : (sortedSol[i] % (9 * i) !== 0 ? (sortedSol[i] % (9 * i)).toString() : "9");
+        }
+        return sudoString;
+    });
+}
