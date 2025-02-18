@@ -21,14 +21,14 @@ const SudokuNumberPad: React.FC<SudokuNumberPadProps> = ({ onNumberSelect, onRes
       <div ref= {padRef} className="grid grid-cols-3 gap-2 max-w-md">
         <Button 
                 onClick={onReset}
-                className="col-span-3 h-10" size="sm" variant="secondary"
+                className="col-span-3 h-8 sm:h-10 text-xs sm:text-sm" size="sm" variant="secondary"
             >
                 Reset Game
         </Button>
         {numbers.map((num) => (
           <Button
             variant="outline"
-            className="w-12 h-12 p-2 text-md font-semibold rounded"
+            className="w-8 h-8 sm:w-12 sm:h-12 p-2 text-xs sm:text-lg font-semibold rounded"
             key={num}
             onClick={() => onNumberSelect(num)}
           >
@@ -37,7 +37,7 @@ const SudokuNumberPad: React.FC<SudokuNumberPadProps> = ({ onNumberSelect, onRes
         ))}
         <Button
           variant="outline"
-          className="w-12 h-12 p-2 text-md font-semibold rounded col-start-2"
+          className="w-8 h-8 sm:w-12 sm:h-12 p-2 text-xs sm:text-lg font-semibold rounded col-start-2"
           onClick={() => onNumberSelect(0)}
         >
           ⌫

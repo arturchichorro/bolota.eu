@@ -26,8 +26,8 @@ export const SudokuCell: React.FC<SudokuCellProps> = ({
   <div
     onClick={onClick}
     className={`
-      w-10 h-10 flex items-center justify-center
-      border border-sudoku-borders text-xl
+      w-8 h-8 sm:w-10 sm:h-10 text-md sm:text-xl flex items-center justify-center
+      border border-sudoku-borders
       ${isAlternateBox ? 'bg-sudoku' : 'bg-sudoku-foreground'}
       ${isOriginal ? 'font-bold text-primary' : 'text-sudoku-text'}
       ${borderRight && 'border-r-2 border-r-sudoku-highlight'}

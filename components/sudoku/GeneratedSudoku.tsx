@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import PlayableSudoku from "./PlayableSudoku";
 import { generateSudokuAndSolution } from "@/lib/sudoku/generateSudoku";
+import { Button } from "../ui/button";
 
 const GeneratedSudoku = () => {
     const [sudoku, setSudoku] = useState<{ initialGrid: number[][], solutionGrid: number[][] } | null>(null);
@@ -22,20 +23,20 @@ const GeneratedSudoku = () => {
     return (
         <div className="flex flex-col items-center space-y-4">
             {loading ? (
-                <p>Loading Sudoku...</p>
+                <p>Generating Sudoku...</p>
             ) : sudoku ? (
                 <PlayableSudoku initialGrid={sudoku.initialGrid} solutionGrid={sudoku.solutionGrid} />
             ) : (
                 <p>Failed to generate Sudoku</p>
             )}
 
-            <button 
+            <Button 
                 onClick={fetchSudoku}
                 disabled={loading}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-400"
+                variant="secondary"
             >
                 {loading ? "Generating..." : "Generate New Puzzle"}
-            </button>
+            </Button>
         </div>
     );
 };
