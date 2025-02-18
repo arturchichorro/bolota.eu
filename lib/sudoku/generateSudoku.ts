@@ -33,36 +33,32 @@ export function generateFilledSudoku(): number[][] {
     return grid
 }
 
-export async function generateSudoku(): Promise<number[][]> {
-    return new Promise((resolve) => {
-        setTimeout(() => {  // Simulate async behavior
-            const sudokuGrid: number[][] = generateFilledSudoku();
-            const positions: [number, number][] = [];
-            for (let r = 0; r < 9; r++) {
-                for (let c = 0; c < 9; c++) {
-                    positions.push([r, c]);
-                }
-            }
-            shuffleArray(positions);
+export function generateSudoku(): number[][] {
+    const sudokuGrid: number[][] = generateFilledSudoku();
+    const positions: [number, number][] = [];
+    for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+            positions.push([r, c]);
+        }
+    }
+    shuffleArray(positions)
 
-            while (positions.length > 0) {
-                const [r, c] = positions.pop() as [number, number];
-                const temp = sudokuGrid[r][c];
-                sudokuGrid[r][c] = 0;
+    while (positions.length > 0) {
+        const [r, c] = positions.pop() as [number, number]
+        const temp = sudokuGrid[r][c];
+        sudokuGrid[r][c] = 0;
 
-                const tempGrid = deepCopy(sudokuGrid);
-                if (solveSudokuMatrixExactCover(tempGrid).length > 1) {
-                    sudokuGrid[r][c] = temp;
-                }
-            }
+        const tempGrid = deepCopy(sudokuGrid)
+        if (solveSudokuMatrixExactCover(tempGrid).length > 1) {
+            sudokuGrid[r][c] = temp;
+        }
+    }
 
-            resolve(sudokuGrid);
-        }, 0);
-    });
+    return sudokuGrid
 }
 
-export async function generateSudokuAndSolution(): Promise<{ initialGrid: number[][], solutionGrid: number[][] }> {
-    const initialGrid: number[][] = await generateSudoku()
+export function generateSudokuAndSolution(): { initialGrid: number[][], solutionGrid: number[][] } {
+    const initialGrid: number[][] = generateSudoku()
     const solutionGrid: number[][] = sudokuStringToSudokuGrid(translateSolutionToSudoku(solveSudokuMatrixExactCover(initialGrid))[0])
     return {
         initialGrid,

@@ -2,7 +2,7 @@
 title: Solving Sudoku Puzzles with Matrices
 description: Implementing Algorithm X to solve Sudoku puzzles
 date: 2025-02-10
-published: false
+published: true
 icon: python
 ---
 
@@ -10,7 +10,7 @@ While working on a different project, I fell down the rabbit hole of trying to g
 
 ### Generating Sudokus
 
-To generate Sudokus, I first needed to define my success criteria: a well-constructed puzzle must have exactly one solution. In order to achieve this, I landed at this algorithm.
+To generate Sudokus, I first needed to define my success criteria: a well-constructed puzzle must have **exactly one solution**. In order to achieve this, I landed at this algorithm.
 
 <details>
 <summary><span className="link cursor-pointer">Sudoku Generation Algorithm outline</span></summary>
@@ -29,19 +29,19 @@ In order to actually implement the algorithm that generates Sudoku puzzles, I ne
 
 ### Backtracking
 
-The simplest algorithm you can write to solve a sudoku puzzle is a backtracking algorithm. All it does is it attempts to fill the next empty square with the next valid number. If at some point there are no valid placements possible, it means it made a mistake. In this case, it *backtracks* (goes back to before the mistake was made) and attempts the next valid number. It's as brute force as it gets. 
+The simplest algorithm you can write to solve a sudoku puzzle is a **backtracking algorithm**. All it does is it attempts to fill the next empty square with the next valid number. If at some point there are no valid placements possible, it means it made a mistake. In this case, it *backtracks* (goes back to before the mistake was made) and attempts the next valid number. It's as brute force as it gets. 
 
 <div className="flex justify-center">
     <SudokuBacktrack initialGrid={[
-        [0, 0, 0, 0, 9, 0, 4, 1, 2],
-        [0, 0, 0, 4, 7, 0, 0, 0, 0],
-        [0, 0, 6, 5, 0, 2, 9, 0, 0],
-        [4, 0, 0, 7, 0, 0, 0, 2, 0],
-        [0, 0, 0, 0, 0, 8, 7, 0, 0],
-        [5, 8, 0, 0, 0, 0, 6, 0, 0],
-        [0, 2, 0, 0, 0, 5, 0, 0, 0],
+        [0, 3, 5, 0, 0, 7, 0, 0, 0],
         [8, 0, 0, 0, 0, 0, 0, 0, 1],
-        [6, 0, 0, 2, 0, 0, 0, 3, 0],
+        [0, 0, 2, 6, 0, 9, 0, 8, 0],
+        [0, 0, 6, 0, 0, 5, 2, 0, 0],
+        [0, 0, 0, 0, 0, 8, 4, 0, 5],
+        [0, 0, 0, 0, 0, 0, 0, 9, 7],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 5, 8, 0, 0, 0, 4],
+        [0, 0, 0, 1, 7, 0, 0, 6, 0]
     ]} />
 </div>
 
@@ -117,17 +117,17 @@ $$
 0 & 0 & 0 & 1 & 1 & 0 & 1
 \end{bmatrix}
 $$
-The goal is to find an exact cover: a set of rows such that they contain exactly one 1 in each column. Note that this is analogous to the example I outlined above. A different way of thinking about it is to find a set of rows such that when summed, the result is exactly $\begin{bmatrix} 1 & 1 & 1 & 1 & 1 & 1 & 1 \end{bmatrix}$ . In this present example, the only solution is the set of rows $\{1, 4, 5\}$. Note that
+The goal is to find an exact cover: a set of rows such that they contain exactly one 1 in each column. Note that this is analogous to the example I outlined above. A different way of thinking about it is to find a set of rows such that when summed, the result is exactly $\begin{bmatrix} 1 & 1 & 1 & 1 & 1 & 1 & 1 \end{bmatrix}$. In this present example, the only solution is the set of rows $\{1, 4, 5\}$. Note that
 
 $$
  \begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \\ 1 \\ 1 \\ 0 \end{bmatrix}^T + \begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}^T + \begin{bmatrix} 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \end{bmatrix}^T = \begin{bmatrix} 1 \\ 1 \\ 1 \\ 1 \\ 1 \\ 1 \\ 1 \end{bmatrix}^T
 $$
 
-Turns out, any Sudoku puzzle can be described as a matrix of 1s and 0s. And even more interesting is that finding exact covers for that matrix is the same as finding solutions to the puzzle.
+Turns out, **any Sudoku puzzle can be described as a matrix of 1s and 0s**. And even more interesting is that finding exact covers for that matrix is the same as finding solutions to the puzzle.
 
 ### Translating Sudoku into an Exact Cover Problem
 
-So how can this matrix of 1s and 0s be constructed? It's a very custom method.
+So how can this matrix of 1s and 0s be constructed?
 
 I'll start by naming each row of the matrix in the following way: $R_iC_jD_k$ where $0 \leq i \leq 8$, $0 \leq j \leq 8$, $1 \leq k \leq 9$, and $i, j, k \in \mathbb{Z}$ , $R$ stands for rows, $C$ for columns and $D$ for digits. There's a total of $9^3 = 729$ rows. Here's a list of all the rows:
 
@@ -178,7 +178,7 @@ R8C8D9
 
 Note that each row represents putting a certain digit in a certain position of a Sudoku grid! If I pick 81 rows out of the 729, I might just have a completed sudoku puzzle.
 
-Now the columns: It's easier to think of the columns as the constraints (rules) that exist in a Sudoku puzzle. Consider the same integers as before, $0 \leq i \leq 8$, $0 \leq j \leq 8$, $1 \leq k \leq 9$, and $i, j, k \in \mathbb{Z}$. There's four different constraints to worry about:
+Now the columns: It's easier to think of the columns as the **constraints (rules) that exist in a Sudoku puzzle**. Consider the same integers as before, $0 \leq i \leq 8$, $0 \leq j \leq 8$, $1 \leq k \leq 9$, and $i, j, k \in \mathbb{Z}$. There's four different constraints to worry about:
 
 - There needs to be exactly one digit in every cell of the sudoku board. I'll represent each of these constraints like this: $R_iC_j$.
 -  In every row, there can only be one of each digit: $R_iD_k$. 
@@ -270,7 +270,7 @@ Here's how it works. Given a matrix $A$ of 0s and 1s:
 4. Repeat this algorithm recursively on the reduced matrix A
 ```
 
-And that's exactly what I implemented. Now, using the matrix obtained from translating Sudoku into an exact cover problem, I can solve any Sudoku puzzle I want simply by writting a Sudoku in this 729x324 matrix format.
+And that's exactly what I implemented. Now, using the matrix obtained from translating Sudoku into an exact cover problem, I can solve any Sudoku puzzle I want simply by writting a Sudoku in this 729x324 matrix format and including some of the rows (initial clues) in my partial solution.
 
 <details>
 <summary><span className="link cursor-pointer">My Implementation of Knuth's Algorithm X</span></summary>
@@ -308,9 +308,9 @@ def solve(matrix, partial_solution, solutions):
 ```
 </details>
 
-But you might've noticed something: this is also a backtracking algorithm. It keeps calling itself until the problem is solved. How is this any better than the brute force method I described at the start of this article?
+But you might've noticed something: this is **also a backtracking algorithm**. It keeps calling itself until the problem is solved. How is this any better than the brute force method I described at the start of this article?
 
-The secret is step 2: choosing a column. If in this step we choose the column with the least amount of 1s in it, we guarantee that the number of guesses we have to make is much smaller, and therefore, our function will have to recurse a lot less. In Sudoku puzzle terms, the brute force backtracking algorithm tries the first valid digit in the first empty cell, while Algorithm X tries the first valid digit in the cell with less possible digits to place. In this visualization, this becomes very apparent:
+The secret is step 2: choosing a column. If in this step we choose the **column with the least amount of 1s in it**, we guarantee that the number of guesses we have to make is much smaller, and therefore, our function will have to recurse a lot less. In Sudoku puzzle terms, the brute force backtracking algorithm tries the first valid digit in the first empty cell, while Algorithm X tries the first valid digit in the cell with less possible digits to place. In this visualization, this becomes very apparent:
 
 <div className="flex justify-center">
     <SudokuAlgX initialGrid={[
@@ -491,7 +491,7 @@ The results for time are fairly consistent with the first fifty puzzles solved: 
 </table>
 
 
-On the other hand, the results for the nodes were fascinating. The first thing I noticed was that the Min nodes and Median nodes are the same! Upon closer inspection, I found that out of the 49151 puzzles, 28853 puzzles required exactly 64 nodes to be solved. That's 58.7% of all puzzles!
+On the other hand, the results for the nodes were fascinating. The first thing I noticed was that the Min nodes and Median nodes are the same! Upon closer inspection, I found that out of the 49151 puzzles, 28853 puzzles required **exactly 64 nodes to be solved**. That's 58.7% of all puzzles!
 
 So what exactly is going on here? What's so special about the number 64? Well, the dataset had something consistent across all puzzles: all of them started out with **17 filled cells**. Subtract that from 81 and you get 64. This meant that over half of the puzzles were solved without the algorithm having to take any guess. For sudoku enthusiasts, this means that over half of these 49151 puzzles were solvable using **naked singles** only: the method where you exclude all but one possible number from a cell based on the row, column, and box.
 
@@ -559,20 +559,17 @@ Having finished the puzzle solver, I can generate my own puzzles reasonably fast
     ]} />
 </div>
 
-Now that I've reached this point, I realize I've only scratched the surface of this topic. As this point, my only criteria is that the puzzles I generate only have one solution. But in order to generate a puzzle that's pleasant for a human to solve, there's a lot of other challenges: can the generated puzzles be solved without having to make any guesses? Can the algorithm generate puzzles of all difficulties?
+Now that I've reached this point, I realize I've only scratched the surface of this topic. As this point, my only criteria is that the puzzles I generate only have one solution. But in order to generate a puzzle that's **pleasant for a human to solve**, there's a lot of other challenges: can the generated puzzles be solved without having to make any guesses? Can the algorithm generate puzzles of all difficulties?
 
 While searching around for answers to my questions in this realm, I found this <a target="_blank" className="link" href="https://gamedev.stackexchange.com/questions/56149/how-can-i-generate-sudoku-puzzles">incredibly interesting comment</a> from someone who seems to be the dev of a sudoku mobile app. It's a bit long, but I think the read is worth it.
 
  ### Final Remarks
 
-Seems like I have a lot of work to do before I actually start generating interesting puzzles. In the meantime, I decided it was a good idea to put my puzzle generator to work. I added a daily sudoku to this website. Here it is:
+There are still plenty of loose ends to explore in this topic, but I thought this was a good time to pause and share what I've discovered so far.
 
-<GeneratedSudoku />
+Here's the next steps I'll take:
+- Currently, my code still takes a around 2~3 seconds to generate puzzles. I'd like to improve that and build an API that generates Sudokus instantly on demand, potentially using a lower-level language like Rust or C/C++.
+- Implement <a className="link" href="https://www.ocf.berkeley.edu/~jchu/publicportal/sudoku/0011047.pdf" target="_blank">Dancing Links</a>, a more advanced version of Algorithm X by Donald Knuth that uses linked lists instead of matrices.
+- Translate other puzzles to Exact Cover problems, like <a target="_blank" href="https://en.wikipedia.org/wiki/Futoshiki" className="link">Futoshiki</a> or the <a href="https://developers.google.com/optimization/cp/queens" target="_blank" className="link">N-queens problem</a>.
 
-The generated puzzles might not be the best, but who knows, my generator might just get better. <a className="link" href="https://github.com/arturchichorro/Exact-Covers" target="_blank">Here's the github repo</a> in which I have been playing around with these algorithms. 
-
-###### Notes:
-- My code is very quick and dirty: I had fun reading about these algorithms, but there's a lot of polishing and refactoring work that could be made. In the future, I want to implement all of this in a more performant programming language, like C, C++ or Rust.
-- I haven't implemented Dancing Links, which is an implementation of Algorithm X that Donald Knuth proposes in his <a className="link" href="https://www.ocf.berkeley.edu/~jchu/publicportal/sudoku/0011047.pdf" target="_blank">paper</a>. It's definetely the next step though!
-
-<span className="text-red-600">TODO: adicionar site para visualizar matriz</span>
+In case you want to check it out, <a className="link" href="https://github.com/arturchichorro/Exact-Covers" target="_blank">here's the github repo</a> in which I have been playing around with these algorithms: just FYI, it's a lot of very quick and dirty code that I used to deepen my understanding of the ideas in this blog post.
