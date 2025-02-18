@@ -140,3 +140,23 @@
     opacity: 1;
   }
  }
+
+.mdx-hidden-flex {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .mdx-hidden-flex {
+    display: flex;
+  }
+}
+
+.mdx-hidden-block {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .mdx-hidden-block {
+    display: block;
+  }
+}

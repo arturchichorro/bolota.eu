@@ -189,9 +189,19 @@ In total, this adds up to $4 \times 9^2 = 324$ columns.
 
 Alright: I've named the rows and the columns. Now where should the 1s in the matrix be? It's pretty intuitive. I'll focus on the following row: $R_3C_5D_5$. It'll take this form:
 
-<div className="prose flex justify-center text-primary">
+<div className="justify-center text-primary mdx-hidden-flex">
 $
 \begin{array}{cccccccccccc} & R_0C_0 & ... & R_3C_5 & ... & R_3D_5 & ... & C_5D_5 & ... & B_4D_5 & ... \\ \hline R_3C_5D_5 & 0 & ... & 1 & ... & 1 & ... & 1 & ... & 1 & ... \end{array}
+$
+</div>
+
+<div className="prose justify-center items-center text-primary flex flex-col sm:hidden">
+$
+\begin{array}{cccccccccccc} & R_0C_0 & ... & R_3C_5 & ... & R_3D_5 & ... \\ \hline R_3C_5D_5 & 0 & ... & 1 & ... & 1 & ...\end{array}
+$
+
+$
+\begin{array}{cccccccccccc}... & C_5D_5 & ... & B_4D_5 & ... \\ \hline ... & 1 & ... & 1 & ...\end{array}
 $
 </div>
 
@@ -322,6 +332,7 @@ To benchmark both algorithms, I generated 50 puzzles, each starting with around 
 
 Note: When I refer to "Nodes," I mean recursive calls: essentially, the number of times each algorithm needs to backtrack before solving a puzzle.
 
+<div className="mdx-hidden-block">
 <table className="text-center">
   <thead>
     <tr>
@@ -355,6 +366,53 @@ Note: When I refer to "Nodes," I mean recursive calls: essentially, the number o
     </tr>
   </tbody>
 </table>
+</div>
+
+<div className="sm:hidden">
+<table className="text-center">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Backtracking</th>
+      <th>Algorithm X</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Avg Time</td>
+      <td>8.3997s</td>
+      <td>0.0351s</td>
+    </tr>
+    <tr>
+      <td>Max Time</td>
+      <td>125.1491s</td>
+      <td>0.0527s</td>
+    </tr>
+    <tr>
+      <td>Min Time</td>
+      <td>0.0643s</td>
+      <td>0.0302s</td>
+    </tr>
+    <tr>
+      <td>Avg Nodes</td>
+      <td>124144.76</td>
+      <td>69.28</td>
+    </tr>
+    <tr>
+      <td>Max Nodes</td>
+      <td>1883620</td>
+      <td>157</td>
+    </tr>
+    <tr>
+      <td>Min Nodes</td>
+      <td>924</td>
+      <td>55</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
 
 To me, the most fascinating result is the average recursive calls Algorithm X took to solve each puzzle: 69! By selecting the column with the least 1s during the algorithm, we almost entirely remove the need to ever take a guess. Comparing that to the 124145 average recursive calls the Backtracking algorithm needs doesn't even seem fair.
 
