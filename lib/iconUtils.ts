@@ -9,6 +9,7 @@ import { Icons } from "@/components/icons";
 import SocketIoSVG from "@/components/svg/socketIoSvg";
 import PythonIconSVG from "@/components/svg/pythonSvg";
 import ReactTogetherSVG from "@/components/svg/reacttogetherSvg";
+import SudokuSVG from "@/components/svg/sudokuSvg";
 
 
 const iconMap: Record<string, React.FC<any>> = {
@@ -23,6 +24,7 @@ const iconMap: Record<string, React.FC<any>> = {
   socketio: SocketIoSVG,
   python: PythonIconSVG,
   reactTogether: ReactTogetherSVG,
+  sudoku: SudokuSVG,
 };
 
 export const getIcon = (iconName: string): React.FC<any> | null => {
