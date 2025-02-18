@@ -74,7 +74,7 @@ const SudokuComparison: React.FC<SudokuComparisonProps> = ({ initialGrid }) => {
 
   return (
     <div className="flex flex-col gap-4 my-4">
-      <div className="flex gap-8 items-start">
+      <div className="flex flex-col gap-8 md:flex-row items-start">
         <SudokuGrid grid={backtrackGrid} initialGrid={initialGrid} isPlayable={false} />
         <SudokuGrid grid={algXGrid} initialGrid={initialGrid} isPlayable={false} />
       </div>
