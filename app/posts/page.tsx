@@ -1,6 +1,5 @@
 import { posts } from "#site/content";
 import { PostItem } from "@/components/post-item";
-import { QueryPagination } from "@/components/query-pagination";
 import { sortPosts } from "@/lib/utils";
 import { Metadata } from "next";
 
@@ -9,29 +8,15 @@ export const metadata: Metadata = {
     description: "List of all posts in bolota.eu.",
 }
 
-const POSTS_PER_PAGE = 20;
-
-interface BlogPageProps {
-    searchParams: {
-        page?: string;
-    }
-}
 
 interface Accumulator {
     posts: JSX.Element[];
     currentYear: number | null;
 }
 
-export default async function BlogPage({ searchParams }: BlogPageProps) {
+export default async function BlogPage() {
 
-    const currentPage = Number(searchParams?.page) || 1
     const sortedPosts = sortPosts(posts.filter(post => post.published));
-    const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
-
-    const displayPosts = sortedPosts.slice(
-        POSTS_PER_PAGE * (currentPage - 1),
-        POSTS_PER_PAGE * currentPage
-    );
 
     return (
         <div className="container max-w-4xl pb-8 pt-6 md:pb-2 md:mt-2 lg:py-2">
@@ -40,9 +25,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                     <h1 className="inline-block font-black text-2xl text-accent">** All Posts</h1>
                 </div>
             </div>
-            {displayPosts?.length > 0 ? (
+            {sortedPosts?.length > 0 ? (
                 <ul className="flex flex-col gap-2">
-                    {displayPosts
+                    {sortedPosts
                         .reduce<Accumulator>((acc, post) => {
                             const postYear = new Date(post.date).getFullYear();
                             if (!acc.currentYear || acc.currentYear !== postYear) {
@@ -65,7 +50,6 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             ) : (
                 <p>Nothing to see here yet.</p>
             )}
-            <QueryPagination totalPages={totalPages} className="justify-end mt-4" />
         </div>
     )
 }
