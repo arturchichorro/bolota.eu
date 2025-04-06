@@ -3,6 +3,7 @@ import { siteConfig } from "@/config/site";
 import { Metadata } from "next";
 import LeetCodeStats from "@/components/stats/leetcode-stats";
 import ChessStats from "@/components/stats/chess-stats";
+import SubscribeSection from "@/components/mailerlite/subscribe-section";
 
 export const metadata: Metadata = {
     title: "About Me",
@@ -43,8 +44,12 @@ export default async function AboutPage() {
                     <p>
                         Currently, I&apos;m transitioning from my background in mathematics to software engineering. I try to spend my free time exploring my interests, which involve coding, math, videography, cooking, basketball and chess.
                     </p>
-                    <p> Feel free to mail me at <a className="link">arturchichorro [at] gmail.com</a> to say hello! </p>
+                    <p> Feel free to mail me at <a className="link">arturchichorro [at] bolota.eu</a> to say hello! </p>
                 </div>
+            </div>
+
+            <div className="flex justify-center">
+                <SubscribeSection />
             </div>
 
             <hr></hr>
