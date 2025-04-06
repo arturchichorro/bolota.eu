@@ -69,7 +69,9 @@ const config = {
           borders: "hsl(var(--sudoku-borders))",
           warning: "hsl(var(--sudoku-warning))",
           textwarning: "hsl(var(--sudoku-textwarning))"
-        }
+        },
+
+        warning: "hsl(var(--warning))"
 
       },
       borderRadius: {

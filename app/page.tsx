@@ -6,6 +6,7 @@ import Link from "next/link";
 import { PostItem } from "@/components/post-item";
 import { ProjectItem } from "@/components/project-item";
 import { projects } from "@/lib/projects";
+import SubscribeSection from "@/components/mailerlite/subscribe-section";
 
 export default function Home() {
 
@@ -13,7 +14,7 @@ export default function Home() {
   const topProjects = projects.slice(0,6);
 
   return (
-    <>
+    <div className="flex flex-col gap-6">
       <section className="container max-w-4xl space-y-6 pb-8 pt-6 md:pb-2 md:mt-2 lg:py-2">
         <div className="flex flex-col gap-4">
           <h3 className="text-2xl font-black text-accent">
@@ -23,6 +24,9 @@ export default function Home() {
             Hello, I&apos;m Artur, a mathematician / coder. Welcome to my corner of the internet, where I talk about whatever I spend my energy on. If you wish to find out more about me check the <a href="/about" className="link">about me</a> page.
           </p>
         </div>
+      </section>
+      <section className="flex justify-center">
+        <SubscribeSection />
       </section>
       <section className="container max-w-4xl flex flex-col py-6 gap-10">
         <div className="flex flex-col gap-2">
@@ -68,6 +72,6 @@ export default function Home() {
           </ul>
         </div>
       </section>
-    </>
+    </div>
   );
 }

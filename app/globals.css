@@ -65,6 +65,8 @@
       --sudoku-borders: 140 28% 85%;
       --sudoku-warning: 9 80% 95%;
       --sudoku-textwarning: 0 84% 60%;
+
+      --warning: 9 80% 95%;
     }
 
     .dark {
@@ -112,6 +114,8 @@
       --sudoku-borders: 140 33% 7%;
       --sudoku-warning: 8 60% 65%;
       --sudoku-textwarning: 0 100% 37%;
+
+      --warning: 8 60% 65%;
 
     }
   }
