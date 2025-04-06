@@ -4,7 +4,6 @@ import { cn, sortPosts } from "@/lib/utils";
 import { posts } from "#site/content";
 import Link from "next/link";
 import { PostItem } from "@/components/post-item";
-import { ProjectItem } from "@/components/project-item";
 import { projects } from "@/lib/projects";
 import SubscribeSection from "@/components/mailerlite/subscribe-section";
 
@@ -25,9 +24,7 @@ export default function Home() {
           </p>
         </div>
       </section>
-      <section className="flex justify-center">
-        <SubscribeSection />
-      </section>
+
       <section className="container max-w-4xl flex flex-col py-6 gap-10">
         <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
@@ -50,27 +47,10 @@ export default function Home() {
             ))}
           </ul>
         </div>
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl font-black text-accent py-2">
-              ** Recent Projects
-            </h2>
-            <Link className="link text-sm" href="/projects">All Projects</Link>
-          </div>
-          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {topProjects.map((project, index) => (
-              <li key={index}>
-                <ProjectItem
-                  title={project.title} 
-                  description={project.description} 
-                  years={project.years} 
-                  gh={project.gh} 
-                  posts={project.posts}  
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
+      </section>
+
+      <section className="flex justify-center">
+        <SubscribeSection />
       </section>
     </div>
   );
