@@ -73,56 +73,59 @@ export const SubscriberForm = () => {
   return (
     <form 
       onSubmit={handleSubmit} 
-      className="flex flex-col gap-3 max-w-sm mx-auto"
+      className="flex flex-col gap-3 w-full max-w-sm mx-auto px-2"
       aria-live="polite"
     >
+        <div className="flex w-full gap-2 sm:gap-3">
+          <div className="flex-grow">
+            <input
+                id="email"
+                type="email"
+                name="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="w-full border-2 border-border rounded px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                aria-describedby={validationError ? errorId : undefined}
+                aria-invalid={!!validationError}
+            />
+          </div>
 
-        <div className="flex flex-row gap-3">
-        <input
-            id="email"
-            type="email"
-            name="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
-            aria-describedby={validationError ? errorId : undefined}
-            aria-invalid={!!validationError}
-        />
-
+          <Button
+              type="submit"
+              disabled={status === 'loading'}
+              variant="secondary"
+              className="whitespace-nowrap"
+              aria-busy={status === 'loading'}
+              >
+              {status === 'loading' ? (
+                  <>
+                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></span>
+                  <span className="hidden xs:inline">Subscribing...</span>
+                  <span className="xs:hidden">...</span>
+                  </>
+              ) : (
+                  'Subscribe'
+              )}
+          </Button>
+        </div>
+      
         {validationError && (
             <p id={errorId} className="text-warning text-xs mt-1">
-            {validationError}
+              {validationError}
             </p>
         )}
       
-        <Button
-            type="submit"
-            disabled={status === 'loading'}
-            variant="secondary"
-            aria-busy={status === 'loading'}
-            >
-            {status === 'loading' ? (
-                <>
-                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></span>
-                Subscribing...
-                </>
-            ) : (
-                'Subscribe'
-            )}
-        </Button>
-        </div>
-      
-      {message && (
-        <p 
-          id={messageId} 
-          className={`text-sm ${status === 'error' ? 'text-red-500' : 'text-green-600'}`}
-          role="status"
-        >
-          {message}
-        </p>
-      )}
+        {message && (
+          <p 
+            id={messageId} 
+            className={`text-xs sm:text-sm ${status === 'error' ? 'text-red-500' : 'text-green-600'}`}
+            role="status"
+          >
+            {message}
+          </p>
+        )}
     </form>
   );
 };
