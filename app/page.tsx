@@ -10,7 +10,6 @@ import SubscribeSection from "@/components/mailerlite/subscribe-section";
 export default function Home() {
 
   const latestPosts = sortPosts(posts).filter(post => post.published).slice(0, 5);
-  const topProjects = projects.slice(0,6);
 
   return (
     <div className="flex flex-col gap-6">

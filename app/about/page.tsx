@@ -37,14 +37,11 @@ export default async function AboutPage() {
                     </p>
                 </div>
                 <div className="prose prose-base dark:prose-invert prose-p:text-primary">
-                    <p> Hey, I&apos;m Artur. I&apos;ve been fiddling with mathematics since I can remember. </p>
+                    <p> Hey, I&apos;m Artur and this is my personal website. </p>
                     <p>
-                        This website exists because I like the idea of having my corner of the internet where I can express myself and talk about what I care about, whatever that may be. At the moment, it seems to mostly be the things I&apos;m learning about.
+                        My studies were in mathematics, but I like doing all kinds of other things too: coding, cooking, basketball, chess and puzzles in general. This website exists because I want to express myself and talk about what I care about, whatever that may be. Right now, it&apos;s all the things I&apos;ve been learning about.
                     </p>
-                    <p>
-                        Currently, I&apos;m transitioning from my background in mathematics to software engineering. I try to spend my free time exploring my interests, which involve coding, math, videography, cooking, basketball and chess.
-                    </p>
-                    <p> Feel free to mail me at <a className="link">arturchichorro [at] bolota.eu</a> to say hello! </p>
+                    <p> Whether you want to contact me or request my CV, feel free to mail me at <a className="link">arturchichorro [at] bolota.eu</a>!</p>
                 </div>
             </div>
 
