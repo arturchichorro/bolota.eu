@@ -19,7 +19,7 @@ export default function Home() {
             Welcome
           </h3>
           <p className="sm:text-lg">
-            Hello, I&apos;m Artur. I like to write about what I do. Read more <a href="/about" className="link">about me</a> or my posts below.
+            Hello, I&apos;m Artur. I like to write about what I do. Read more <Link href="/about" className="link">about me</Link> or my posts below.
           </p>
         </div>
       </section>
