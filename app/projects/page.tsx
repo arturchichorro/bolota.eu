@@ -10,9 +10,8 @@ export const metadata: Metadata = {
 export default async function AboutPage() {
     return (
         <div className="container max-w-4xl space-y-6 pb-8 pt-6 md:pb-2 md:mt-2 lg:py-2">
-
-            <h1 className="inline-block text-2xl font-black text-accent">
-                ** Projects
+            <h1 className="text-2xl font-black text-accent">
+                Projects
             </h1>
             <div className="prose prose-base dark:prose-invert prose-p:text-primary">
                     <p> Here&apos;s all the projects I&apos;ve worked / am working on. </p>

@@ -20,7 +20,7 @@ export default async function AboutPage() {
         <div className="container max-w-4xl space-y-6 pb-8 pt-6 md:pb-2 md:mt-2 lg:py-2">
 
             <h1 className="inline-block text-2xl font-black text-accent">
-                ** About me
+                About me
             </h1>
 
             <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
