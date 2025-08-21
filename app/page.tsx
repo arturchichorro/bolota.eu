@@ -9,7 +9,7 @@ import SubscribeSection from "@/components/mailerlite/subscribe-section";
 
 export default function Home() {
 
-  const latestPosts = sortPosts(posts).filter(post => post.published).slice(0, 5);
+  const latestPosts = sortPosts(posts).filter(post => post.published).slice(0, 8);
 
   return (
     <div className="flex flex-col gap-6">
@@ -19,38 +19,35 @@ export default function Home() {
             Welcome
           </h3>
           <p className="sm:text-lg">
-            Hello, I&apos;m Artur, a mathematician / coder. Welcome to my corner of the internet, where I talk about whatever I spend my energy on. If you wish to find out more about me check the <a href="/about" className="link">about me</a> page.
+            Hello, I&apos;m Artur. I like to write about what I do. Read more <a href="/about" className="link">about me</a> or my posts below.
           </p>
         </div>
       </section>
 
-      <section className="container max-w-4xl flex flex-col py-6 gap-10">
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl font-black text-accent py-2">
-              Latest Posts
-            </h2>
-            <Link className="link text-sm" href="/posts">All Posts</Link>
+      <section className="container max-w-4xl flex flex-col gap-12 mt-[-30px]">
+          <div className="flex flex-col gap-4">
+            <div className="flex justify-end">
+              <Link className="link" href="/posts">See All</Link>
+            </div>
+            <ul className="flex flex-col gap-2">
+              {latestPosts.map((post) => (
+                <li key={post.slug}>
+                  <PostItem
+                    slug={post.slug}
+                    title={post.title}
+                    description={post.description}
+                    date={post.date}
+                    icon={post.icon}
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="flex flex-col gap-2">
-            {latestPosts.map((post) => (
-              <li key={post.slug}>
-                <PostItem
-                  slug={post.slug}
-                  title={post.title}
-                  description={post.description}
-                  date={post.date}
-                  icon={post.icon}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
+          <div className="flex justify-center">
+            <SubscribeSection />
+          </div>
       </section>
 
-      <section className="flex justify-center">
-        <SubscribeSection />
-      </section>
     </div>
   );
 }
