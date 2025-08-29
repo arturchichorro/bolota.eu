@@ -6,7 +6,7 @@ published: true
 icon: python
 ---
 
-Over the past year, I’ve been playing a lot of basketball in my free time. This inspired me to explore computer vision and create a simple program to count attempted and made shots. Here’s how it turned out:
+Over the past year, I've been playing a lot of basketball in my free time. This inspired me to explore computer vision and create a simple program to count attempted and made shots. Here’s how it turned out:
 <div className="flex justify-center">
     <video className="border-2 border-border rounded-md" width="350" controls>
         <source src="https://utfs.io/f/If0ZI6Cx8kn0nGgRSKPrT0MCbicdgX7hJO48tunEPVqHNlLm" type="video/mp4" />
@@ -17,18 +17,18 @@ And here's the <a className="link" href="https://github.com/arturchichorro/bball
 
 ### Background 
 
-I started this project during the summer while participating in buildspace, where I began researching what I needed to learn. You can check out a <Link className="link" href="7_sharing_and_buildspace">previous post</Link> I wrote about my experience. During that time, I learned a lot about machine learning and computer vision and completed the <a className="link" href="https://www.codecademy.com/profiles/achichorro/certificates/6f8e0510ca91437a847b53aa9e9aa3f1" target="_blank">Machine Learning/AI Engineer career path</a> on <a className="link" href="https://www.codecademy.com/" target="_blank"></a>Codecademy. I explored several resources, including Kaggle, but after some vacations and other projects, I didn’t get back to the basketball vision project until now.
+I started this project during the summer while participating in buildspace, where I began researching what I needed to learn. You can check out a <Link className="link" href="7_sharing_and_buildspace">previous post</Link> I wrote about my experience. During that time, I learned a lot about machine learning and computer vision and completed the <a className="link" href="https://www.codecademy.com/profiles/achichorro/certificates/6f8e0510ca91437a847b53aa9e9aa3f1" target="_blank">Machine Learning/AI Engineer career path</a> on <a className="link" href="https://www.codecademy.com/" target="_blank">Codecademy</a>. I explored several resources, including Kaggle, but after some vacations and other projects, I didn’t get back to the basketball vision project until now.
 
 ### Actual Implementation
 
-To my surprise, implementing the project wasn’t that difficult. I found an <a className="link" href="https://universe.roboflow.com/test-datset/basketball-bs0zc/dataset/1" target="_blank">excellent dataset</a> on <a className="link" href="https://roboflow.com/" target="_blank">Roboflow</a> and trained my model for 50 epochs using Google Colab. This dataset enabled my model to detect the following classes:
+To my surprise, implementing the project wasn't that difficult. I found an <a className="link" href="https://universe.roboflow.com/test-datset/basketball-bs0zc/dataset/1" target="_blank">excellent dataset</a> on <a className="link" href="https://roboflow.com/" target="_blank">Roboflow</a> and trained my model for 50 epochs using Google Colab. This dataset enabled my model to detect the following classes:
 ```python
 classnames = ["ball", "made", "person", "rim", "shoot"]
 ```
 
 Once the model was trained, most of the groundwork was done. All that remained was to implement the shot counting logic.
 
-While experimenting with my trained model, I discovered two important insights. First, the "made" class wasn’t detected frequently enough, so I decided not to use it due to its inconsistency. I needed a more reliable indicator. On the other hand, the "shoot" class was consistently detected, regardless of the shooting form. Therefore, I decided that it made sense to use it to count attempted shots.
+While experimenting with my trained model, I discovered two important insights. First, the "made" class wasn't detected frequently enough, so I decided not to use it due to its inconsistency. I needed a more reliable indicator. On the other hand, the "shoot" class was consistently detected, regardless of the shooting form. Therefore, I decided that it made sense to use it to count attempted shots.
 
 ##### Counting Attempted Shots
 

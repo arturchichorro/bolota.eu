@@ -85,7 +85,7 @@ export const SubscriberForm = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
+                placeholder="Enter your email..."
                 className="w-full bg-green-50 dark:bg-green-950 border-2 border-border rounded px-3 py-2 placeholder:text-primary/50 text-sm focus:outline-none focus:border-accent"
                 aria-describedby={validationError ? errorId : undefined}
                 aria-invalid={!!validationError}

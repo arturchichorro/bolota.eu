@@ -1,0 +1,105 @@
+---
+title: "Version 3: bolota.eu"
+description: "Update on the development of my personal blog: Web Analytics, Newsletter, Projects and more."
+date: 2025-08-29
+published: false
+icon: logo
+---
+
+### One Year Later
+
+The last time I wrote about <Link href="/" className="link">bolota.eu</Link> was July 2024, over a year ago. Since then, I kept making small tweaks to it, and together they added up to some pretty significant changes from how the website used to be.
+
+From version 1 to version 2, the changes were pretty drastic: I rewrote the whole website from just plain React and Javascript to Next.js with Typescript and MDX. This time around, I didn't do any crazy rewrite or anything of that sort: The code idea remains the same: blog posts from Markdown(x). 
+
+In general, I feel like my vision of this website is slowly maturing, and it'll probably keep evolving over time. For now, I'm happy using it as a scrappy project where I can experiment, build small features, break things, share ideas in new ways, and see how it develops. Enough of all the talk, here's what's actually new:
+
+### Newsletter
+
+First things first, and maybe most important of all, I started a newsletter. Now, every time I write a blog post, I'm sending out an email to everyone who cares.
+
+Why did I decide to start something like this? Well, as much as I like writting, I think part of the point of writting is to have things be read. And for that matter, distribution does help. I've already decided to have my own blog, outside of something like <a className="link" href="https://substack.com/" target="_blank">Substack</a>, which would have made it easier for people to find and follow along, so I need some way of keeping those interested updated each time.
+
+To do that, I'm using a platform called <a className="link" href="https://www.mailerlite.com/" target="_blank">MailerLite</a>. It's simpler than most email marketing tools, which is exactly what I wanted. It handles the basics well: managing a list of subscribers, making it easy to unsubscribe, sending emails to everyone at once, and providing a clear dashboard with stats on opens, clicks, and more. Finally, it includes a simple API for subscribing, which I can then embed in a form and put in the website. Here it is, in case you want to subscribe:
+
+<SubscriberForm />
+
+### Web Analytics
+
+Another thing I didn't know anything about, was whether people were visiting the website or not: things like unique visitors, page views, session duration, etc. For that reason I decided to add some sort of service that would track these metrics. 
+
+Since the website is hosted on Vercel, I started by using <a target="_blank" href="https://vercel.com/docs/analytics" className="link">Vercel Web Analytics</a> for a few months. It was fine, and it gave me all the metrics I wanted, but it had one crucial flaw: the free plan would run out very fast, and then it would just stop tracking all together.
+
+> Once you exceed your included limit (...) If your team is on the Hobby plan, we will pause the collection, as you cannot be charged for extra events.
+
+Given that this website is not necessarily moving mountains in traffic, I decided to look for alternatives that could track all the traffic within their free plan. And I found just that with <a target="_blank" href="https://posthog.com/" className="link">Posthog</a>, the service I'm using now. It's great, and it tells me some pretty basic stuff. Here's some stats on the last few months: I'm getting somewhere between 20 to 100 unique visitors each month.
+
+<div className="flex justify-center">
+    <img className="border-2 border-border rounded-md" src="https://0mjwcg480p.ufs.sh/f/If0ZI6Cx8kn0Cdo87Htu5ABixORCQtesJl28mhMDfgYvLrFo" width="650" alt="Explanation of made shot logic" />
+</div>
+
+### Projects
+
+For a few months, I added a new tab in the navigation of the website called projects. It was supposed to showcase the projects that I had been working on, with cards that looked like this:
+
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 not-prose">
+    <ProjectItem 
+        title="Bolota.eu" 
+        description="This website's source code." 
+        years="2023-Present" 
+        gh="https://github.com/arturchichorro/bolota.eu"
+        posts={[
+            {post_title: "Version 3", external: false, url: "15_bolotav3"},
+            {post_title: "Version 2", external: false, url: "6_bolotaeuv2"},
+            {post_title: "Version 1", external: false, url: "1_bolotaeuv1"},
+        ]}   
+    />
+    <ProjectItem 
+        title="Basketball Vision" 
+        description="Counting attempted/made Basketball shots w/ Python." 
+        years="2024" 
+        gh="https://github.com/arturchichorro/bballvision"
+        posts={[
+            {post_title: "Implementation", external: false, url: "10_bballvision"},
+            {post_title: "Idea", external: false, url: "7_sharing_and_buildspace"},
+        ]}   
+    />
+    <ProjectItem 
+        title="Spotify Controller"
+        description="Device to remotely control spotify."
+        years="2024" 
+        gh="https://github.com/arturchichorro/Spotify_Controller"
+        posts={[
+            {post_title: "Article", external: false, url: "8_embedded_programming"},
+        ]}   
+    />
+    <ProjectItem 
+        title="Learn Anything (Lanny)"
+        description="Turn any text document into a Quizz using AI." 
+        years="2024" 
+        gh={undefined}
+        posts={[
+            {post_title: "Article", external: false, url:"5_shift_appens"},
+            {post_title: "Behance", external: true, url:"https://www.behance.net/gallery/198170575/Lanny"}
+        ]}   
+    />
+</div>
+
+The idea was ok, but I realised that it was a bit redundant. The posts both spoke for themselves (as I wrote about these projects anyway), and were far more interesting by themselves than these project cards. I decided to simplify the website as much as possible, and therefore ended up scraping this "projects" page entirely.
+
+### The other stuff
+
+Finally, it h
+
+
+
+
+
+
+removed x, introduced random apis like chess.com stats and leetcode stats in the about page, played around with UIs, added icons, tried to care about responsiveness, etc
+
+screenshot for posteriority
+
+Maybe what I've had the most fun with over the past year, is actually utilising MDX to it's full potential. I can't get enough of the Sudoku visualizations or the Connect 4 chess.com like UI. The fact that I can now in very simple fashion add stuff lik
+
+Uploadthing

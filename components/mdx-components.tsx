@@ -8,6 +8,8 @@ import SudokuComparison from "./sudoku/SudokuComparison";
 import ConnectFour from "./connect-four/connect-four";
 import Link from "next/link";
 import { SudokuGrid } from "./sudoku/SudokuGrid";
+import { SubscriberForm } from "./mailerlite/subscriber-form";
+import { ProjectItem } from "./project-item";
 
 const useMDXComponent = (code: string) => {
     const fn = new Function(code);
@@ -23,7 +25,9 @@ const components = {
     SudokuAlgX,
     SudokuComparison,
     SudokuGrid,
-    Link
+    Link,
+    SubscriberForm,
+    ProjectItem
 };
 
 interface MdxProps {

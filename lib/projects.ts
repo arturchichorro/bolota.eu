@@ -2,7 +2,7 @@ export const projects = [
     {
         title: "Bolota.eu",
         description: "This website's source code.",
-        years: "2023-2024",
+        years: "2023-Present",
         gh: "https://github.com/arturchichorro/bolota.eu",
         posts: [
             {post_title: "Version 2", external: false, url: "posts/6_bolotaeuv2"},

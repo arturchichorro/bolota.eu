@@ -12,10 +12,6 @@ export const metadata: Metadata = {
 
 export default async function AboutPage() {
 
-    const res = await fetch("https://leetcode-api-faisalshohag.vercel.app/arturchichorro")
-    const leetCodeData = await res.json();
-
-
     return (
         <div className="container max-w-4xl space-y-6 pb-8 pt-6 md:pb-2 md:mt-2 lg:py-2">
 

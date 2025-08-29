@@ -14,8 +14,8 @@ export default async function AboutPage() {
                 Projects
             </h1>
             <div className="prose prose-base dark:prose-invert prose-p:text-primary">
-                    <p> Here&apos;s all the projects I&apos;ve worked / am working on. </p>
-                </div>
+                <p> Here&apos;s all the projects I&apos;ve worked / am working on. </p>
+            </div>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {projects.map((project, index) => (
                     <li key={index}>
