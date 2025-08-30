@@ -83,7 +83,7 @@ export default async function PostPage({ params }: PostPageProps) {
                         <li className="m-1" key={item.url}>
                             <Link
                             href={item.url}
-                            className="block rounded-full border border-border/70 px-2.5 py-1 text-xs no-underline hover:bg-accent/10 hover:border-border text-center"
+                            className="block rounded-full border border-border/70 px-2.5 py-1 text-xs no-underline hover:bg-accent/10 hover:border-border text-center whitespace-nowrap overflow-hidden text-ellipsis"
                             >
                                 {item.title}
                             </Link>

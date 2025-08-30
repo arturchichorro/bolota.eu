@@ -19,27 +19,33 @@ export const SudokuControls: React.FC<SudokuControlsProps> = ({
   onReset,
   onSpeedChange,
 }) => (
-  <div className="flex gap-4 justify-center">
-    <Button
-      onClick={onToggleSolving}
-      variant="secondary"
-    >
-      {solving ? (isPaused ? 'Resume' : 'Pause') : 'Start'}
-    </Button>
-    <Button
-      onClick={onReset}
-      variant="outline"
-    >
-      Reset
-    </Button>
+  <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center">
+    <div className="flex gap-2 sm:gap-4">
+      <Button
+        onClick={onToggleSolving}
+        variant="secondary"
+        size="sm"
+        className="sm:size-default text-sm sm:text-base"
+      >
+        {solving ? (isPaused ? 'Resume' : 'Pause') : 'Start'}
+      </Button>
+      <Button
+        onClick={onReset}
+        variant="outline"
+        size="sm"
+        className="sm:size-default text-sm sm:text-base"
+      >
+        Reset
+      </Button>
+    </div>
     <div className="flex items-center gap-2">
-      <span className="text-sm">Speed:</span>
+      <span className="text-xs sm:text-sm">Speed:</span>
       <Slider
         value={[speed]} 
         onValueChange={(value) => onSpeedChange(value[0])}
         max={100}
         step={1}
-        className="w-24 text-accent"
+        className="w-16 sm:w-24 text-accent"
       />
     </div>
   </div>
