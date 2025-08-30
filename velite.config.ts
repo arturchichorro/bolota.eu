@@ -20,7 +20,13 @@ const posts = defineCollection({
         date: s.isodate(),
         published: s.boolean().default(true),
         icon: s.string().max(99),
-        body: s.mdx()
+        body: s.mdx(),
+        saga: s.array(
+            s.object({
+                title: s.string(),
+                url: s.string(),
+            })
+        ).optional().default([])
     }).transform(computedFields),
 });
 
