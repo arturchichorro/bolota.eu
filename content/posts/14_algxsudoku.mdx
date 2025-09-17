@@ -23,6 +23,7 @@ To generate Sudokus, I first needed to define my success criteria: a well-constr
 6. Stop when all 81 positions have been tested
 
 <Callout>Credit to this <a className="link" href="https://stackoverflow.com/questions/6924216/how-to-generate-sudoku-boards-with-unique-solutions" target="_blank">this stack overflow discussion</a> where I found the algorithm.</Callout>
+<hr className="border-border"/>
 </details>
 
 In order to actually implement the algorithm that generates Sudoku puzzles, I needed another ingredient: an algorithm that *solved* Sudoku puzzles.
@@ -63,6 +64,7 @@ def solve_sudoku_backtracking(sudoku_grid):
         return True
     backtrack(sudoku_grid)
 ```
+<hr className="border-border"/>
 </details>
 
 Turns out, this approach is actually really good at solving Sudoku. It solves most puzzles really fast! However, sometimes, the configuration of certain puzzles forces the algorithm to backtrack extensively, making the algorithm take much longer than we'd like.
@@ -84,6 +86,7 @@ This puzzle will force the Backtracking algorithm to make almost two million rec
         [0, 7, 0, 0, 3, 5, 0, 0, 0],
     ]} />
 </div>
+<hr className="border-border"/>
 </details>
 
 This annoying setback made me try to find more sophisticated algorithms that were better prepared to handle all kinds of edge cases. This is how I stumbled upon the <a className="link" href="https://en.wikipedia.org/wiki/Exact_cover" target="_blank">Exact Cover Problem</a>.
@@ -246,6 +249,7 @@ def empty_sudoku_exact_cover(size=9):
     numbered_column = np.arange(1, rows + 1, dtype=int).reshape(-1, 1)
     return np.hstack((numbered_column, matrix))
 ```
+<hr className="border-border"/>
 </details>
 
 But now we have a different problem. How do we find exact covers in this huge matrix?
@@ -306,6 +310,7 @@ def solve(matrix, partial_solution, solutions):
         reduced_matrix = choose_row(matrix, row_idx)
         solve(reduced_matrix, new_partial_solution, solutions)
 ```
+<hr className="border-border"/>
 </details>
 
 But you might've noticed something: this is **also a backtracking algorithm**. It keeps calling itself until the problem is solved. How is this any better than the brute force method I described at the start of this article?
@@ -442,6 +447,7 @@ An interesting thing to note is the existence of clear outliers when solving wit
 
 I find it funny how only one puzzle required over one million recursive calls, but that one needed almost two million! Over twice as many recursive calls as any other puzzle.
 
+<hr className="border-border"/>
 </details>
 
 ### Solving lots of Sudoku with Algorithm X
@@ -502,6 +508,7 @@ Another interesting find can be observed in this scatterplot:
 <div className="flex justify-center">
     <img className="border-2 border-border rounded-md" src="https://0mjwcg480p.ufs.sh/f/If0ZI6Cx8kn0e1dMzorNMirHmubGkwghWjYCtPfA1zcedyLR" width="500" alt="Alg X scatterplot (time x nodes)" />
 </div>
+<hr className="border-border"/>
 </details>
 
 Only four puzzles required over 1s to solve! That's 0.008% of all puzzles. Algorithm X isn't easy to trick. So how do these hard puzzles actually look like? 
@@ -527,6 +534,7 @@ Note: the visualization is much slower than the actual solve time.
 </div>
 
 It seems that having a mostly empty bottom half of the puzzle combined with some wrong guesses at the start of the solving process drastically increase the number of nodes.
+<hr className="border-border"/>
 </details>
 
 ### Back to generating Sudoku puzzles

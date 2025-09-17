@@ -131,36 +131,43 @@
 
   .link {
     @apply underline underline-offset-4 decoration-accent/[0.5] decoration-2 text-accent hover:no-underline hover:bg-destructive hover:text-popover-foreground
- }
-
-
- .fade-in {
-  opacity: 0;
-  animation: fadeIn 0.5s forwards;
- }
-
- @keyframes fadeIn {
-  to {
-    opacity: 1;
   }
- }
 
-.mdx-hidden-flex {
-  display: none;
-}
+  .reference {
+    @apply px-1 no-underline text-accent hover:bg-destructive hover:text-popover-foreground
+  }
 
-@media (min-width: 640px) {
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+   }
+
+  .ref-number {
+    @apply font-mono tabular-nums cursor-default no-underline;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
   .mdx-hidden-flex {
-    display: flex;
+    display: none;
   }
-}
 
-.mdx-hidden-block {
-  display: none;
-}
+  @media (min-width: 640px) {
+    .mdx-hidden-flex {
+      display: flex;
+    }
+  }
 
-@media (min-width: 640px) {
   .mdx-hidden-block {
-    display: block;
+    display: none;
   }
-}
+
+  @media (min-width: 640px) {
+    .mdx-hidden-block {
+      display: block;
+    }
+  }
