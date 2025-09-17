@@ -72,7 +72,11 @@ export default async function PostPage({ params }: PostPageProps) {
     return (
         <article className="container py-6 prose prose-headings:text-accent prose-a:text-accent dark:prose-invert max-w-3xl mx-auto">
             
-            <div className="grid grid-cols-[3fr_1fr]">
+            <div className={`grid ${
+                Array.isArray(post.saga) && post.saga.length > 0
+                ? "grid-cols-[3fr_1fr]"
+                : "grid-cols-1"
+            }`}>
                 <div className="flex flex-col justify-between">
                     <h1 className="mb-2 text-2xl sm:text-3xl">{post.title}</h1>
                     <p className="m-0 text-sm sm:text-base">Posted on <time dateTime={post.date}>{formatDate(post.date)}</time></p>
