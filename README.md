@@ -1,6 +1,7 @@
 This is the source code for my personal website.
 I wrote about how I got to this point in these articles: 
 
+- [Version 3](http://localhost:3000/posts/15_bolotav3) (29th August 2025)
 - [Version 2](https://bolota.eu/posts/6_bolotaeuv2) (7th July 2024)
 - [Version 1](https://bolota.eu/posts/1_bolotaeuv1) (15th November 2023)
 
