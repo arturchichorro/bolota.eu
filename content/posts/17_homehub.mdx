@@ -1,0 +1,85 @@
+---
+title: Building my personal home dashboard
+description: Dev Log
+date: 2026-09-16
+published: false
+icon: python
+---
+
+I've been working on a dashboard for myself, and this is the first devlog. Its first two modules are **Lists**, for todo lists, shopping lists, or anything else, and **Recipes**, where I can save things I've cooked, with some pictures and history.
+
+(imagens do home hub)
+
+It sounds very simple, and it is, but I had a few goals:
+
+- Make a tool that is tailored exactly to how I want to use it
+- Have it be easy to adapt and add new features (scalable to my needs)
+- Have it be usable by multiple people
+- Host it on my own private VPS
+- Learn some interesting new tools and techniques
+
+### Modular Structure
+
+The dashboard is organized around households. Each household can have multiple users, and each user can belong to multiple households. Every household can enable whichever modules it needs. The modular structure also makes it easy to add new functionality. Since I’m learning French, I might build a flashcard module for studying vocabulary. Or maybe I’ll add a workout tracker when I train for a race. It could be anything.
+
+(meter um desenho aqui das households e dos módulos)
+
+### User experience, Linear and Zero
+
+I wanted the dashboard to feel really nice to use. At my work, we use a product development tool called <a target="_blank" href="https://linear.app/" className="link">Linear</a>. Using it has felt super nice because everything about it is instant. I want to create a new issue, instant. I want to edit a piece of text, instant. I want to navigate between thirty different issues, instant. I never experience any lag while navigating the UI. So could I do the same?
+
+Most web apps work like this: the user clicks something, the browser asks the server for some information, some loading state is displayed while the server is thinking and shortly after: data shows up in the website.
+
+(meter aqi diagramas do figma https://www.figma.com/board/eljRxMa1n1LxIag5Pgc8ea/Traditional-Web-App-Request-Flow?node-id=0-1&p=f&t=M3rb69O4MlFZscJS-0 (a.chichorro@cohabs))
+
+Linear's main idea is that it is local first: the browser keeps a local copy of the data it needs, allowing the UI to update without waiting for the server to respond. In the background, a **sync engine** sends local changes to the server and brings remote changes back to the client.
+
+(segundo diagrama, tenho de os fazer no excalidraw or some shit)
+
+I decided to try a similar approach using a library called Zero by Rocicorp. Zero and Linear work differently in a few ways, but the main ideas are the same.
+
+(gifs e tal de eu a utilizar a aplicação e a fazer user actions e tal)
+
+### Image pipeline
+
+I also wanted to have images feel instant. When an image is uploaded, it is stored in Cloudflare and converted into two compressed variants: a small `thumbnail.webp` for recipe covers and image galleries, and a larger `viewer.webp` for fullscreen viewing.
+
+For example, uploading this 6MB `carbonara.png` produced a 600 KB viewr image and a 200 KB thumbnail, which are 10x and 30x smaller than the original image, resulting in faster loading times.
+
+(show original image, and then on the side of the original one show the thumbnail version (with a caption and information telling to user to click on it, and when the user clicks on it it should open the full version))
+
+### CI/CD, deployment, and VPS hosting
+
+Another thing I wanted to learn was how to set up my own infrastructure, which is something I’d never done from start to finish. I had three main goals:
+
+- Every push and pull request runs formatting, linting, type-checking, tests, and production build checks
+- Automatically deploy changes merged into the `main` branch
+- Host the application on my own domain using a European VPS
+
+I achieved exactly that by using GitHub Actions for CI/CD, Docker Compose to run the application, and Caddy for HTTPS and routing. Everything runs on an OVHcloud (🇪🇺) VPS.
+
+### Learning with AI and developing with AI
+
+When I was first starting the project, I wrote most of the code myself and used AI more like a tutor. I created a guided learning skill that had the AI guide me through implementations and quiz me afterward. We went back and forth discussing architectural tradeoffs and the concepts that I wasn't familiar with.
+
+Once the patterns were established and the work became repetitive, I started relying more on AI. Zero queries and mutators, for example, mostly follow the same structure. By having agents reference existing implementations, I could minimize the chance of them introducing a new pattern with every feature.
+
+I also had AI maintain living documentation covering most aspects of the dashboard. Each feature has its own specification, giving new agents the context they need to work without getting lost. I also keep a backlog of ideas that the agents can turn into more detailed tasks and implement. 
+
+Currently, implementing new features is very fast. I've even started treating code as more discardable, especially when iterating on small UI and UX details: I have agents generate multiple options that I then cross reference them with other applications, and slowly converge to a solution that feels right.
+
+### More
+
+There are a lot of other little things that I enjoyed learning about while doing this, and a lot of new things I want to add to the application in the future. Some examples are:
+
+- I implemented my own JWT authentication without any third party libraries to learn more about how to make that work
+- I made it into a Progressive Web App, which to simplify basically means I can open it as a standalone app on my phone; this introdu
+- A lot of things in the app are orderable (e.g. recipe ingredient items, list items, the images in a recipe), and I arrived at a standardized way to order everything, using sort keys and 1024 gaps; I just think this little detail is quite fun and interesting
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
+Interesting reads:
+<a target="_blank" href="https://performance.dev/how-is-linear-so-fast-a-technical-breakdown" className="link">How's Linear so fast? A technical breakdown</a>
+
+
