@@ -10,6 +10,7 @@ import Link from "next/link";
 import { SudokuGrid } from "./sudoku/SudokuGrid";
 import { SubscriberForm } from "./mailerlite/subscriber-form";
 import { ProjectItem } from "./project-item";
+import { StaticBlogFlowDiagram } from "./static-flow-diagram";
 
 const useMDXComponent = (code: string) => {
     const fn = new Function(code);
@@ -27,7 +28,8 @@ const components = {
     SudokuGrid,
     Link,
     SubscriberForm,
-    ProjectItem
+    ProjectItem,
+    StaticBlogFlowDiagram
 };
 
 interface MdxProps {

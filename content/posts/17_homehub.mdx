@@ -2,7 +2,7 @@
 title: Building my personal home dashboard
 description: Dev Log
 date: 2026-09-16
-published: false
+published: true
 icon: python
 ---
 
@@ -22,7 +22,16 @@ It sounds very simple, and it is, but I had a few goals:
 
 The dashboard is organized around households. Each household can have multiple users, and each user can belong to multiple households. Every household can enable whichever modules it needs. The modular structure also makes it easy to add new functionality. Since I’m learning French, I might build a flashcard module for studying vocabulary. Or maybe I’ll add a workout tracker when I train for a race. It could be anything.
 
-(meter um desenho aqui das households e dos módulos)
+<StaticBlogFlowDiagram
+  label="Households can enable independent sets of modules"
+  layout="distributed"
+  nodes={[
+    { id: "household-1", title: "Household 1", icon: "house", headerInline: true, headerBoxed: true, shape: "card", tone: "theme", itemsLayout: "chips", items: ["Module 1", "Module 2", "Module 3"] },
+    { id: "household-2", title: "Household 2", icon: "house", headerInline: true, headerBoxed: true, shape: "card", tone: "theme", itemsLayout: "chips", items: ["Lists", "Recipes"] },
+    { id: "household-3", title: "Household 3", icon: "house", headerInline: true, headerBoxed: true, shape: "card", tone: "theme", itemsLayout: "chips", items: ["Lists", "Flashcards", "Workout tracker"] },
+  ]}
+  edges={[]}
+/>
 
 ### User experience, Linear and Zero
 
@@ -30,11 +39,36 @@ I wanted the dashboard to feel really nice to use. At my work, we use a product 
 
 Most web apps work like this: the user clicks something, the browser asks the server for some information, some loading state is displayed while the server is thinking and shortly after: data shows up in the website.
 
-(meter aqi diagramas do figma https://www.figma.com/board/eljRxMa1n1LxIag5Pgc8ea/Traditional-Web-App-Request-Flow?node-id=0-1&p=f&t=M3rb69O4MlFZscJS-0 (a.chichorro@cohabs))
+<StaticBlogFlowDiagram
+  label="Traditional web application request and response flow"
+  nodes={[
+    { id: "action", title: "User action", shape: "pill", tone: "green", align: "center", width: 135, height: 64, position: { x: 0, y: 0 } },
+    { id: "server", title: "Server", shape: "card", tone: "amber", align: "center", verticalAlign: "center", width: 100, height: 56, position: { x: 230, y: 4 } },
+    { id: "update", title: "UI updates", shape: "pill", tone: "green", align: "center", width: 140, height: 64, position: { x: 430, y: 0 } },
+  ]}
+  edges={[
+    { from: "action", to: "server", label: "request", tone: "neutral" },
+    { from: "server", to: "update", label: "response", tone: "neutral" },
+  ]}
+/>
 
 Linear's main idea is that it is local first: the browser keeps a local copy of the data it needs, allowing the UI to update without waiting for the server to respond. In the background, a **sync engine** sends local changes to the server and brings remote changes back to the client.
 
-(segundo diagrama, tenho de os fazer no excalidraw or some shit)
+<StaticBlogFlowDiagram
+  label="Local-first user interface update and background synchronization flow"
+  nodes={[
+    { id: "local-action", title: "User action", shape: "pill", tone: "green", align: "center", width: 135, height: 64, position: { x: 0, y: 0 } },
+    { id: "local-store", title: "Local\ndatastore", shape: "database", tone: "blue", align: "center", width: 112, height: 104, position: { x: 215, y: -20 } },
+    { id: "instant-update", title: "UI updates", shape: "pill", tone: "green", align: "center", width: 140, height: 64, position: { x: 407, y: 0 } },
+    { id: "remote-server", title: "Server", shape: "card", tone: "amber", align: "center", verticalAlign: "center", width: 100, height: 56, position: { x: 221, y: 155 } },
+  ]}
+  edges={[
+    { from: "local-action", to: "local-store", tone: "neutral" },
+    { from: "local-store", to: "instant-update", tone: "neutral" },
+    { from: "local-store", to: "remote-server", fromSide: "bottom", toSide: "top", label: "background sync", labelSide: "left", offset: -28, tone: "neutral", dashed: true },
+    { from: "remote-server", to: "local-store", fromSide: "top", toSide: "bottom", label: "confirmed changes", labelSide: "right", offset: 28, tone: "neutral", dashed: true },
+  ]}
+/>
 
 I decided to try a similar approach using a library called Zero by Rocicorp. Zero and Linear work differently in a few ways, but the main ideas are the same.
 
@@ -81,5 +115,3 @@ There are a lot of other little things that I enjoyed learning about while doing
 
 Interesting reads:
 <a target="_blank" href="https://performance.dev/how-is-linear-so-fast-a-technical-breakdown" className="link">How's Linear so fast? A technical breakdown</a>
-
-
