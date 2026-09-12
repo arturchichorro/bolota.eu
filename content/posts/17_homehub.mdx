@@ -8,7 +8,16 @@ icon: python
 
 I've been working on a dashboard for myself, and this is the first devlog. Its first two modules are **Lists**, for todo lists, shopping lists, or anything else, and **Recipes**, where I can save things I've cooked, with some pictures and history.
 
-(imagens do home hub)
+<ImageGallery
+  layout="inline"
+  wide
+  images={[
+    { src: "https://0mjwcg480p.ufs.sh/f/If0ZI6Cx8kn0TMPkiAsymzxaQu9t1eJUR8bswMpSN0PYW5d7", alt: "Home Hub recipes list with sidebar open"
+    },
+    { src: "https://0mjwcg480p.ufs.sh/f/If0ZI6Cx8kn0DWNK8QBubNVz0Z4UfWPSmhv8pCdHw6oRcDlx", alt: "Home Hub recipes module" },
+    { src: "https://0mjwcg480p.ufs.sh/f/If0ZI6Cx8kn0bwIVLQN0D6J5QxGdNYkHhZvefnMlO7rpP923", alt: "Home Hub lists module" },
+  ]}
+/>
 
 It sounds very simple, and it is, but I had a few goals:
 
@@ -52,7 +61,7 @@ Most web apps work like this: the user clicks something, the browser asks the se
   ]}
 />
 
-Linear's main idea is that it is local first: the browser keeps a local copy of the data it needs, allowing the UI to update without waiting for the server to respond. In the background, a **sync engine** sends local changes to the server and brings remote changes back to the client.
+Linear's main idea is that it is local first: the browser keeps a local copy of the data it needs, allowing the UI to update immediately. In the background, a **sync engine** sends local changes to the server and brings remote changes back to the client. We still need the server, we simply don't make the UI wait for it.
 
 <StaticBlogFlowDiagram
   label="Local-first user interface update and background synchronization flow"
@@ -78,9 +87,30 @@ I decided to try a similar approach using a library called Zero by Rocicorp. Zer
 
 I also wanted to have images feel instant. When an image is uploaded, it is stored in Cloudflare and converted into two compressed variants: a small `thumbnail.webp` for recipe covers and image galleries, and a larger `viewer.webp` for fullscreen viewing.
 
-For example, uploading this 6MB `carbonara.png` produced a 600 KB viewr image and a 200 KB thumbnail, which are 10x and 30x smaller than the original image, resulting in faster loading times.
+For example, uploading this 2.7 MB `carbonara.jpeg` produced a 327 KB viewer image and a 74 KB thumbnail, which are roughly 8x and 36x smaller than the original image, resulting in faster loading times, without a meaningful loss of image quality.
 
-(show original image, and then on the side of the original one show the thumbnail version (with a caption and information telling to user to click on it, and when the user clicks on it it should open the full version))
+<ImageGallery
+  layout="inline"
+  wide
+  previewAspectRatio="1 / 1"
+  previewMaxWidth="12rem"
+  images={[
+    {
+      src: "https://0mjwcg480p.ufs.sh/f/If0ZI6Cx8kn04ARlCaCs7GOcHYEuJIvSw2nk8x5oXzsQqlmA",
+      alt: "Original carbonara upload",
+      caption: "carbonara.jpeg",
+      expandable: false,
+      previewFit: "cover",
+    },
+    {
+      src: "https://0mjwcg480p.ufs.sh/f/If0ZI6Cx8kn0KTpuUHYZaYRisJOEnU5Ayutl32T74L9vIPhc",
+      fullSrc: "https://0mjwcg480p.ufs.sh/f/If0ZI6Cx8kn0k8tVQoE7qMhA6dpfiwKstPTbkzUIeZNa3lQW",
+      alt: "Compressed carbonara thumbnail",
+      caption: "thumbnail.webp — click to open viewer.webp",
+      previewFit: "cover",
+    },
+  ]}
+/>
 
 ### CI/CD, deployment, and VPS hosting
 
@@ -100,7 +130,7 @@ Once the patterns were established and the work became repetitive, I started rel
 
 I also had AI maintain living documentation covering most aspects of the dashboard. Each feature has its own specification, giving new agents the context they need to work without getting lost. I also keep a backlog of ideas that the agents can turn into more detailed tasks and implement. 
 
-Currently, implementing new features is very fast. I've even started treating code as more discardable, especially when iterating on small UI and UX details: I have agents generate multiple options that I then cross reference them with other applications, and slowly converge to a solution that feels right.
+Currently, implementing new features is very fast. I’ve even started treating code as more disposable, especially when iterating on small UI and UX details. I have agents generate several options, then I evaluate them, compare them with other applications, and guide the agents through more iterations until I arrive at something that feels right.
 
 ### More
 
