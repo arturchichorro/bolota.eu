@@ -238,20 +238,28 @@ export function StaticBlogFlowDiagram({
     label,
     direction = "horizontal",
     layout = "flow",
+    wide = false,
 }: {
     nodes: StaticFlowNode[];
     edges: StaticFlowEdge[];
     label: string;
     direction?: "horizontal" | "vertical";
     layout?: "flow" | "distributed";
+    wide?: boolean;
 }) {
+    const wideStyle = wide ? {
+        width: "min(calc(100vw - 4rem), 52rem)",
+        marginLeft: "50%",
+        transform: "translateX(-50%)",
+    } : undefined;
+
     if (layout === "distributed") {
         const largestNodeWidth = Math.max(...nodes.map((node) => dimensions(node).width));
         const gap = 16;
         const minimumWidth = nodes.length * largestNodeWidth + Math.max(0, nodes.length - 1) * gap;
 
         return (
-            <figure className="not-prose my-7 w-full overflow-x-auto overflow-y-hidden bg-transparent pb-2" aria-label={label}>
+            <figure className="not-prose my-7 w-full overflow-x-auto overflow-y-hidden bg-transparent pb-2" style={wideStyle} aria-label={label}>
                 <div
                     className="grid items-start gap-4"
                     style={{
@@ -277,9 +285,9 @@ export function StaticBlogFlowDiagram({
     const idPrefix = label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
     return (
-        <figure className="not-prose my-7 w-full overflow-x-auto overflow-y-hidden bg-transparent pb-2" aria-label={label} tabIndex={0}>
+        <figure className="not-prose my-7 w-full overflow-x-auto overflow-y-hidden bg-transparent pb-2" style={wideStyle} aria-label={label} tabIndex={0}>
             <div className="flex justify-center" style={{ width: `max(100%, ${width}px)` }}>
-            <svg className="block h-auto shrink-0" style={{ width: `${width}px` }} viewBox={`${left} ${top} ${width} ${height}`} role="img" aria-labelledby={`${idPrefix}-title`}>
+            <svg className="block h-auto shrink-0" style={{ width: wide ? `max(100%, ${width}px)` : `${width}px` }} viewBox={`${left} ${top} ${width} ${height}`} role="img" aria-labelledby={`${idPrefix}-title`}>
                 <title id={`${idPrefix}-title`}>{label}</title>
                 <defs>
                     {edges.map((edge, index) => {
