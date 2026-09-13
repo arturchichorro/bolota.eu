@@ -3,7 +3,7 @@ title: Building my personal home dashboard
 description: Dev Log
 date: 2026-09-16
 published: true
-icon: python
+icon: homeHub
 ---
 
 I've been working on a dashboard for myself, and this is the first devlog. Its first two modules are **Lists**, for todo lists, shopping lists, or anything else, and **Recipes**, where I can save things I've cooked, with some pictures and history.
@@ -81,8 +81,6 @@ Linear's main idea is that it is local first: the browser keeps a local copy of 
 
 I decided to try a similar approach using a library called Zero by Rocicorp. Zero and Linear work differently in a few ways, but the main ideas are the same.
 
-(gifs e tal de eu a utilizar a aplicação e a fazer user actions e tal)
-
 ### Image pipeline
 
 I also wanted to have images feel instant. When an image is uploaded, it is stored in Cloudflare and converted into two compressed variants: a small `thumbnail.webp` for recipe covers and image galleries, and a larger `viewer.webp` for fullscreen viewing.
@@ -132,16 +130,8 @@ I also had AI maintain living documentation covering most aspects of the dashboa
 
 Currently, implementing new features is very fast. I’ve even started treating code as more disposable, especially when iterating on small UI and UX details. I have agents generate several options, then I evaluate them, compare them with other applications, and guide the agents through more iterations until I arrive at something that feels right.
 
-### More
+### And more
 
-There are a lot of other little things that I enjoyed learning about while doing this, and a lot of new things I want to add to the application in the future. Some examples are:
+There were plenty of smaller things to learn along the way. I built my own JWT authentication, turned the dashboard into a Progressive Web App I can install on my phone, used some neat tricks to store orderings of items, etc. 
 
-- I implemented my own JWT authentication without any third party libraries to learn more about how to make that work
-- I made it into a Progressive Web App, which to simplify basically means I can open it as a standalone app on my phone; this introdu
-- A lot of things in the app are orderable (e.g. recipe ingredient items, list items, the images in a recipe), and I arrived at a standardized way to order everything, using sort keys and 1024 gaps; I just think this little detail is quite fun and interesting
-
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-
-
-Interesting reads:
-<a target="_blank" href="https://performance.dev/how-is-linear-so-fast-a-technical-breakdown" className="link">How's Linear so fast? A technical breakdown</a>
+In general, I'm pretty happy with the result. I recommend reading this article that inspired a lot of my architectural decisions for this project: <a target="_blank" href="https://performance.dev/how-is-linear-so-fast-a-technical-breakdown" className="link">How's Linear so fast? A technical breakdown</a>.
