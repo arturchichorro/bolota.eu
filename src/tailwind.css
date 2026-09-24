@@ -26,5 +26,5 @@
   --color-sudoku-warning: #5b241f;
   --color-sudoku-textwarning: #ff8f87;
   --font-sans: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-mono: var(--font-sans);
 }
