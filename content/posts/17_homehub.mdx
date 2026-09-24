@@ -9,6 +9,7 @@ icon: homeHub
 
 import { ImageGallery } from "../../src/components/image-gallery"
 import { StaticBlogFlowDiagram } from "../../src/components/static-flow-diagram"
+import { LocalFirstSyncFlowDiagram, TraditionalRequestFlowDiagram } from "../../src/components/diagrams/17_homehub/flow-diagrams"
 
 I've been working on a dashboard for myself, and this is the first devlog. Its first two modules are **Lists**, for todo lists, shopping lists, or anything else, and **Recipes**, where I can save things I've cooked, with some pictures and history.
 
@@ -52,36 +53,11 @@ I wanted the dashboard to feel really nice to use. At my work, we use a product 
 
 Most web apps work like this: the user clicks something, the browser asks the server for some information, some loading state is displayed while the server is thinking and shortly after: data shows up in the website.
 
-<StaticBlogFlowDiagram
-  label="Traditional web application request and response flow"
-  nodes={[
-    { id: "action", title: "User action", shape: "pill", tone: "green", align: "center", width: 135, height: 64, position: { x: 0, y: 0 } },
-    { id: "server", title: "Server", shape: "card", tone: "amber", align: "center", verticalAlign: "center", width: 100, height: 56, position: { x: 230, y: 4 } },
-    { id: "update", title: "UI updates", shape: "pill", tone: "green", align: "center", width: 140, height: 64, position: { x: 430, y: 0 } },
-  ]}
-  edges={[
-    { from: "action", to: "server", label: "request", tone: "neutral" },
-    { from: "server", to: "update", label: "response", tone: "neutral" },
-  ]}
-/>
+<TraditionalRequestFlowDiagram />
 
 Linear's main idea is that it is local first: the browser keeps a local copy of the data it needs, allowing the UI to update immediately. In the background, a **sync engine** sends local changes to the server and brings remote changes back to the client. We still need the server, we simply don't make the UI wait for it.
 
-<StaticBlogFlowDiagram
-  label="Local-first user interface update and background synchronization flow"
-  nodes={[
-    { id: "local-action", title: "User action", shape: "pill", tone: "green", align: "center", width: 135, height: 64, position: { x: 0, y: 0 } },
-    { id: "local-store", title: "Local\ndatastore", shape: "database", tone: "blue", align: "center", width: 112, height: 104, position: { x: 215, y: -20 } },
-    { id: "instant-update", title: "UI updates", shape: "pill", tone: "green", align: "center", width: 140, height: 64, position: { x: 407, y: 0 } },
-    { id: "remote-server", title: "Server", shape: "card", tone: "amber", align: "center", verticalAlign: "center", width: 100, height: 56, position: { x: 221, y: 155 } },
-  ]}
-  edges={[
-    { from: "local-action", to: "local-store", tone: "neutral" },
-    { from: "local-store", to: "instant-update", tone: "neutral" },
-    { from: "local-store", to: "remote-server", fromSide: "bottom", toSide: "top", label: "background sync", labelSide: "left", offset: -28, tone: "neutral", dashed: true },
-    { from: "remote-server", to: "local-store", fromSide: "top", toSide: "bottom", label: "confirmed changes", labelSide: "right", offset: 28, tone: "neutral", dashed: true },
-  ]}
-/>
+<LocalFirstSyncFlowDiagram />
 
 I decided to try a similar approach using a library called Zero by Rocicorp. Zero and Linear work differently in a few ways, but the main ideas are the same.
 
