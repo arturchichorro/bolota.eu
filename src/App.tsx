@@ -94,12 +94,10 @@ function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }
     <main id="main" className="flex-1">
       <ReadingProgress />
       <div className="w-full xl:grid xl:grid-cols-[minmax(0,45rem)_10rem] xl:gap-8">
-        <article id="article-start" data-article className="mx-auto w-full max-w-180 min-w-0 scroll-mt-8 py-16 max-sm:py-12 xl:mx-0">
-          <a className="mb-18 inline-block font-mono text-xs text-muted no-underline hover:text-accent max-sm:mb-12" href="/">← all writing</a>
+        <article id="article-start" data-article className="mx-auto w-full max-w-180 min-w-0 scroll-mt-8 py-10 max-sm:py-8 xl:mx-0">
           <header>
-            <p className="mb-5 font-mono text-xs font-semibold uppercase tracking-[.14em] text-accent">{formatDate(meta.date)}</p>
-            <h1 className="m-0 text-[clamp(2rem,4.5vw,3.4rem)] font-normal leading-[1.05] tracking-[-.04em]">{meta.title}</h1>
-            {meta.description && <p className="mt-6 text-base leading-relaxed text-muted">{meta.description}</p>}
+            <h1 className="m-0 text-[clamp(2rem,4vw,2.75rem)] font-black leading-[1.08] tracking-[-.035em] text-accent">{meta.title}</h1>
+            <p className="mt-4 mb-0 text-lg text-muted">Posted on <time dateTime={meta.date}>{formatDate(meta.date)}</time></p>
           </header>
           {meta.saga?.length ? (
             <nav className="flex flex-wrap gap-2 border-b border-border py-4" aria-label="Related series">
@@ -108,11 +106,11 @@ function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }
               ))}
             </nav>
           ) : null}
-          <div className="prose prose-invert max-w-none pt-10 prose-headings:scroll-mt-8 prose-headings:font-normal prose-headings:tracking-tight prose-headings:text-foreground prose-a:text-accent-soft prose-a:decoration-accent/40 prose-a:underline-offset-4 hover:prose-a:text-accent prose-blockquote:border-accent prose-blockquote:text-muted prose-code:text-accent-soft prose-pre:border prose-pre:border-border prose-pre:bg-[#08090a] prose-img:rounded-md prose-img:border prose-img:border-border prose-video:rounded-md prose-video:border prose-video:border-border prose-hr:border-border prose-strong:text-foreground prose-li:marker:text-accent">
+          <div className="prose prose-invert max-w-none pt-8 prose-headings:scroll-mt-8 prose-headings:font-normal prose-headings:tracking-tight prose-headings:text-foreground prose-a:text-accent-soft prose-a:decoration-accent/40 prose-a:underline-offset-4 hover:prose-a:text-accent prose-blockquote:border-accent prose-blockquote:text-muted prose-code:text-accent-soft prose-pre:border prose-pre:border-border prose-pre:bg-[#08090a] prose-img:rounded-md prose-img:border prose-img:border-border prose-video:rounded-md prose-video:border prose-video:border-border prose-hr:border-border prose-strong:text-foreground prose-li:marker:text-accent">
             <Content components={mdxComponents} />
           </div>
         </article>
-        <aside className="hidden py-16 xl:block" aria-label="Article sections">
+        <aside className="hidden py-10 xl:block" aria-label="Article sections">
           <nav className="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto border-l border-border pl-4">
             <p className="mb-3 font-mono text-[0.65rem] font-semibold uppercase tracking-[.14em] text-faint">On this page</p>
             <ol className="m-0 list-none space-y-2 p-0 text-xs leading-snug">
