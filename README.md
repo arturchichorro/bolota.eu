@@ -1,8 +1,40 @@
-This is the source code for my personal website.
-I wrote about how I got to this point in these articles: 
+# achichorro.com
 
-- [Version 3](http://localhost:3000/posts/15_bolotav3) (29th August 2025)
-- [Version 2](https://bolota.eu/posts/6_bolotaeuv2) (7th July 2024)
-- [Version 1](https://bolota.eu/posts/1_bolotaeuv1) (15th November 2023)
+A small, static-first personal site and blog built with Vite, React, MDX and Tailwind CSS. It is the successor to bolota.eu.
 
-You can access the website [here](https://bolota.eu/).
+## See the app locally
+
+Install the dependencies and start the development server:
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Then open the local URL shown in the terminal—normally [http://localhost:5173](http://localhost:5173). Changes to the source files and MDX posts appear automatically while the server is running.
+
+To inspect the production build locally instead:
+
+```bash
+pnpm build
+pnpm preview
+```
+
+## Commands
+
+- `pnpm dev` — local development
+- `pnpm check` — TypeScript checks
+- `pnpm build` — build and prerender every page, plus RSS, sitemap and robots.txt
+- `pnpm preview` — preview the production build
+
+## Writing
+
+Yes: add an `.mdx` file to `content/posts` and it is discovered automatically. The filename becomes the post URL: `content/posts/my-post.mdx` → `/posts/my-post`. See [the authoring guide](docs/authoring.md) for the required frontmatter and examples.
+
+## Architecture
+
+See [Architecture](docs/architecture.md) and [Decisions](docs/decisions.md).
+
+## SEO
+
+See the [SEO plan](docs/SEO.md). Project follow-ups live in [Tasks](docs/tasks.md).

@@ -3,6 +3,7 @@ title: "Version 3: bolota.eu"
 description: "Update on the development of my personal blog: Web Analytics, Newsletter, Projects and more."
 date: 2025-08-29
 published: true
+interactive: true
 icon: logo
 saga:
   - title: "First version of this website!"
@@ -13,25 +14,27 @@ saga:
     url: "15_bolotav3"
 ---
 
-### One Year Later
+import ConnectFour from "../../src/components/connect-four/connect-four"
+import { ProjectItem } from "../../src/components/project-item"
+import SudokuAlgX from "../../src/components/sudoku/SudokuAlgX"
 
-The last time I wrote about <Link href="/" className="link">bolota.eu</Link> was July 2024, over a year ago. Since then, I kept making small tweaks to it, and together they added up to some pretty significant changes from how the website used to be.
+## One Year Later
+
+The last time I wrote about <a href="/" className="link">bolota.eu</a> was July 2024, over a year ago. Since then, I kept making small tweaks to it, and together they added up to some pretty significant changes from how the website used to be.
 
 From version 1 to version 2, the changes were pretty drastic: I rewrote the whole website from just plain React and Javascript to Next.js with Typescript and MDX. This time around, I didn't do any crazy rewrite or anything of that sort: The code idea remains the same: blog posts from Markdown(x). 
 
 In general, I feel like my vision of this website is slowly maturing, and it'll probably keep evolving over time. For now, I'm happy using it as a scrappy project where I can experiment, build small features, break things, share ideas in new ways, and see how it develops. With that said, here's what's actually new:
 
-### Newsletter
+## Newsletter
 
 First things first, and maybe most important of all, I started an email newsletter. Now, every time I write a blog post, I'm sending out an email to everyone who cares.
 
 Why did I decide to start something like this? Well, as much as I like writting, I think part of the point of writting is to have things be read. And for that matter, distribution does help. I've already decided to have my own blog, outside of something like <a className="link" href="https://substack.com/" target="_blank">Substack</a>, which would have made it easier for people to find and follow along, so I need some way of keeping those interested updated each time.
 
-To do that, I'm using a platform called <a className="link" href="https://www.mailerlite.com/" target="_blank">MailerLite</a>. It's simpler than most email marketing tools, which is exactly what I wanted. It handles the basics well: managing a list of subscribers, making it easy to unsubscribe, sending emails to everyone at once, and providing a clear dashboard with stats on opens, clicks, and more. Finally, it includes a simple API for subscribing, which I can then embed in a form and put in the website. Here it is, in case you want to subscribe:
+To do that, I used a platform called <a className="link" href="https://www.mailerlite.com/" target="_blank">MailerLite</a>. It handled the basics well: managing a list of subscribers, making it easy to unsubscribe, sending emails to everyone at once, and providing a clear dashboard with stats on opens, clicks, and more. The subscription form described here has since been retired.
 
-<SubscriberForm />
-
-### Web Analytics
+## Web Analytics
 
 Another thing I didn't know anything about, was whether people were visiting the website or not: things like unique visitors, page views, session duration, etc. For that reason I decided to add some sort of service that would track these metrics. 
 
@@ -45,7 +48,7 @@ Given that this website is not necessarily moving mountains in traffic, I decide
     <img className="border-2 border-border rounded-md" src="https://0mjwcg480p.ufs.sh/f/If0ZI6Cx8kn0Cdo87Htu5ABixORCQtesJl28mhMDfgYvLrFo" width="650" alt="Statistics for traffic on Bolota.eu" />
 </div>
 
-### Projects
+## Projects
 
 For a few months, I added a new tab in the navigation of the website called projects. It was supposed to showcase the projects that I had been working on, with cards that looked like this:
 
@@ -94,11 +97,11 @@ For a few months, I added a new tab in the navigation of the website called proj
 
 The idea was ok, but I realised that it was a bit redundant. The posts both speak for themselves (as I write about these projects anyway), and are far more interesting by themselves than these project cards. I decided to simplify the website as much as possible, and therefore ended up scraping this "projects" page entirely.
 
-### A bunch of small things
+## A bunch of small things
 
 On top of these larger changes that happened, there are all kinds of tiny stuff sprinkled about. For example, when blog posts are part of a series, you can now easily navigate between them from within each (check the top of this post for an example of that).
 
-Adding to that, I've generally been getting more used to embedding components in blog posts using MDX. I'm particularly happy with the visualizations of the Sudoku algorithms, from <Link href="14_algxsudoku" className="link">this</Link> post.
+Adding to that, I've generally been getting more used to embedding components in blog posts using MDX. I'm particularly happy with the visualizations of the Sudoku algorithms, from <a href="14_algxsudoku" className="link">this</a> post.
 
 <details>
 <summary><span className="link cursor-pointer">Sudoku Visualization</span></summary>
@@ -121,7 +124,7 @@ This sudoku is classified as expert difficulty.
 <hr className="border-border"/>
 </details>
 
-And the Connect Four "chess.com" like UI from <Link className="link" href="9_connect4">this</Link> post.
+And the Connect Four "chess.com" like UI from <a className="link" href="9_connect4">this</a> post.
 
 <details>
 <summary><span className="link cursor-pointer">Connect 4 Game</span></summary>
@@ -132,7 +135,7 @@ And the Connect Four "chess.com" like UI from <Link className="link" href="9_con
 <hr className="border-border"/>
 </details>
 
-Apart from the blog posts, I've also been having fun in other parts of the website: in the <Link className="link" href="/about">about page</Link>, I added some random statistics (of my chess.com accounts and my leetcode solved problems). In the homepage, I added icon specific icons for each post, to finally bring some color to this very green website. In the "backend", I started using <a target="_blank" className='link' href="https://uploadthing.com/">Uploadthing</a> to handle my images and videos, instead of using the public folder. This way, I have slightly better performance when loading media, all while getting to keep my repository much lighter.
+Apart from the blog posts, I've also been having fun in other parts of the website: in the <a className="link" href="/about">about page</a>, I added some random statistics (of my chess.com accounts and my leetcode solved problems). In the homepage, I added icon specific icons for each post, to finally bring some color to this very green website. In the "backend", I started using <a target="_blank" className='link' href="https://uploadthing.com/">Uploadthing</a> to handle my images and videos, instead of using the public folder. This way, I have slightly better performance when loading media, all while getting to keep my repository much lighter.
 
 And for now, I think that's most of it. As it has become tradition, here is a screenshot of how bolota looks right now, for posterity's sake.
 

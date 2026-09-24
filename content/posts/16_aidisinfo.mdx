@@ -6,6 +6,35 @@ published: true
 icon: simpleAi
 ---
 
+import { Callout } from "../../src/components/callout"
+import { StaticBlogFlowDiagram } from "../../src/components/static-flow-diagram"
+
+export const persuasionNodes = [
+  { id: "post", title: "CMV: Teachers in subjects that are in higher demand should receive higher pay", eyebrow: "r/ChangeMyView", detail: "I believe the U.S. education system can be significantly improved by implementing a higher pay scale for teachers who specialize in high-demand subjects…", icon: "reddit", tone: "light", width: 275, height: 132, position: { x: 0, y: 0 } },
+  { id: "profile", title: "Profiler", tone: "rose", align: "center", width: 100, height: 58, position: { x: 330, y: 37 } },
+  { id: "draft", title: "Drafter", tone: "orange", align: "center", width: 100, height: 58, position: { x: 480, y: 37 } },
+  { id: "rank", title: "Ranker", tone: "blue", align: "center", width: 100, height: 58, position: { x: 630, y: 37 } },
+  { id: "reply", title: "“This would actually make the teacher shortage worse, not better…”", eyebrow: "Chosen response", tone: "neutral", align: "center", dashed: true, width: 220, height: 132, position: { x: 780, y: 0 } },
+]
+
+export const persuasionEdges = [
+  { from: "post", to: "profile", tone: "neutral" },
+  { from: "profile", to: "draft", tone: "neutral" },
+  { from: "draft", to: "rank", tone: "neutral" },
+  { from: "rank", to: "reply", tone: "neutral" },
+]
+
+export const watermarkNodes = [
+  { id: "marked", title: "Watermarked response", eyebrow: "99.3% detected", icon: "shield", width: 190, height: 92 },
+  { id: "rewrite", title: "Repeated paraphrasing", eyebrow: "Up to 200×", icon: "rewrite", tone: "amber", width: 190, height: 92 },
+  { id: "weak", title: "Weakened signals", eyebrow: "9.7% detected", icon: "signal", tone: "rose", width: 190, height: 92 },
+]
+
+export const watermarkEdges = [
+  { from: "marked", to: "rewrite", label: "paraphrase", tone: "amber" },
+  { from: "rewrite", to: "weak", label: "repeat", tone: "rose" },
+]
+
 When I listen to music, I often use Spotify's auto-generated playlists like "Discover Weekly". And when I do that, I rarely check what's playing. On one of the few occasions I did, I realised I was listening to a song produced by "Suno", a popular AI music generator.
 
 <div className="flex justify-center prose">
@@ -19,11 +48,11 @@ It hit me that **I have been listening to AI generated songs without knowing abo
 Turns out, if AI can slip into my playlists unnoticed, it can just as easily slip basically anywhere.
 <hr className="border-border"/>
 
-### Changing Someone's Opinion
+## Changing Someone's Opinion
 
 With the rising usage of ChatGPT and other text based AI models, researchers have released multiple papers trying to answer a simple question: how good is ChatGPT at changing someone's mind? How persuasive can it be?
 
-###### r/ChangeMyView and deltas
+### r/ChangeMyView and deltas
 
 <a href="https://www.reddit.com/r/changemyview/" className='link' target='_blank'>Reddit's r/ChangeMyView</a> is an online community with over a million weekly users, amongst the top 1% communities on the website. In this subreddit, anyone can create a post stating their opinion. The post's title follows this format:
 
@@ -37,15 +66,13 @@ If anyone disagrees with the original statement and explanation, they can provid
 
 By having the original poster acknowledge a change of mind, researchers can identify which arguments were persuasive. Deltas serve as a practical metric of shifts in opinion.
 
-###### Maximising minds changed
+### Maximising minds changed
 
 With this in mind, a group of researchers from ETH Zurich decided to try and create the most persuasive AI bot. At its core, their goal was simple: maximise the number of deltas they could obtain: how many opinions they could change. Between November 2024 and March 2025, their bots commented on a total of 1061 unique posts<sup><a className="reference" href="#1">1</a></sup>.
 
 Among different methods to generate comments, one involved inferring certain personal details about the original author through their posting history, like age, gender, ethnicity, location and political orientation<sup><a className="reference" href="#1">1</a></sup>. This information was then fed to the AI bot so that it could craft arguments tailored to the person it aimed to persuade.
 
-<div className="flex justify-center">
-    <img className="border-2 border-border rounded-md" src="https://0mjwcg480p.ufs.sh/f/If0ZI6Cx8kn0t0kPn8S5Tms9dZ3OQbwXunWGHCkB8iMopeYf" width="750" alt="Diagram about Personalized Response Generation Process" />
-</div>
+<StaticBlogFlowDiagram label="Personalized response generation process" nodes={persuasionNodes} edges={persuasionEdges} />
 <details>
     <summary><span className="link cursor-pointer">Overview of the response generation process</span><sup><a className="reference" href="#1">1</a></sup></summary>
 
@@ -62,7 +89,7 @@ Among different methods to generate comments, one involved inferring certain per
 
 This *Personalization* approach ranks in the 99th percentile among r/ChangeMyView users at obtaining "deltas".
 
-###### Prompts used
+### Prompts used
 
 In an OSF pre-registration of the paper<sup><a className="reference" href="#2">2</a></sup>, the researchers revealed some of the prompts used to generate comments, revealing some interesting choices:
 
@@ -123,7 +150,7 @@ Here's some of the insane comments that ended up being generated. None of these 
 
 The moderators of r/ChangeMyView released a document containing all the comments posted by the bots<sup><a className="reference" href="#3">3</a></sup>. In it, there's dozens of other comments that are deeply problematic (for example, the AI claiming to be a rape victim to strengthen its argument). I was struck by the wide range of stances often directly contradicting each other. These bots clearly had no inherent ideology; their sole goal was to obtain as many deltas as possible.
 
-###### The reaction
+### The reaction
 
 The community reacted poorly to the researcher's findings. The whole operation happened without consent of r/ChangeMyView users, and the moderators of the community filed an ethics complaint with the University of Zurich Institutional Review Board. The researchers were forced to not publish their paper.
 
@@ -133,23 +160,21 @@ In the meantime, thousands of discussions were had, in which opinions were swaye
 
 <hr className="border-border"/>
 
-### The task of detection
+## The task of detection
 
 Examples like the one above serve as a cautionary tale about AI-generated content. As a result, detecting AI-generated text, images, videos, and other media is essential. However, despite extensive efforts, reliable detection remains extremely difficult.
 
-###### Watermarking
+### Watermarking
 
 One proposed strategy is <a href="https://en.wikipedia.org/wiki/Digital_watermarking" target="_blank" className='link'>watermarking</a>, which embeds hidden statistical signals in AI-generated content (text included) to help identify it later. For example, <a href="https://deepmind.google/models/synthid/" target='_blank' className='link'>Google's SynthID</a> adds invisible patterns to generated text or images that allow them to be recognized afterward.
 
 The idea behind SynthID is clever, but it only works for content made by Google's own models. Even then, it's easy to weaken: researchers showed that repeatedly rephrasing the text with another AI can drop detection from 99.3% to just 9.7%<sup><a className="reference" href="#4">4</a></sup>.
 
-<div className="flex justify-center prose">
-    <img className="border-2 border-border rounded-md" src="https://0mjwcg480p.ufs.sh/f/If0ZI6Cx8kn07kGkbi4azXR6n8EGZPkc2vlsdx4fKUQHot9F" width="700" alt="Diagram about Watermarked AI response abuse" />
-</div>
+<StaticBlogFlowDiagram label="Watermark degradation through repeated paraphrasing" nodes={watermarkNodes} edges={watermarkEdges} />
 
 Additionally, the researchers also showed that the paraphrased passages remain high quality in terms of content preservation, grammar and text quality<sup><a className="reference" href="#4">4</a></sup>.
 
-###### The cat-and-mouse game
+### The cat-and-mouse game
 
 Multiple other strategies exist: 
 - **Statistical and Stylistic Analysis:**<sup><a className="reference" href="#5">5</a></sup> Classifiers that look for typical ChatGPT-style expressions, such as *"it's not _, it's _"* or the word *"delve"*
@@ -162,19 +187,19 @@ On top of that, there are simply too many factors that make detection unreliable
 
 Another interesting roadblock is language. Text generated in different languages seems to also demand different tactics to detect: most existing detectors focus on the English language. Interestingly enough, AI detection tools wrongly classify human text as AI generated if the text was written by non-native English speakers<sup><a className="reference" href="#6">6</a></sup>.
 
-###### Is it feasible?
+### Is it feasible?
 
 In the paper "Can AI-Generated Text be Reliably Detected?"<sup><a className="reference" href="#4">4</a></sup>, the researchers present an interesting concept: Total Variation (TV) distance. Essentially, TV distance is a mathematical way to measure how closely AI generated text relates to the way humans write. As AI becomes more advanced, they mimic human patterns so closely that the TV distance between them shrinks. In theory, when this gap becomes too small, it becomes mathematically impossible for even the most sophisticated detector to tell them apart reliably.
 
 These are a lot of words to describe a very simple idea: **as AI continues to improve, our ability to detect it will naturally hit a theoretical wall**.
 
-###### AI Labels
+### AI Labels
 
 One proposed measure to combat AI generated disinformation is to have all AI generated content labeled as such. My question becomes: if we can't reliably detect AI generated content, how can we ever aspire to enforce such a measure?
 
 <hr className="border-border"/>
 
-### Other stories
+## Other stories
 
 While writing this blog post, I stumbled upon dozens of stories that I could write about at length. Here's some notable ones:
 
@@ -193,7 +218,7 @@ There are countless other stories like these. It's clear that our online communi
 As it becomes harder to trust images, videos, or even stories online, human authenticity will matter more than ever. **I believe that in the future, earning trust will be both more difficult and more essential than ever.**
 
 
-### References
+## References
 
 <a className="link ref-number font-bold" id="1">[1]</a> - <a target="_blank" className="link" href="https://regmedia.co.uk/2025/04/29/supplied_can_ai_change_your_view.pdf">Can AI Change Your View? Evidence from a Large-Scale Online Field Experiment</a>
 <br/><a className="link ref-number font-bold" id="2">[2]</a> - <a target="_blank" className="link" href="https://osf.io/atcvn?view_only=dcf58026c0374c1885368c23763a2bad">Changemyview LLM Persuasion study Preregistration Template</a>

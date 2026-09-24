@@ -3,12 +3,19 @@ title: Solving Sudoku Puzzles with Matrices
 description: Implementing Algorithm X to solve Sudoku puzzles
 date: 2025-02-18
 published: true
+interactive: true
 icon: sudoku
 ---
 
+import { Callout } from "../../src/components/callout"
+import SudokuAlgX from "../../src/components/sudoku/SudokuAlgX"
+import SudokuBacktrack from "../../src/components/sudoku/SudokuBacktrack"
+import SudokuComparison from "../../src/components/sudoku/SudokuComparison"
+import { SudokuGrid } from "../../src/components/sudoku/SudokuGrid"
+
 While working on a different project, I fell down the rabbit hole of trying to generate my own sudokus programmatically. Turns out, this rabbit hole had turns, crossings, twists and required a lot of backtracking.
 
-### Generating Sudokus
+## Generating Sudokus
 
 To generate Sudokus, I first needed to define my success criteria: a well-constructed puzzle must have **exactly one solution**. In order to achieve this, I landed at this algorithm.
 
@@ -28,7 +35,7 @@ To generate Sudokus, I first needed to define my success criteria: a well-constr
 
 In order to actually implement the algorithm that generates Sudoku puzzles, I needed another ingredient: an algorithm that *solved* Sudoku puzzles.
 
-### Backtracking
+## Backtracking
 
 The simplest algorithm you can write to solve a sudoku puzzle is a **backtracking algorithm**. All it does is it attempts to fill the next empty square with the next valid number. If at some point there are no valid placements possible, it means it made a mistake. In this case, it *backtracks* (goes back to before the mistake was made) and attempts the next valid number. It's as brute force as it gets. 
 
@@ -91,7 +98,7 @@ This puzzle will force the Backtracking algorithm to make almost two million rec
 
 This annoying setback made me try to find more sophisticated algorithms that were better prepared to handle all kinds of edge cases. This is how I stumbled upon the <a className="link" href="https://en.wikipedia.org/wiki/Exact_cover" target="_blank">Exact Cover Problem</a>.
 
-### Exact Cover Problem
+## Exact Cover Problem
 
 I'll give an example to explain the concept of an exact cover. Let's say we have a certain universe set $X=\{1,2,3,4\}$. Along with $X$, we also have some subsets of $X$:
 - $A = \{2\}$
@@ -128,7 +135,7 @@ $$
 
 Turns out, **any Sudoku puzzle can be described as a matrix of 1s and 0s**. And even more interesting is that finding exact covers for that matrix is the same as finding solutions to the puzzle.
 
-### Translating Sudoku into an Exact Cover Problem
+## Translating Sudoku into an Exact Cover Problem
 
 So how can this matrix of 1s and 0s be constructed?
 
@@ -254,7 +261,7 @@ def empty_sudoku_exact_cover(size=9):
 
 But now we have a different problem. How do we find exact covers in this huge matrix?
 
-### Algorithm X
+## Algorithm X
 
 <a className="link" href="https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X" target="_blank">Algorithm X</a> is the name of the algorithm presented by <a className="link" href="https://pt.wikipedia.org/wiki/Donald_Knuth" target="_blank">Donald Knuth</a> to solve exact cover problems written in this matrix format. In his words:
 
@@ -331,7 +338,7 @@ The secret is step 2: choosing a column. If in this step we choose the **column 
     ]} />
 </div>
 
-### Comparing the two algorithms
+## Comparing the two algorithms
 
 To benchmark both algorithms, I generated 50 puzzles, each starting with around 22-27 filled cells. Both algorithms were then tasked with solving all the puzzles. Please note that the results come from my rather unoptimized Python code. I'm sure the times could be vastly improved. However, I believe these numbers effectively demonstrate the relative performance of each algorithm.
 
@@ -450,7 +457,7 @@ I find it funny how only one puzzle required over one million recursive calls, b
 <hr className="border-border"/>
 </details>
 
-### Solving lots of Sudoku with Algorithm X
+## Solving lots of Sudoku with Algorithm X
 
 Despite the many interesting conclusions to take away from solving puzzles with Backtracking, 
 I was a lot more curious about the data I could get out of Algorithm X. Therefore, I had it solve 49151 puzzles I found in a repository online. Here's the results:
@@ -537,7 +544,7 @@ It seems that having a mostly empty bottom half of the puzzle combined with some
 <hr className="border-border"/>
 </details>
 
-### Back to generating Sudoku puzzles
+## Back to generating Sudoku puzzles
 
 Having finished the puzzle solver, I can generate my own puzzles reasonably fast! Here are a few of them:
 

@@ -1,0 +1,30 @@
+@import "@fontsource-variable/inter";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@source "../content/posts";
+
+@theme {
+  --color-background: #0d0f10;
+  --color-surface: #131617;
+  --color-surface-2: #1a1e1c;
+  --color-foreground: #ecefed;
+  --color-primary: #ecefed;
+  --color-muted: #9ba29e;
+  --color-muted-foreground: #9ba29e;
+  --color-faint: #656c68;
+  --color-border: #2a2f2c;
+  --color-accent: #6ee7a2;
+  --color-accent-soft: #a7f3c4;
+  --color-secondary: #ffd479;
+  --color-secondary-foreground: #ff8f87;
+  --color-warning: #ff8f87;
+  --color-sudoku: #102219;
+  --color-sudoku-foreground: #0c1911;
+  --color-sudoku-text: #6ee7a2;
+  --color-sudoku-borders: #263d2e;
+  --color-sudoku-highlight: #6ee7a2;
+  --color-sudoku-warning: #5b241f;
+  --color-sudoku-textwarning: #ff8f87;
+  --font-sans: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
