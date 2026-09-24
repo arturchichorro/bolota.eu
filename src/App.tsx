@@ -1,7 +1,7 @@
 import type { ComponentType } from "react";
 import { mdxComponents } from "./components/mdx-components";
 import { PostIcon } from "./components/post-icon";
-import { ReadingProgress } from "./components/reading-progress";
+import { TocScrollSpy } from "./components/toc-scroll-spy";
 import { postFromPath, posts, type PostMeta } from "./posts";
 
 const SITE = "https://achichorro.com";
@@ -92,7 +92,7 @@ function Home() {
 function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }) {
   return (
     <main id="main" className="flex-1">
-      <ReadingProgress />
+      <TocScrollSpy />
       <div className="w-full xl:grid xl:grid-cols-[minmax(0,45rem)_10rem] xl:gap-8">
         <article id="article-start" data-article className="mx-auto w-full max-w-180 min-w-0 scroll-mt-8 py-10 max-sm:py-8 xl:mx-0">
           <header>
