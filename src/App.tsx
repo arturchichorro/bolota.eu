@@ -93,7 +93,7 @@ function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }
               ))}
             </nav>
           ) : null}
-          <div className="prose prose-invert max-w-none pt-8 prose-headings:scroll-mt-8 prose-headings:font-normal prose-headings:tracking-tight prose-headings:text-foreground prose-a:text-accent-soft prose-a:decoration-accent/40 prose-a:underline-offset-4 hover:prose-a:text-accent prose-blockquote:border-accent prose-blockquote:text-muted prose-code:text-accent-soft prose-pre:border prose-pre:border-border prose-pre:bg-[#08090a] prose-img:rounded-md prose-img:border prose-img:border-border prose-video:rounded-md prose-video:border prose-video:border-border prose-hr:border-border prose-strong:text-foreground prose-li:marker:text-accent">
+          <div className="prose prose-invert max-w-none pt-8 prose-headings:scroll-mt-8 prose-headings:font-normal prose-headings:tracking-tight prose-headings:text-foreground prose-blockquote:border-accent prose-blockquote:text-muted prose-code:text-accent-soft prose-pre:border prose-pre:border-border prose-pre:bg-[#08090a] prose-img:rounded-md prose-img:border prose-img:border-border prose-video:rounded-md prose-video:border prose-video:border-border prose-hr:border-border prose-strong:text-foreground prose-li:marker:text-accent">
             <Content components={mdxComponents} />
           </div>
         </article>

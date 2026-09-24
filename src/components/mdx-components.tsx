@@ -19,13 +19,13 @@ const headingStyles = {
 
 export function MdxHeading({ as: Tag, children, className = "", ...props }: ComponentProps<"h2"> & { as: "h2" | "h3" | "h4" | "h5" | "h6" }) {
   const id = headingSlug(headingText(children));
-  return <Tag id={id} className={`${headingStyles[Tag]} ${className}`} {...props}><a className="no-underline hover:text-accent" href={`#${id}`}>{children}</a></Tag>;
+  return <Tag id={id} className={`${headingStyles[Tag]} ${className}`} {...props}><a className="subheading-anchor" href={`#${id}`}>{children}</a></Tag>;
 }
 
 export function Link({ href = "", className = "", ...props }: ComponentProps<"a">) {
   const external = /^https?:\/\//.test(href);
   const resolvedHref = !external && !href.startsWith("/") && /^\d+_[a-z0-9_-]+$/i.test(href) ? `/posts/${href}/` : href;
-  return <a className={`text-accent-soft underline decoration-accent/40 underline-offset-4 hover:text-accent hover:no-underline ${className}`} href={resolvedHref} rel={external ? "noreferrer" : undefined} target={external ? "_blank" : undefined} {...props} />;
+  return <a className={`link ${className}`} href={resolvedHref} rel={external ? "noreferrer" : undefined} target={external ? "_blank" : undefined} {...props} />;
 }
 
 export function MdxImage({ className = "", ...props }: ComponentProps<"img">) {
