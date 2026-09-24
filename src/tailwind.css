@@ -29,20 +29,22 @@
   --font-mono: var(--font-sans);
 }
 
-@layer components {
-  .link {
-    @apply text-accent underline decoration-2 decoration-accent/50 underline-offset-4 hover:bg-accent hover:text-background hover:no-underline;
-  }
+.link,
+[data-article] .prose .link {
+  @apply text-accent underline decoration-2 decoration-accent/50 underline-offset-4 hover:bg-accent hover:text-background hover:no-underline;
+}
 
-  .reference {
-    @apply px-1 text-accent no-underline hover:bg-accent hover:text-background;
-  }
+.reference,
+[data-article] .prose .reference {
+  @apply px-1 text-accent no-underline hover:bg-accent hover:text-background;
+}
 
-  .ref-number {
-    @apply cursor-default tabular-nums no-underline;
-  }
+.ref-number,
+[data-article] .prose .ref-number {
+  @apply cursor-default tabular-nums no-underline;
+}
 
-  .subheading-anchor {
-    @apply no-underline hover:underline;
-  }
+.subheading-anchor,
+[data-article] .prose .subheading-anchor {
+  @apply font-medium text-accent no-underline hover:bg-transparent hover:text-accent hover:underline;
 }

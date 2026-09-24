@@ -83,8 +83,8 @@ function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }
       <div className="w-full xl:grid xl:grid-cols-[minmax(0,45rem)_10rem] xl:gap-8">
         <article id="article-start" data-article className="mx-auto w-full max-w-180 min-w-0 scroll-mt-8 py-10 max-sm:py-8 xl:mx-0">
           <header>
-            <h1 className="m-0 text-[clamp(2rem,4vw,2.75rem)] font-black leading-[1.08] tracking-[-.035em] text-accent">{meta.title}</h1>
-            <p className="mt-4 mb-0 text-lg text-muted">Posted on <time dateTime={meta.date}>{formatDate(meta.date)}</time></p>
+            <h1 className="mt-0 mb-2 text-2xl font-extrabold leading-8 text-accent sm:text-3xl sm:leading-9">{meta.title}</h1>
+            <p className="m-0 text-base leading-6 text-muted">Posted on <time dateTime={meta.date}>{formatDate(meta.date)}</time></p>
           </header>
           {meta.saga?.length ? (
             <nav className="flex flex-wrap gap-2 border-b border-border py-4" aria-label="Related series">
@@ -93,7 +93,7 @@ function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }
               ))}
             </nav>
           ) : null}
-          <div className="prose prose-invert max-w-none pt-8 prose-headings:scroll-mt-8 prose-headings:font-normal prose-headings:tracking-tight prose-headings:text-foreground prose-blockquote:border-accent prose-blockquote:text-muted prose-code:text-accent-soft prose-pre:border prose-pre:border-border prose-pre:bg-[#08090a] prose-img:rounded-md prose-img:border prose-img:border-border prose-video:rounded-md prose-video:border prose-video:border-border prose-hr:border-border prose-strong:text-foreground prose-li:marker:text-accent">
+          <div className="prose prose-invert max-w-none pt-8 prose-headings:scroll-mt-8 prose-blockquote:border-accent prose-blockquote:text-muted prose-code:text-accent-soft prose-pre:border prose-pre:border-border prose-pre:bg-[#08090a] prose-img:rounded-md prose-img:border prose-img:border-border prose-video:rounded-md prose-video:border prose-video:border-border prose-hr:border-border prose-strong:text-foreground prose-li:marker:text-accent">
             <Content components={mdxComponents} />
           </div>
         </article>

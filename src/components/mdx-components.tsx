@@ -10,11 +10,11 @@ function headingText(value: ReactNode): string {
 }
 
 const headingStyles = {
-  h2: "mt-12 mb-4 scroll-mt-8 text-3xl font-normal tracking-tight text-foreground",
-  h3: "mt-12 mb-4 scroll-mt-8 text-2xl font-normal tracking-tight text-foreground",
-  h4: "mt-12 mb-4 scroll-mt-8 text-xl font-normal tracking-tight text-foreground",
-  h5: "mt-12 mb-4 scroll-mt-8 text-xl font-normal tracking-tight text-foreground",
-  h6: "mt-10 mb-4 scroll-mt-8 text-lg font-semibold tracking-tight text-foreground",
+  h2: "mt-8 mb-3 scroll-mt-8 text-2xl font-semibold leading-8 text-accent",
+  h3: "mt-8 mb-3 scroll-mt-8 text-xl font-semibold leading-8 text-accent",
+  h4: "mt-8 mb-3 scroll-mt-8 text-lg font-medium leading-7 text-accent",
+  h5: "mt-6 mb-2 scroll-mt-8 text-base font-medium leading-7 text-accent",
+  h6: "mt-6 mb-2 scroll-mt-8 text-sm font-semibold leading-6 text-accent",
 };
 
 export function MdxHeading({ as: Tag, children, className = "", ...props }: ComponentProps<"h2"> & { as: "h2" | "h3" | "h4" | "h5" | "h6" }) {
