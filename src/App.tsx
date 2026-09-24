@@ -21,19 +21,6 @@ function Header() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="flex justify-between border-t border-border py-8 font-mono text-xs text-faint max-sm:flex-col max-sm:gap-4">
-      <span>© {new Date().getFullYear()} Artur Chichorro</span>
-      <span>
-        <a className="no-underline hover:text-accent" href="https://github.com/arturchichorro">GitHub</a>
-        {" · "}
-        <a className="no-underline hover:text-accent" href="https://x.com/achichorroc">X</a>
-      </span>
-    </footer>
-  );
-}
-
 function formatDate(date: string) {
   return new Intl.DateTimeFormat("en", { year: "numeric", month: "short", day: "2-digit", timeZone: "UTC" }).format(new Date(`${date}T00:00:00Z`));
 }
@@ -147,7 +134,6 @@ export function App({ pathname, Content }: { pathname: string; Content?: Compone
       <a className="fixed top-2 left-2 z-20 -translate-y-[150%] bg-accent px-4 py-2 text-background focus:translate-y-0" href="#main">Skip to content</a>
       <Header />
       {meta && Content ? <Post meta={meta} Content={Content} /> : pathname === "/" || pathname === "/posts" || pathname === "/posts/" ? <Home /> : <NotFound />}
-      <Footer />
     </div>
   );
 }

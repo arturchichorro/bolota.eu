@@ -9,7 +9,7 @@ const server = await import(pathToFileURL(resolve(root, ".ssr/entry-server.js"))
 
 const interactiveRoutes = new Set(server.posts.filter((post) => post.interactive).map((post) => `/posts/${post.slug}/`));
 const articleRoutes = new Set(server.posts.map((post) => `/posts/${post.slug}/`));
-const readingProgressScript = `<script>(()=>{const b=document.querySelector('[data-reading-progress]'),a=document.querySelector('[data-article]');if(!b||!a)return;const t=[...document.querySelectorAll('[data-toc-link]')].map(l=>({l,s:document.getElementById(l.dataset.tocLink)})).filter(x=>x.s);let f;const u=()=>{f=undefined;const s=a.getBoundingClientRect().top+scrollY,e=s+a.scrollHeight-innerHeight,d=Math.max(1,e-s),v=Math.min(1,Math.max(0,(scrollY-s)/d));b.style.transform='scaleX('+v+')';b.setAttribute('aria-valuenow',String(Math.round(v*100)));const y=Math.min(innerHeight*.3,240);let c=t[0];for(const x of t){if(x.s.getBoundingClientRect().top<=y)c=x;else break}for(const x of t){const n=x===c;x.l.dataset.active=String(n);n?x.l.setAttribute('aria-current','location'):x.l.removeAttribute('aria-current')}};const q=()=>{if(f===undefined)f=requestAnimationFrame(u)};u();addEventListener('scroll',q,{passive:true});addEventListener('resize',q)})()</script>`;
+const tocScrollSpyScript = `<script>(()=>{const t=[...document.querySelectorAll('[data-toc-link]')].map(l=>({l,s:document.getElementById(l.dataset.tocLink)})).filter(x=>x.s);if(!t.length)return;let f;const u=()=>{f=undefined;const y=Math.min(innerHeight*.3,240);let c=t[0];for(const x of t){if(x.s.getBoundingClientRect().top<=y)c=x;else break}for(const x of t){const n=x===c;x.l.dataset.active=String(n);n?x.l.setAttribute('aria-current','location'):x.l.removeAttribute('aria-current')}};const q=()=>{if(f===undefined)f=requestAnimationFrame(u)};u();addEventListener('scroll',q,{passive:true});addEventListener('resize',q)})()</script>`;
 
 const escape = (value = "") => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 
@@ -30,15 +30,14 @@ function headFor(pathname) {
     <meta property="og:description" content="${escape(seo.description)}" />
     <meta property="og:url" content="${seo.canonical}" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:creator" content="@achichorroc" />
     <script type="application/ld+json">${JSON.stringify(jsonLd).replaceAll("<", "\\u003c")}</script>`;
 }
 
 for (const route of server.routes) {
   const needsJavaScript = interactiveRoutes.has(route);
-  const needsStandaloneProgress = articleRoutes.has(route) && !needsJavaScript;
+  const needsStandaloneToc = articleRoutes.has(route) && !needsJavaScript;
   const staticTemplate = template.replace(/\s*<script type="module"[^>]+><\/script>/, "");
-  const routeTemplate = needsJavaScript ? template : needsStandaloneProgress ? staticTemplate.replace("</body>", `${readingProgressScript}</body>`) : staticTemplate;
+  const routeTemplate = needsJavaScript ? template : needsStandaloneToc ? staticTemplate.replace("</body>", `${tocScrollSpyScript}</body>`) : staticTemplate;
   const html = routeTemplate.replace("<!--seo-head-->", headFor(route)).replace("<!--app-html-->", await server.render(route));
   const target = route === "/" ? resolve(dist, "index.html") : resolve(dist, `.${route}`, "index.html");
   await mkdir(dirname(target), { recursive: true });

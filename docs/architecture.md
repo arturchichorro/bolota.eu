@@ -13,7 +13,7 @@ The site is a static-first Vite and React application. MDX is compiled during de
 5. Vite creates the client and server bundles.
 6. `scripts/prerender.mjs` renders every route into `dist`, then generates the sitemap, RSS feed, and robots file.
 
-The homepage receives only metadata, not every post body. The React bundle is retained only for posts marked `interactive: true`. Other article pages receive a tiny standalone script for the reading-progress bar, while index pages remain JavaScript-free.
+The homepage receives only metadata, not every post body. The React bundle is retained only for posts marked `interactive: true`. Other article pages receive a tiny standalone script for table-of-contents section highlighting, while index pages remain JavaScript-free.
 
 ## Important locations
 
@@ -32,7 +32,7 @@ The homepage receives only metadata, not every post body. The React bundle is re
 - Every published route has complete static HTML.
 - Post bodies are split by route.
 - The homepage has no production JavaScript.
-- Static article pages use a small inline, animation-frame-throttled script for reading progress instead of loading and hydrating React.
+- Static article pages use a small inline, animation-frame-throttled script for table-of-contents section highlighting instead of loading and hydrating React.
 - Images embedded as JSX receive lazy-loading attributes during MDX compilation.
 - Drafts are excluded from routes and discovery files.
 - Invalid or unknown frontmatter fields fail the build, and `interactive: true` is the single source of truth for post hydration.
