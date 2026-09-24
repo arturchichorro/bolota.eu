@@ -93,23 +93,8 @@ function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }
   return (
     <main id="main" className="flex-1">
       <ReadingProgress />
-      <div className="w-full">
-        <aside className="fixed top-1/2 left-4 z-10 hidden w-40 -translate-y-1/2 xl:block" aria-label="Article sections">
-          <nav className="border-l border-border pl-4">
-            <p className="mb-3 font-mono text-[0.65rem] font-semibold uppercase tracking-[.14em] text-faint">On this page</p>
-            <ol className="m-0 list-none space-y-2 p-0 text-xs leading-snug">
-              <li>
-                <a className="block text-muted no-underline transition-colors hover:text-accent data-[active=true]:font-semibold data-[active=true]:text-accent" data-toc-link="article-start" data-active="true" aria-current="location" href="#article-start">Start</a>
-              </li>
-              {meta.headings.map((heading, index) => (
-                <li className={tocIndent(heading.depth)} key={`${heading.id}-${index}`}>
-                  <a className="block text-muted no-underline transition-colors hover:text-accent data-[active=true]:font-semibold data-[active=true]:text-accent" data-toc-link={heading.id} data-active="false" href={`#${heading.id}`}>{heading.title}</a>
-                </li>
-              ))}
-            </ol>
-          </nav>
-        </aside>
-        <article id="article-start" data-article className="mx-auto w-full max-w-180 min-w-0 scroll-mt-8 py-16 max-sm:py-12">
+      <div className="w-full xl:grid xl:grid-cols-[minmax(0,45rem)_10rem] xl:gap-8">
+        <article id="article-start" data-article className="mx-auto w-full max-w-180 min-w-0 scroll-mt-8 py-16 max-sm:py-12 xl:mx-0">
           <a className="mb-18 inline-block font-mono text-xs text-muted no-underline hover:text-accent max-sm:mb-12" href="/">← all writing</a>
           <header>
             <p className="mb-5 font-mono text-xs font-semibold uppercase tracking-[.14em] text-accent">{formatDate(meta.date)}</p>
@@ -127,6 +112,21 @@ function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }
             <Content components={mdxComponents} />
           </div>
         </article>
+        <aside className="hidden py-16 xl:block" aria-label="Article sections">
+          <nav className="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto border-l border-border pl-4">
+            <p className="mb-3 font-mono text-[0.65rem] font-semibold uppercase tracking-[.14em] text-faint">On this page</p>
+            <ol className="m-0 list-none space-y-2 p-0 text-xs leading-snug">
+              <li>
+                <a className="block text-muted no-underline transition-colors hover:text-accent data-[active=true]:font-semibold data-[active=true]:text-accent" data-toc-link="article-start" data-active="true" aria-current="location" href="#article-start">Start</a>
+              </li>
+              {meta.headings.map((heading, index) => (
+                <li className={tocIndent(heading.depth)} key={`${heading.id}-${index}`}>
+                  <a className="block text-muted no-underline transition-colors hover:text-accent data-[active=true]:font-semibold data-[active=true]:text-accent" data-toc-link={heading.id} data-active="false" href={`#${heading.id}`}>{heading.title}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </aside>
       </div>
     </main>
   );
