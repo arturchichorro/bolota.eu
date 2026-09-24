@@ -57,7 +57,7 @@ export function LocalFirstSyncFlowDiagram() {
   return (
     <figure className="not-prose my-7 w-full overflow-x-auto overflow-y-hidden bg-transparent pb-2" aria-label="Local-first user interface update and background synchronization flow" tabIndex={0}>
       <div className="flex justify-center" style={{ width: "max(100%, 38rem)" }}>
-        <svg className="block h-auto w-full min-w-[38rem]" viewBox="-28 -48 603 287" role="img" aria-labelledby="local-first-sync-flow-title">
+        <svg className="block h-auto w-full min-w-152" viewBox="-28 -48 603 287" role="img" aria-labelledby="local-first-sync-flow-title">
           <title id="local-first-sync-flow-title">A user action updates a local datastore and the interface immediately while the datastore synchronizes with the server in the background.</title>
           <defs>
             {["local-horizontal-1", "local-horizontal-2", "local-sync-down", "local-sync-up"].map((id) => (
