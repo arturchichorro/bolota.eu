@@ -24,7 +24,7 @@ const edgeText = {
 export function TraditionalRequestFlowDiagram() {
   return (
     <figure className="not-prose my-7 w-full overflow-x-auto overflow-y-hidden bg-transparent pb-2" aria-label="Traditional web application request and response flow" tabIndex={0}>
-      <div className="mx-auto w-full min-w-[39rem] max-w-[42rem]">
+      <div className="mx-auto w-full min-w-156 max-w-2xl">
         <svg className="block h-auto w-full" viewBox="-28 -28 626 120" role="img" aria-labelledby="traditional-request-flow-title">
           <title id="traditional-request-flow-title">A user action sends a request to the server, waits for a response, and then updates the interface.</title>
           <defs>
