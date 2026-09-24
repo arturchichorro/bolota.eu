@@ -58,7 +58,7 @@ function Home() {
   }, {});
 
   return (
-    <main id="main" className="w-full flex-1 py-2 max-sm:px-1">
+    <main id="main" className="w-full flex-1 py-2">
       <section aria-label="Articles">
         {Object.entries(postsByYear).sort(([a], [b]) => b.localeCompare(a)).map(([year, yearPosts]) => (
           <div className="mb-2" key={year}>
@@ -109,7 +109,7 @@ function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }
             </ol>
           </nav>
         </aside>
-        <article id="article-start" data-article className="mx-auto w-full max-w-[55rem] min-w-0 scroll-mt-8 py-16 max-sm:px-1 max-sm:py-12">
+        <article id="article-start" data-article className="mx-auto w-full max-w-180 min-w-0 scroll-mt-8 py-16 max-sm:py-12">
           <a className="mb-18 inline-block font-mono text-xs text-muted no-underline hover:text-accent max-sm:mb-12" href="/">← all writing</a>
           <header>
             <p className="mb-5 font-mono text-xs font-semibold uppercase tracking-[.14em] text-accent">{formatDate(meta.date)}</p>
@@ -145,7 +145,7 @@ function NotFound() {
 export function App({ pathname, Content }: { pathname: string; Content?: ComponentType<any> }) {
   const meta = postFromPath(pathname);
   return (
-    <div className="mx-auto flex min-h-screen w-[calc(100%-2rem)] max-w-240 flex-col max-sm:w-[calc(100%-1.25rem)]">
+    <div className="mx-auto flex min-h-screen w-full max-w-[64rem] flex-col px-4 sm:px-6 md:px-10 lg:px-12">
       <a className="fixed top-2 left-2 z-20 -translate-y-[150%] bg-accent px-4 py-2 text-background focus:translate-y-0" href="#main">Skip to content</a>
       <Header />
       {meta && Content ? <Post meta={meta} Content={Content} /> : pathname === "/" || pathname === "/posts" || pathname === "/posts/" ? <Home /> : <NotFound />}

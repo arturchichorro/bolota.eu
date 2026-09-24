@@ -24,7 +24,7 @@ const edgeText = {
 export function TraditionalRequestFlowDiagram() {
   return (
     <figure className="not-prose my-7 w-full overflow-x-auto overflow-y-hidden bg-transparent pb-2" aria-label="Traditional web application request and response flow" tabIndex={0}>
-      <div className="flex justify-center" style={{ width: "max(100%, 39rem)" }}>
+      <div className="mx-auto w-full min-w-[39rem] max-w-[42rem]">
         <svg className="block h-auto w-full" viewBox="-28 -28 626 120" role="img" aria-labelledby="traditional-request-flow-title">
           <title id="traditional-request-flow-title">A user action sends a request to the server, waits for a response, and then updates the interface.</title>
           <defs>
@@ -56,7 +56,7 @@ export function TraditionalRequestFlowDiagram() {
 export function LocalFirstSyncFlowDiagram() {
   return (
     <figure className="not-prose my-7 w-full overflow-x-auto overflow-y-hidden bg-transparent pb-2" aria-label="Local-first user interface update and background synchronization flow" tabIndex={0}>
-      <div className="flex justify-center" style={{ width: "max(100%, 38rem)" }}>
+      <div className="mx-auto w-full min-w-152 max-w-[42rem]">
         <svg className="block h-auto w-full min-w-152" viewBox="-28 -48 603 287" role="img" aria-labelledby="local-first-sync-flow-title">
           <title id="local-first-sync-flow-title">A user action updates a local datastore and the interface immediately while the datastore synchronizes with the server in the background.</title>
           <defs>
