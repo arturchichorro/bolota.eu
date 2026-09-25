@@ -47,7 +47,7 @@ type PositionedNode = StaticFlowNode & Required<Pick<StaticFlowNode, "position" 
 
 const tones: Record<Tone, { color: string; fill: string; foreground: string; muted: string }> = {
     theme: { color: "var(--color-border)", fill: "var(--color-surface)", foreground: "var(--color-foreground)", muted: "var(--color-muted)" },
-    green: { color: "#6ee7a2", fill: "#10241a", foreground: "#f0f5f1", muted: "#8ca194" },
+    green: { color: "#62c98d", fill: "#10241a", foreground: "#f0f5f1", muted: "#8ca194" },
     orange: { color: "#ff8a2b", fill: "#28170d", foreground: "#f0f5f1", muted: "#a99687" },
     amber: { color: "#f5a524", fill: "#251b0d", foreground: "#f0f5f1", muted: "#a99c86" },
     blue: { color: "#60a5fa", fill: "#10202d", foreground: "#f0f5f1", muted: "#8ca0ad" },

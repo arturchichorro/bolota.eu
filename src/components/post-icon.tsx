@@ -101,8 +101,8 @@ const icons = {
 export function PostIcon({ name }: { name?: string }) {
   const Icon = name ? icons[name as keyof typeof icons] : undefined;
 
-  if (!Icon) return <span className="block w-6 text-center text-lg leading-none text-[#4db36f]">#</span>;
+  if (!Icon) return <span className="block w-5 text-center text-base leading-none text-[#4db36f]">#</span>;
 
   const color = name === "react" ? "text-[#61dafb]" : name === "spotify" ? "text-[#1ed760]" : name === "homeHub" ? "text-[#e8753d]" : name === "logo" ? "text-accent" : "text-foreground";
-  return <Icon aria-hidden="true" className={`h-6 w-6 shrink-0 ${color}`} />;
+  return <Icon aria-hidden="true" className={`h-5 w-5 shrink-0 ${color}`} />;
 }

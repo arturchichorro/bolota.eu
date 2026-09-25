@@ -10,7 +10,7 @@ function Header() {
   return (
     <header className="flex h-21 items-center justify-between border-b border-border">
       <a className="flex items-center gap-2 text-base font-bold tracking-tight no-underline" href="/" aria-label="achichorro.com home">
-        <span className="text-xs text-accent drop-shadow-[0_0_7px_rgba(110,231,162,.45)]" aria-hidden="true">●</span>
+        <span className="text-xs text-accent drop-shadow-[0_0_7px_rgba(98,201,141,.4)]" aria-hidden="true">●</span>
         achichorro.com
       </a>
       <nav className="flex gap-6 font-mono text-xs font-medium uppercase tracking-[.12em] text-muted" aria-label="Main navigation">
@@ -53,7 +53,7 @@ function Home() {
             <ol className="m-0 list-none p-0">
               {yearPosts?.map((post) => (
                 <li key={post.slug}>
-                  <article className="grid grid-cols-[minmax(0,1fr)_auto] border-b border-border py-2">
+                  <article className="grid grid-cols-[minmax(0,1fr)_auto] py-2">
                     <div className="flex min-w-0 items-center gap-2">
                       <PostIcon name={post.icon} />
                       <h2 className="m-0 min-w-0 text-base font-normal tracking-widest sm:text-lg">

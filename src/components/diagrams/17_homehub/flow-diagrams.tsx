@@ -1,6 +1,6 @@
 const foreground = "var(--color-foreground)";
 const neutral = "#d8e0da";
-const green = "#6ee7a2";
+const green = "#62c98d";
 const greenFill = "#10241a";
 const amber = "#f5a524";
 const amberFill = "#251b0d";
