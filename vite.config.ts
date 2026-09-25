@@ -7,11 +7,24 @@ import remarkMath from "remark-math";
 import { defineConfig } from "vite";
 import { frontmatterPlugin, postIndexPlugin } from "./src/content";
 
+type MdxNode = { type?: string; name?: string; children?: MdxNode[] };
+
+function remarkBaseUiDetails() {
+  return (tree: MdxNode) => {
+    const visit = (node: MdxNode) => {
+      if (node.type === "mdxJsxFlowElement" && node.name === "details") node.name = "MdxDetails";
+      node.children?.forEach(visit);
+    };
+
+    visit(tree);
+  };
+}
+
 export default defineConfig({
   plugins: [
     postIndexPlugin(),
     frontmatterPlugin(),
-    mdx({ remarkPlugins: [remarkMath], rehypePlugins: [rehypeKatex] }),
+    mdx({ remarkPlugins: [remarkMath, remarkBaseUiDetails], rehypePlugins: [rehypeKatex] }),
     react(),
     tailwindcss(),
   ],

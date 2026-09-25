@@ -130,8 +130,8 @@ function NotFound() {
 export function App({ pathname, Content }: { pathname: string; Content?: ComponentType<any> }) {
   const meta = postFromPath(pathname);
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-[64rem] flex-col px-4 sm:px-6 md:px-10 lg:px-12">
-      <a className="fixed top-2 left-2 z-20 -translate-y-[150%] bg-accent px-4 py-2 text-background focus:translate-y-0" href="#main">Skip to content</a>
+    <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-4 sm:px-6 md:px-10 lg:px-12">
+      <a className="fixed top-2 left-2 z-20 translate-y-[-150%] bg-accent px-4 py-2 text-background focus:translate-y-0" href="#main">Skip to content</a>
       <Header />
       {meta && Content ? <Post meta={meta} Content={Content} /> : pathname === "/" || pathname === "/posts" || pathname === "/posts/" ? <Home /> : <NotFound />}
     </div>

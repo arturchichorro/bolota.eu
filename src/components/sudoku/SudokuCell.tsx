@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../ui/button';
 
 interface SudokuCellProps {
   value: number;
@@ -22,10 +23,8 @@ export const SudokuCell: React.FC<SudokuCellProps> = ({
   onClick,
   isValid = true,
   isPlayable = false,
-}) => (
-  <div
-    onClick={onClick}
-    className={`
+}) => {
+  const className = `
       w-8 h-8 sm:w-10 sm:h-10 text-base sm:text-xl flex items-center justify-center
       border border-sudoku-borders
       ${isAlternateBox ? 'bg-sudoku' : 'bg-sudoku-foreground'}
@@ -36,8 +35,15 @@ export const SudokuCell: React.FC<SudokuCellProps> = ({
       ${!isValid && '!bg-sudoku-warning'}
       ${!isValid && !isOriginal && '!text-sudoku-textwarning'}
       ${isPlayable && 'hover:!bg-accent cursor-pointer'}
-    `}
-  >
-    {value !== 0 ? value : ''}
-  </div>
-);
+    `;
+
+  if (isPlayable) {
+    return (
+      <Button unstyled className={className} onClick={onClick} aria-label={value === 0 ? "Empty Sudoku cell" : `Sudoku cell ${value}`}>
+        {value !== 0 ? value : ''}
+      </Button>
+    );
+  }
+
+  return <div className={className}>{value !== 0 ? value : ''}</div>;
+};

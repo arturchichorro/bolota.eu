@@ -108,11 +108,13 @@ const ConnectFour = () => {
     const isLandingSquare = landingSquare && !isProcessingMove ? landingSquare[0] === row && landingSquare[1] === col : false;
 
     return (
-      <div
+      <Button
+        unstyled
         key={`${row}-${col}`}
         onClick={() => handleMove(col)}
         onMouseEnter={() => setHoveredCol(col)}
         onMouseLeave={() => setHoveredCol(null)}
+        aria-label={`Drop a piece in column ${col + 1}`}
         className={`
           ${cellValue ? 'scale-100 opacity-100' : ''}
           w-10 sm:w-12
