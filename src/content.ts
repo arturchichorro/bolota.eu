@@ -4,7 +4,7 @@ import { fileURLToPath, URL } from "node:url";
 import type { Plugin } from "vite";
 import { parse } from "yaml";
 import { z } from "zod";
-import { headingSlug } from "./lib/heading-slug";
+import { headingSlug } from "./lib/heading-slug.ts";
 
 export const postFrontmatterSchema = z.object({
   title: z.string().trim().min(1),

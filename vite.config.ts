@@ -5,7 +5,7 @@ import react from "@vitejs/plugin-react";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import { defineConfig } from "vite";
-import { frontmatterPlugin, postIndexPlugin } from "./src/content";
+import { frontmatterPlugin, postIndexPlugin } from "./src/content.ts";
 
 type MdxNode = { type?: string; name?: string; children?: MdxNode[] };
 
@@ -28,6 +28,15 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  optimizeDeps: {
+    include: [
+      "@base-ui/react/button",
+      "@base-ui/react/collapsible",
+      "@base-ui/react/dialog",
+      "@base-ui/react/slider",
+      "@base-ui/react/switch",
+    ],
+  },
   resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
   build: { target: "es2022" },
 });

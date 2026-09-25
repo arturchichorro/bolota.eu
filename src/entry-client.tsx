@@ -10,7 +10,7 @@ async function start() {
   const post = postFromPath(pathname);
   const module = post ? await loadPost(post.slug) : undefined;
   const app = <App pathname={pathname} Content={module?.default} />;
-  if (root.hasChildNodes()) hydrateRoot(root, app);
+  if (root.children.length > 0) hydrateRoot(root, app);
   else createRoot(root).render(app);
 }
 
