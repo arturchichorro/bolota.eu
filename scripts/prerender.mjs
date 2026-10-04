@@ -8,9 +8,6 @@ const template = await readFile(resolve(dist, "index.html"), "utf8");
 const server = await import(pathToFileURL(resolve(root, ".ssr/entry-server.js")));
 
 const interactiveRoutes = new Set(server.posts.filter((post) => post.interactive).map((post) => `/posts/${post.slug}/`));
-const articleRoutes = new Set(server.posts.map((post) => `/posts/${post.slug}/`));
-const tocScrollSpyScript = `<script>(()=>{const t=[...document.querySelectorAll('[data-toc-link]')].map(l=>({l,s:document.getElementById(l.dataset.tocLink)})).filter(x=>x.s);if(!t.length)return;let f;const u=()=>{f=undefined;const y=Math.min(innerHeight*.3,240);let c=t[0];for(const x of t){if(x.s.getBoundingClientRect().top<=y)c=x;else break}for(const x of t){const n=x===c;x.l.dataset.active=String(n);n?x.l.setAttribute('aria-current','location'):x.l.removeAttribute('aria-current')}};const q=()=>{if(f===undefined)f=requestAnimationFrame(u)};u();addEventListener('scroll',q,{passive:true});addEventListener('resize',q)})()</script>`;
-
 const escape = (value = "") => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 
 function headFor(pathname) {
@@ -35,9 +32,8 @@ function headFor(pathname) {
 
 for (const route of server.routes) {
   const needsJavaScript = interactiveRoutes.has(route);
-  const needsStandaloneToc = articleRoutes.has(route) && !needsJavaScript;
   const staticTemplate = template.replace(/\s*<script type="module"[^>]+><\/script>/, "");
-  const routeTemplate = needsJavaScript ? template : needsStandaloneToc ? staticTemplate.replace("</body>", `${tocScrollSpyScript}</body>`) : staticTemplate;
+  const routeTemplate = needsJavaScript ? template : staticTemplate;
   const html = routeTemplate.replace("<!--seo-head-->", headFor(route)).replace("<!--app-html-->", await server.render(route));
   const target = route === "/" ? resolve(dist, "index.html") : resolve(dist, `.${route}`, "index.html");
   await mkdir(dirname(target), { recursive: true });

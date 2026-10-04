@@ -1,7 +1,6 @@
 import type { ComponentType } from "react";
 import { mdxComponents } from "./components/mdx-components";
 import { PostIcon } from "./components/post-icon";
-import { TocScrollSpy } from "./components/toc-scroll-spy";
 import { postFromPath, posts, type PostMeta } from "./posts";
 
 const SITE = "https://achichorro.com";
@@ -9,11 +8,11 @@ const SITE = "https://achichorro.com";
 function Header() {
   return (
     <header className="flex h-21 items-center justify-between">
-      <a className="flex items-center gap-2 text-base font-bold tracking-tight no-underline" href="/" aria-label="achichorro.com home">
-        achichorro.com
+      <a className="flex items-center gap-2 text-base font-bold tracking-tight no-underline underline-offset-4 hover:underline" href="/" aria-label="achichorro.com home">
+        Artur Chichorro
       </a>
       <nav className="flex gap-6 font-mono text-xs font-medium uppercase tracking-[.12em] text-muted" aria-label="Main navigation">
-        <a className="no-underline hover:text-accent" href="/rss.xml">rss</a>
+        <a className="no-underline underline-offset-4 hover:underline" href="/rss.xml">rss</a>
       </nav>
     </header>
   );
@@ -25,14 +24,6 @@ function formatDate(date: string) {
 
 function formatArchiveDate(date: string) {
   return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(`${date}T00:00:00Z`));
-}
-
-function tocIndent(depth: number) {
-  if (depth >= 6) return "pl-8";
-  if (depth === 5) return "pl-6";
-  if (depth === 4) return "pl-4";
-  if (depth === 3) return "pl-2";
-  return "";
 }
 
 function Home() {
@@ -47,7 +38,7 @@ function Home() {
       <section aria-label="Articles">
         {Object.entries(postsByYear).sort(([a], [b]) => b.localeCompare(a)).map(([year, yearPosts]) => (
           <div className="mb-2" key={year}>
-            <h1 className="m-0 pt-4 pb-2 text-xl font-black text-foreground">{year}</h1>
+            <h1 className="m-0 pt-4 pb-2 text-base font-medium text-foreground sm:text-lg">{year}</h1>
             <ol className="m-0 list-none p-0">
               {yearPosts?.map((post) => (
                 <li key={post.slug}>
@@ -55,7 +46,7 @@ function Home() {
                     <div className="flex min-w-0 items-center gap-2">
                       <PostIcon name={post.icon} />
                       <h2 className="m-0 min-w-0 text-base font-normal tracking-widest sm:text-lg">
-                        <a className="text-accent underline decoration-2 decoration-accent/50 underline-offset-4 hover:bg-accent hover:text-background hover:no-underline" href={`/posts/${post.slug}/`}>
+                        <a className="link" href={`/posts/${post.slug}/`}>
                           {post.title}
                         </a>
                       </h2>
@@ -77,40 +68,22 @@ function Home() {
 function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }) {
   return (
     <main id="main" className="flex-1">
-      <TocScrollSpy />
-      <div className="w-full xl:grid xl:grid-cols-[minmax(0,45rem)_10rem] xl:gap-8">
-        <article id="article-start" data-article className="mx-auto w-full max-w-180 min-w-0 scroll-mt-8 py-10 max-sm:py-8 xl:mx-0">
-          <header>
-            <h1 className="mt-0 mb-2 text-2xl font-extrabold leading-8 text-accent sm:text-3xl sm:leading-9">{meta.title}</h1>
-            <p className="m-0 text-base leading-6 text-muted">Posted on <time dateTime={meta.date}>{formatDate(meta.date)}</time></p>
-          </header>
-          {meta.saga?.length ? (
-            <nav className="flex flex-wrap gap-2 border-b border-border py-4" aria-label="Related series">
-              {meta.saga.map((item) => (
-                <a className="rounded-full border border-border px-3 py-1.5 font-mono text-xs text-muted no-underline hover:border-accent hover:text-accent" href={`/posts/${item.url.replace(/^\/?posts\//, "").replace(/\/$/, "")}/`} key={item.url}>{item.title}</a>
-              ))}
-            </nav>
-          ) : null}
-          <div className="prose prose-invert max-w-none pt-8 prose-headings:scroll-mt-8 prose-blockquote:border-accent prose-blockquote:text-muted prose-code:text-accent-soft prose-pre:border prose-pre:border-border prose-pre:bg-[#08090a] prose-img:rounded-md prose-img:border prose-img:border-border prose-video:rounded-md prose-video:border prose-video:border-border prose-hr:border-border prose-strong:text-foreground prose-li:marker:text-accent">
-            <Content components={mdxComponents} />
-          </div>
-        </article>
-        <aside className="hidden py-10 xl:block" aria-label="Article sections">
-          <nav className="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto border-l border-border pl-4">
-            <p className="mb-3 font-mono text-[0.65rem] font-semibold uppercase tracking-[.14em] text-faint">On this page</p>
-            <ol className="m-0 list-none space-y-2 p-0 text-xs leading-snug">
-              <li>
-                <a className="block text-muted no-underline transition-colors hover:text-accent data-[active=true]:font-semibold data-[active=true]:text-accent" data-toc-link="article-start" data-active="true" aria-current="location" href="#article-start">Start</a>
-              </li>
-              {meta.headings.map((heading, index) => (
-                <li className={tocIndent(heading.depth)} key={`${heading.id}-${index}`}>
-                  <a className="block text-muted no-underline transition-colors hover:text-accent data-[active=true]:font-semibold data-[active=true]:text-accent" data-toc-link={heading.id} data-active="false" href={`#${heading.id}`}>{heading.title}</a>
-                </li>
-              ))}
-            </ol>
+      <article data-article className="mx-auto w-full max-w-180 min-w-0 py-10 max-sm:py-8">
+        <header>
+          <h1 className="mt-0 mb-2 text-2xl font-extrabold leading-8 text-accent sm:text-3xl sm:leading-9">{meta.title}</h1>
+          <p className="m-0 text-base leading-6 text-muted">Posted on <time dateTime={meta.date}>{formatDate(meta.date)}</time></p>
+        </header>
+        {meta.saga?.length ? (
+          <nav className="flex flex-wrap gap-2 border-b border-border py-4" aria-label="Related series">
+            {meta.saga.map((item) => (
+              <a className="rounded-full border border-border px-3 py-1.5 font-mono text-xs text-muted no-underline underline-offset-4 hover:underline" href={`/posts/${item.url.replace(/^\/?posts\//, "").replace(/\/$/, "")}/`} key={item.url}>{item.title}</a>
+            ))}
           </nav>
-        </aside>
-      </div>
+        ) : null}
+        <div className="prose prose-invert max-w-none pt-8 prose-headings:scroll-mt-8 prose-blockquote:border-accent prose-blockquote:text-muted prose-code:text-accent-soft prose-pre:border prose-pre:border-border prose-pre:bg-[#08090a] prose-img:rounded-md prose-img:border prose-img:border-border prose-video:rounded-md prose-video:border prose-video:border-border prose-hr:border-border prose-strong:text-foreground prose-li:marker:text-accent">
+          <Content components={mdxComponents} />
+        </div>
+      </article>
     </main>
   );
 }
@@ -120,7 +93,7 @@ function NotFound() {
     <main className="grid min-h-[65vh] flex-1 place-content-center text-center">
       <p className="mb-5 font-mono text-xs font-semibold uppercase tracking-[.14em] text-accent">404</p>
       <h1 className="mb-6 text-[clamp(2.5rem,8vw,5rem)] font-normal">Nothing planted here.</h1>
-      <a className="text-accent" href="/">Return to the blog →</a>
+      <a className="link" href="/">Return to the blog →</a>
     </main>
   );
 }

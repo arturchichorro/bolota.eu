@@ -1,8 +1,8 @@
 import postIndex from "virtual:bolota-posts";
 import type { ComponentType } from "react";
-import type { PostFrontmatter, PostHeading, PostMeta } from "./content";
+import type { PostFrontmatter, PostMeta } from "./content";
 
-export type { PostHeading, PostMeta } from "./content";
+export type { PostMeta } from "./content";
 
 export interface PostModule {
   default: ComponentType<{ components?: Record<string, ComponentType<any>> }>;

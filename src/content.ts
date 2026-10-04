@@ -4,7 +4,6 @@ import { fileURLToPath, URL } from "node:url";
 import type { Plugin } from "vite";
 import { parse } from "yaml";
 import { z } from "zod";
-import { headingSlug } from "./lib/heading-slug.ts";
 
 export const postFrontmatterSchema = z.object({
   title: z.string().trim().min(1),
@@ -21,15 +20,8 @@ export const postFrontmatterSchema = z.object({
 
 export type PostFrontmatter = z.infer<typeof postFrontmatterSchema>;
 
-export interface PostHeading {
-  depth: number;
-  title: string;
-  id: string;
-}
-
 export type PostMeta = PostFrontmatter & {
   slug: string;
-  headings: PostHeading[];
 };
 
 const contentDirectory = fileURLToPath(new URL("../content/posts", import.meta.url));
@@ -56,38 +48,11 @@ export function parsePost(source: string, sourceName: string) {
   };
 }
 
-export function extractPostHeadings(source: string): PostHeading[] {
-  const headings: PostHeading[] = [];
-  let fenced = false;
-
-  for (const line of source.split("\n")) {
-    if (/^\s*(```|~~~)/.test(line)) {
-      fenced = !fenced;
-      continue;
-    }
-    if (fenced) continue;
-
-    const match = line.match(/^(#{2,6})[ \t]+(.+?)\s*#*\s*$/);
-    if (!match) continue;
-
-    const title = match[2]
-      .replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1")
-      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
-      .replace(/<[^>]+>/g, "")
-      .replace(/[*_~`]/g, "")
-      .trim();
-    if (title) headings.push({ depth: match[1].length, title, id: headingSlug(title) });
-  }
-
-  return headings;
-}
-
 export function computePostMetadata(source: string, filename: string): PostMeta {
-  const { frontmatter, body } = parsePost(source, filename);
+  const { frontmatter } = parsePost(source, filename);
   return {
     ...frontmatter,
     slug: filename.replace(/\.mdx$/, ""),
-    headings: extractPostHeadings(body),
   };
 }
 

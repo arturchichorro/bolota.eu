@@ -1,4 +1,4 @@
-@import "@fontsource-variable/inter";
+@import "@fontsource-variable/dm-sans";
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @source "../content/posts";
@@ -25,18 +25,23 @@
   --color-sudoku-highlight: #62c98d;
   --color-sudoku-warning: #5b241f;
   --color-sudoku-textwarning: #ff8f87;
-  --font-sans: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans Variable", "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-sans);
+}
+
+a,
+.link {
+  text-decoration-style: dashed;
 }
 
 .link,
 [data-article] .prose .link {
-  @apply text-accent underline decoration-2 decoration-accent/50 underline-offset-4 hover:bg-accent hover:text-background hover:no-underline;
+  @apply text-accent no-underline decoration-1 decoration-accent/50 underline-offset-4 hover:underline;
 }
 
 .reference,
 [data-article] .prose .reference {
-  @apply px-1 text-accent no-underline hover:bg-accent hover:text-background;
+  @apply px-1 text-accent no-underline decoration-1 decoration-accent/50 underline-offset-4 hover:underline;
 }
 
 .ref-number,
@@ -46,5 +51,5 @@
 
 .subheading-anchor,
 [data-article] .prose .subheading-anchor {
-  @apply font-medium text-accent no-underline hover:bg-transparent hover:text-accent hover:underline;
+  @apply font-medium text-accent no-underline decoration-1 decoration-accent/50 underline-offset-4 hover:underline;
 }

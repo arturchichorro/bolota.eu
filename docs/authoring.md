@@ -53,7 +53,7 @@ saga:
 
 Regular Markdown, inline HTML/JSX, fenced code blocks, KaTeX math, and Tailwind utility classes are supported. Tailwind scans `content/posts`, so utilities written directly in an MDX `className` are included in the production stylesheet.
 
-Headings from `##` through `######` automatically receive anchor links and appear after “Start” in the desktop “On this page” navigation. No frontmatter or component registration is needed. The post title is already the page's `#`/H1, so prefer `##` for major sections, `###` for subsections, and progressively deeper levels below those. Existing posts that begin their sections at `###` remain fully supported.
+Headings from `##` through `######` automatically receive anchor links. No frontmatter or component registration is needed. The post title is already the page's `#`/H1, so prefer `##` for major sections, `###` for subsections, and progressively deeper levels below those. Existing posts that begin their sections at `###` remain fully supported.
 
 `src/components/mdx-components.tsx` globally maps only Markdown-generated elements: links, images, videos, and headings. Specialized named components are deliberately not registered globally. Import each one only in the article that uses it:
 
