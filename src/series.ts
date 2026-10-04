@@ -1,4 +1,4 @@
-import type { PostMeta } from "./content";
+import type { PostMeta } from "./content.ts";
 
 export interface PostSeries {
   title: string;
