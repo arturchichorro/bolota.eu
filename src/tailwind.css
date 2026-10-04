@@ -29,6 +29,20 @@
   --font-mono: var(--font-sans);
 }
 
+@layer components {
+  [data-rehype-pretty-code-figure] [data-line] {
+    @apply border-l-2 border-transparent px-4;
+  }
+
+  [data-rehype-pretty-code-figure] [data-highlighted-line] {
+    @apply border-accent bg-accent/10;
+  }
+
+  [data-rehype-pretty-code-figure] [data-highlighted-chars] {
+    @apply rounded-sm bg-accent/15;
+  }
+}
+
 a,
 .link {
   text-decoration-style: dashed;

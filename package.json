@@ -8,11 +8,12 @@
     "dev": "vite",
     "build": "vite build && vite build --ssr src/entry-server.tsx --outDir .ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "test:rendering": "node --experimental-strip-types --test scripts/rendering.test.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
-    "katex": "^0.18.9",
+    "katex": "^0.19.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },
@@ -21,12 +22,15 @@
     "@mdx-js/rollup": "^3.1.1",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
+    "@types/hast": "^3.0.5",
     "@types/node": "^26.6.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
-    "rehype-katex": "^7.0.1",
+    "hast-util-from-html": "^2.0.3",
+    "rehype-pretty-code": "^0.14.5",
     "remark-math": "^6.0.0",
+    "shiki": "^4.5.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.3.1",

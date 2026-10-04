@@ -42,7 +42,7 @@ By rewritting the problem this way, we can now use **Cramer's Rule** to solve fo
 <div className="grid grid-cols-1 sm:grid-cols-3">
   <div>
     $$
-    det_A =
+    \det(A) =
     \begin{vmatrix}
     94 & 22 \\
     34 & 67
@@ -51,7 +51,7 @@ By rewritting the problem this way, we can now use **Cramer's Rule** to solve fo
   </div>
   <div>
     $$
-    det_{A1} =
+    \det(A_1) =
     \begin{vmatrix}
     8400 & 22 \\
     5400 & 67
@@ -60,7 +60,7 @@ By rewritting the problem this way, we can now use **Cramer's Rule** to solve fo
   </div>
   <div>
     $$
-    det_{A2} =
+    \det(A_2) =
     \begin{vmatrix}
     94 & 8400 \\
     34 & 5400
@@ -70,7 +70,7 @@ By rewritting the problem this way, we can now use **Cramer's Rule** to solve fo
 </div>
 
 
-Now, the value of $a$ is simply $\frac{det_{A1}}{det_A}$ and the value of b is $\frac{det_{A2}}{det_A}$. If these values are integers, we have the only combination of A button presses and B button presses that solves this problem. For this specific claw machine, the solution is $a = 80$ and $b = 40$.
+Now, the value of $a$ is simply $\dfrac{\det(A_1)}{\det(A)}$ and the value of $b$ is $\dfrac{\det(A_2)}{\det(A)}$. If these values are integers, we have the only combination of A button presses and B button presses that solves this problem. For this specific claw machine, the solution is $a = 80$ and $b = 40$.
 
 Now all we have to do is just rinse and repeat for all the different claw machines that are in the input. Then, we can add **$3\times a+b \hspace{0.5mm}$ to a "token" variable** to figure out how many tokens we need. Here's how I did it in code:
 

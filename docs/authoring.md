@@ -55,6 +55,10 @@ No series frontmatter is needed in individual posts. Navigation uses the postsâ€
 
 Regular Markdown, inline HTML/JSX, fenced code blocks, KaTeX math, and Tailwind utility classes are supported. Tailwind scans `content/posts`, so utilities written directly in an MDX `className` are included in the production stylesheet.
 
+Code fences use their language tag for Shiki highlighting with the `github-dark` theme. Add line metadata such as `python {4,5,10}` to highlight particular lines.
+
+Use `$...$` for inline math and `$$` on separate lines for display math. Math is rendered by the direct KaTeX dependency at build time; invalid TeX fails the build rather than silently showing broken formulas. Prefer `\det(A)`, `\varnothing`, and `\ldots` over informal operator names or punctuation.
+
 Headings from `##` through `######` automatically receive anchor links. No frontmatter or component registration is needed. The post title is already the page's `#`/H1, so prefer `##` for major sections, `###` for subsections, and progressively deeper levels below those. Existing posts that begin their sections at `###` remain fully supported.
 
 `src/components/mdx-components.tsx` globally maps only Markdown-generated elements: links, images, videos, and headings. Specialized named components are deliberately not registered globally. Import each one only in the article that uses it:
