@@ -19,12 +19,17 @@ export function ImageGallery({
   previewMaxWidth,
 }: {
   images: GalleryImage[];
-  layout?: "scroll" | "inline";
+  layout?: "scroll" | "inline" | "carousel";
   wide?: boolean;
   previewAspectRatio?: string;
   previewMaxWidth?: string;
 }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [previewIndex, setPreviewIndex] = useState(0);
+
+  const movePreview = (direction: -1 | 1) => {
+    setPreviewIndex((index) => (index + direction + images.length) % images.length);
+  };
   const expandableIndices = images.flatMap((image, index) => image.expandable === false ? [] : [index]);
   const activePosition = activeIndex === null ? -1 : expandableIndices.indexOf(activeIndex);
   const selectedImage = activeIndex === null ? undefined : images[activeIndex];
@@ -33,6 +38,7 @@ export function ImageGallery({
     if (activePosition < 0 || expandableIndices.length < 2) return;
     const next = (activePosition + direction + expandableIndices.length) % expandableIndices.length;
     setActiveIndex(expandableIndices[next]);
+    if (layout === "carousel") setPreviewIndex(expandableIndices[next]);
   };
 
   useEffect(() => {
@@ -57,10 +63,21 @@ export function ImageGallery({
     <Dialog.Root open={selectedImage !== undefined} onOpenChange={(open) => { if (!open) setActiveIndex(null); }}>
       <div className="not-prose my-7" style={wideStyle}>
         <div
-          className={layout === "scroll" ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3" : "grid gap-3"}
+          className={layout === "scroll" ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3" : layout === "carousel" ? "grid grid-cols-[2rem_minmax(0,1fr)_2rem] items-center gap-2 sm:gap-4" : "grid gap-3"}
           style={layout === "inline" ? { gridTemplateColumns: `repeat(${images.length}, minmax(0, 1fr))` } : undefined}
+          role={layout === "carousel" ? "region" : undefined}
+          aria-roledescription={layout === "carousel" ? "carousel" : undefined}
+          aria-label={layout === "carousel" ? "Image gallery" : undefined}
+          onKeyDown={(event) => {
+            if (layout !== "carousel" || activeIndex !== null) return;
+            if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+              event.preventDefault();
+              movePreview(event.key === "ArrowLeft" ? -1 : 1);
+            }
+          }}
         >
           {images.map((image, index) => {
+            if (layout === "carousel" && index !== previewIndex) return null;
             const expandable = image.expandable !== false;
             const preview = (
               <img
@@ -75,8 +92,8 @@ export function ImageGallery({
 
             return (
               <figure
-                className={layout === "scroll" ? "m-0 w-[min(70vw,35rem)] shrink-0 snap-start" : "m-0 min-w-0 justify-self-center"}
-                style={layout === "inline" ? { width: "100%", maxWidth: previewMaxWidth } : undefined}
+                className={layout === "scroll" ? "m-0 w-[min(70vw,35rem)] shrink-0 snap-start" : layout === "carousel" ? "col-start-2 row-start-1 m-0 min-w-0 justify-self-center" : "m-0 min-w-0 justify-self-center"}
+                style={{ ...(layout !== "scroll" ? { width: "100%" } : {}), maxWidth: previewMaxWidth }}
                 key={`${image.src}-${index}`}
               >
                 {expandable ? (
@@ -93,6 +110,13 @@ export function ImageGallery({
               </figure>
             );
           })}
+          {layout === "carousel" && images.length > 1 && (
+            <>
+              <Button unstyled className="col-start-1 row-start-1 grid h-10 w-8 cursor-pointer place-items-center text-3xl text-muted hover:text-accent focus-visible:outline-2 focus-visible:outline-accent" onClick={() => movePreview(-1)} aria-label="Previous gallery image">‹</Button>
+              <Button unstyled className="col-start-3 row-start-1 grid h-10 w-8 cursor-pointer place-items-center text-3xl text-muted hover:text-accent focus-visible:outline-2 focus-visible:outline-accent" onClick={() => movePreview(1)} aria-label="Next gallery image">›</Button>
+            </>
+          )}
+          {layout === "carousel" && <span className="sr-only" aria-live="polite" aria-atomic="true">Image {previewIndex + 1} of {images.length}: {images[previewIndex]?.alt}</span>}
         </div>
       </div>
 

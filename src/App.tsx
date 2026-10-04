@@ -1,7 +1,7 @@
 import type { ComponentType } from "react";
 import { mdxComponents } from "./components/mdx-components";
 import { PostIcon } from "./components/post-icon";
-import { SeriesNavigation } from "./components/series-navigation";
+import { SeriesNavigation, SeriesPostTitle } from "./components/series-navigation";
 import { postFromPath, posts, type PostMeta } from "./posts";
 
 const SITE = "https://achichorro.com";
@@ -9,14 +9,16 @@ const SITE = "https://achichorro.com";
 function Header({ meta }: { meta?: PostMeta }) {
   return (
     <header className="flex min-h-21 flex-wrap items-center gap-x-6 gap-y-2 py-6 sm:flex-nowrap">
-      <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1 text-lg">
+      <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-lg sm:flex-1">
         <a className="shrink-0 font-bold tracking-tight no-underline underline-offset-4 hover:underline" href="/" aria-label="achichorro.com home">
           Artur Chichorro
         </a>
         {meta && (
           <>
             <span className="hidden text-muted sm:inline" aria-hidden="true">&gt;</span>
-            <h1 className="m-0 w-full min-w-0 text-lg font-medium text-accent sm:w-auto">{meta.title}</h1>
+            <div className="flex w-full min-w-0 items-center gap-x-2 sm:w-auto sm:flex-1">
+              <SeriesPostTitle post={meta} />
+            </div>
           </>
         )}
       </div>
@@ -84,10 +86,10 @@ function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }
   return (
     <main id="main" className="flex-1">
       <article data-article className="mx-auto w-full max-w-180 min-w-0">
-        <SeriesNavigation post={meta} />
         <div className="prose prose-invert max-w-none pt-8 prose-headings:scroll-mt-8 prose-blockquote:border-accent prose-blockquote:text-muted prose-code:text-accent-soft prose-pre:border prose-pre:border-border prose-pre:bg-[#08090a] prose-img:rounded-md prose-img:border prose-img:border-border prose-video:rounded-md prose-video:border prose-video:border-border prose-hr:border-border prose-strong:text-foreground prose-li:marker:text-accent">
           <Content components={mdxComponents} />
         </div>
+        <SeriesNavigation post={meta} className="mt-8 pt-4" />
       </article>
     </main>
   );
