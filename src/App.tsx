@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import { mdxComponents } from "./components/mdx-components";
 import { PostIcon } from "./components/post-icon";
+import { SeriesNavigation } from "./components/series-navigation";
 import { postFromPath, posts, type PostMeta } from "./posts";
 
 const SITE = "https://achichorro.com";
@@ -83,17 +84,7 @@ function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }
   return (
     <main id="main" className="flex-1">
       <article data-article className="mx-auto w-full max-w-180 min-w-0">
-        {meta.saga?.length ? (
-          <nav className="pt-4" aria-label="Related series">
-            <ol className="m-0 flex list-none flex-wrap gap-x-6 gap-y-2 p-0 text-xs text-muted">
-              {meta.saga.map((item) => (
-                <li key={item.url}>
-                  <a className="no-underline underline-offset-4 hover:underline" href={`/posts/${item.url.replace(/^\/?posts\//, "").replace(/\/$/, "")}/`}>{item.title}</a>
-                </li>
-              ))}
-            </ol>
-          </nav>
-        ) : null}
+        <SeriesNavigation post={meta} />
         <div className="prose prose-invert max-w-none pt-8 prose-headings:scroll-mt-8 prose-blockquote:border-accent prose-blockquote:text-muted prose-code:text-accent-soft prose-pre:border prose-pre:border-border prose-pre:bg-[#08090a] prose-img:rounded-md prose-img:border prose-img:border-border prose-video:rounded-md prose-video:border prose-video:border-border prose-hr:border-border prose-strong:text-foreground prose-li:marker:text-accent">
           <Content components={mdxComponents} />
         </div>

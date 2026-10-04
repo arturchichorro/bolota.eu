@@ -33,21 +33,23 @@ Start writing here.
 - `description` is strongly recommended for SEO and the post list.
 - `date` is required and should use `YYYY-MM-DD`.
 - `published: false` keeps a post out of the site, sitemap, and RSS feed. Omit it or use `true` to publish it.
-- `interactive: true` retains and hydrates the React application on that post. Omit it for static posts so they ship without the application bundle.
+- `interactive: true` retains and hydrates the React application for interactive post content. Omit it for static posts so they ship without the application bundle. Series navigation does not require JavaScript.
 - `icon` chooses the icon displayed beside the post on the blog index.
-- `saga` is optional and creates links between related posts.
 
 Frontmatter is validated during development and production builds. Unknown fields, invalid dates, and values of the wrong type fail the build with the post name and field that needs correction.
 
-Example series metadata:
+## Post series
 
-```yaml
-saga:
-  - title: Part 1
-    url: first-post
-  - title: Part 2
-    url: second-post
+Define each series once in `src/series.ts`, listing post slugs in reading order:
+
+```ts
+{
+  title: "My project",
+  posts: ["first-post", "second-post"],
+}
 ```
+
+No series frontmatter is needed in individual posts. Navigation uses the posts’ actual titles for CSS hover/focus tooltips, shows the current position, and disables arrows at either end. Its links and tooltips are statically rendered and require no JavaScript. Unknown slugs or repeated membership fail the build. Draft posts are excluded from navigation and its count; series with fewer than two published posts have no navigation.
 
 ## Supported content
 

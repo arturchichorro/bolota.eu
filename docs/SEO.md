@@ -19,7 +19,7 @@ The technical baseline is built into `pnpm build`: every public post is real sta
 
 - Write a unique, useful description for every post and use one descriptive H1 followed by a logical heading hierarchy.
 - Add descriptive alt text to every new image and explicit dimensions when known to prevent layout shift.
-- Link related posts through the existing `saga` frontmatter and contextual links.
+- Link related posts through the central series registry in `src/series.ts` and contextual links.
 - Watch indexing, queries, 404s, and Core Web Vitals monthly. Fix broken external media and links during the same review.
 - Update `dateModified` separately from `datePublished` if older posts receive substantial changes.
 

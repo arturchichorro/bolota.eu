@@ -4,6 +4,7 @@ import { fileURLToPath, URL } from "node:url";
 import type { Plugin } from "vite";
 import { parse } from "yaml";
 import { z } from "zod";
+import { validatePostSeries } from "./series.ts";
 
 export const postFrontmatterSchema = z.object({
   title: z.string().trim().min(1),
@@ -12,10 +13,6 @@ export const postFrontmatterSchema = z.object({
   published: z.boolean().optional(),
   interactive: z.boolean().optional(),
   icon: z.string().trim().min(1).optional(),
-  saga: z.array(z.object({
-    title: z.string().trim().min(1),
-    url: z.string().trim().min(1),
-  }).strict()).optional(),
 }).strict();
 
 export type PostFrontmatter = z.infer<typeof postFrontmatterSchema>;
@@ -57,9 +54,11 @@ export function computePostMetadata(source: string, filename: string): PostMeta 
 }
 
 export function loadPosts(directory = contentDirectory): PostMeta[] {
-  return readdirSync(directory)
+  const posts = readdirSync(directory)
     .filter((name) => name.endsWith(".mdx"))
     .map((name) => computePostMetadata(readFileSync(join(directory, name), "utf8"), name));
+  validatePostSeries(posts);
+  return posts;
 }
 
 export function frontmatterPlugin(): Plugin {
