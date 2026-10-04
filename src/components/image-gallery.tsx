@@ -99,10 +99,10 @@ export function ImageGallery({
       <Dialog.Portal>
         <Dialog.Backdrop className="fixed inset-0 z-50 cursor-zoom-out bg-black/90 backdrop-blur-sm" />
         <Dialog.Viewport className="fixed inset-0 z-50 grid place-items-center p-4">
-          {selectedImage && (
-            <Dialog.Popup className="relative grid max-h-[calc(100dvh-2rem)] max-w-[calc(100vw-2rem)] place-items-center outline-none">
-              <Dialog.Title className="sr-only">{selectedImage.alt}</Dialog.Title>
-              <img className="m-0 max-h-[calc(100dvh-2rem)] max-w-[calc(100vw-2rem)] rounded-md object-contain" src={selectedImage.fullSrc || selectedImage.src} alt={selectedImage.alt} />
+          {/* Base UI needs the popup mounted until its close lifecycle finishes. */}
+          <Dialog.Popup className="relative grid max-h-[calc(100dvh-2rem)] max-w-[calc(100vw-2rem)] place-items-center outline-none">
+              <Dialog.Title className="sr-only">{selectedImage?.alt || "Fullscreen image"}</Dialog.Title>
+              {selectedImage && <img className="m-0 max-h-[calc(100dvh-2rem)] max-w-[calc(100vw-2rem)] rounded-md object-contain" src={selectedImage.fullSrc || selectedImage.src} alt={selectedImage.alt} />}
               <Dialog.Close className="fixed right-4 top-4 grid h-10 w-10 cursor-pointer place-items-center rounded-full border border-white/20 bg-black/60 text-2xl text-white hover:bg-black/80" aria-label="Close fullscreen image">×</Dialog.Close>
               {expandableIndices.length > 1 && (
                 <>
@@ -111,8 +111,7 @@ export function ImageGallery({
                   <span className="fixed bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-xs text-white">{activePosition + 1} / {expandableIndices.length}</span>
                 </>
               )}
-            </Dialog.Popup>
-          )}
+          </Dialog.Popup>
         </Dialog.Viewport>
       </Dialog.Portal>
     </Dialog.Root>

@@ -8,13 +8,11 @@ const SITE = "https://achichorro.com";
 
 function Header() {
   return (
-    <header className="flex h-21 items-center justify-between border-b border-border">
+    <header className="flex h-21 items-center justify-between">
       <a className="flex items-center gap-2 text-base font-bold tracking-tight no-underline" href="/" aria-label="achichorro.com home">
-        <span className="text-xs text-accent drop-shadow-[0_0_7px_rgba(98,201,141,.4)]" aria-hidden="true">●</span>
         achichorro.com
       </a>
       <nav className="flex gap-6 font-mono text-xs font-medium uppercase tracking-[.12em] text-muted" aria-label="Main navigation">
-        <a className="no-underline hover:text-accent" href="/">blog</a>
         <a className="no-underline hover:text-accent" href="/rss.xml">rss</a>
       </nav>
     </header>
@@ -142,5 +140,5 @@ export function seoFor(pathname: string) {
   const post = postFromPath(pathname);
   return post
     ? { title: `${post.title} · achichorro.com`, description: post.description || "A post by Artur Chichorro.", canonical: `${SITE}/posts/${post.slug}`, type: "article", date: post.date }
-    : { title: "achichorro.com — Artur Chichorro's blog", description: "Experiments in software, games, hardware and everything in between, by Artur Chichorro.", canonical: SITE, type: "website" };
+    : { title: "achichorro.com", description: "Whatever is in my head, mostly software and the world", canonical: SITE, type: "website" };
 }
