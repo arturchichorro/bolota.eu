@@ -5,12 +5,21 @@ import { postFromPath, posts, type PostMeta } from "./posts";
 
 const SITE = "https://achichorro.com";
 
-function Header() {
+function Header({ meta }: { meta?: PostMeta }) {
   return (
-    <header className="flex h-21 items-center justify-between">
-      <a className="flex items-center gap-2 text-base font-bold tracking-tight no-underline underline-offset-4 hover:underline" href="/" aria-label="achichorro.com home">
-        Artur Chichorro
-      </a>
+    <header className="flex min-h-21 flex-wrap items-center gap-x-6 gap-y-2 py-6 sm:flex-nowrap">
+      <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1 text-lg">
+        <a className="shrink-0 font-bold tracking-tight no-underline underline-offset-4 hover:underline" href="/" aria-label="achichorro.com home">
+          Artur Chichorro
+        </a>
+        {meta && (
+          <>
+            <span className="hidden text-muted sm:inline" aria-hidden="true">&gt;</span>
+            <h1 className="m-0 w-full min-w-0 text-lg font-medium text-accent sm:w-auto">{meta.title}</h1>
+          </>
+        )}
+      </div>
+      {meta && <time className="w-full shrink-0 text-left text-sm text-muted sm:ml-auto sm:w-auto sm:text-right" dateTime={meta.date}>{formatDate(meta.date)}</time>}
     </header>
   );
 }
@@ -73,11 +82,7 @@ function Home() {
 function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }) {
   return (
     <main id="main" className="flex-1">
-      <article data-article className="mx-auto w-full max-w-180 min-w-0 pt-10 max-sm:pt-8">
-        <header>
-          <h1 className="mt-0 mb-2 text-2xl font-extrabold leading-8 text-accent sm:text-3xl sm:leading-9">{meta.title}</h1>
-          <p className="m-0 text-base leading-6 text-muted">Posted on <time dateTime={meta.date}>{formatDate(meta.date)}</time></p>
-        </header>
+      <article data-article className="mx-auto w-full max-w-180 min-w-0">
         {meta.saga?.length ? (
           <nav className="pt-4" aria-label="Related series">
             <ol className="m-0 flex list-none flex-wrap gap-x-6 gap-y-2 p-0 text-xs text-muted">
@@ -110,7 +115,7 @@ export function App({ pathname, Content }: { pathname: string; Content?: Compone
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-4 sm:px-6 md:px-10 lg:px-12">
       <a className="fixed top-2 left-2 z-20 translate-y-[-150%] bg-accent px-4 py-2 text-background focus:translate-y-0" href="#main">Skip to content</a>
-      <Header />
+      <Header meta={meta && Content ? meta : undefined} />
       {meta && Content ? <Post meta={meta} Content={Content} /> : pathname === "/" || pathname === "/posts" || pathname === "/posts/" ? <Home /> : <NotFound />}
       <Footer />
     </div>
