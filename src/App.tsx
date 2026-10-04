@@ -73,16 +73,20 @@ function Home() {
 function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }) {
   return (
     <main id="main" className="flex-1">
-      <article data-article className="mx-auto w-full max-w-180 min-w-0 py-10 max-sm:py-8">
+      <article data-article className="mx-auto w-full max-w-180 min-w-0 pt-10 max-sm:pt-8">
         <header>
           <h1 className="mt-0 mb-2 text-2xl font-extrabold leading-8 text-accent sm:text-3xl sm:leading-9">{meta.title}</h1>
           <p className="m-0 text-base leading-6 text-muted">Posted on <time dateTime={meta.date}>{formatDate(meta.date)}</time></p>
         </header>
         {meta.saga?.length ? (
-          <nav className="flex flex-wrap gap-2 border-b border-border py-4" aria-label="Related series">
-            {meta.saga.map((item) => (
-              <a className="rounded-full border border-border px-3 py-1.5 font-mono text-xs text-muted no-underline underline-offset-4 hover:underline" href={`/posts/${item.url.replace(/^\/?posts\//, "").replace(/\/$/, "")}/`} key={item.url}>{item.title}</a>
-            ))}
+          <nav className="pt-4" aria-label="Related series">
+            <ol className="m-0 flex list-none flex-wrap gap-x-6 gap-y-2 p-0 text-xs text-muted">
+              {meta.saga.map((item) => (
+                <li key={item.url}>
+                  <a className="no-underline underline-offset-4 hover:underline" href={`/posts/${item.url.replace(/^\/?posts\//, "").replace(/\/$/, "")}/`}>{item.title}</a>
+                </li>
+              ))}
+            </ol>
           </nav>
         ) : null}
         <div className="prose prose-invert max-w-none pt-8 prose-headings:scroll-mt-8 prose-blockquote:border-accent prose-blockquote:text-muted prose-code:text-accent-soft prose-pre:border prose-pre:border-border prose-pre:bg-[#08090a] prose-img:rounded-md prose-img:border prose-img:border-border prose-video:rounded-md prose-video:border prose-video:border-border prose-hr:border-border prose-strong:text-foreground prose-li:marker:text-accent">
