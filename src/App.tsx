@@ -11,10 +11,15 @@ function Header() {
       <a className="flex items-center gap-2 text-base font-bold tracking-tight no-underline underline-offset-4 hover:underline" href="/" aria-label="achichorro.com home">
         Artur Chichorro
       </a>
-      <nav className="flex gap-6 font-mono text-xs font-medium uppercase tracking-[.12em] text-muted" aria-label="Main navigation">
-        <a className="no-underline underline-offset-4 hover:underline" href="/rss.xml">rss</a>
-      </nav>
     </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="mt-8 py-6 text-sm text-muted">
+      <a className="no-underline underline-offset-4 hover:underline" href="/rss.xml">Subscribe via RSS</a>
+    </footer>
   );
 }
 
@@ -105,6 +110,7 @@ export function App({ pathname, Content }: { pathname: string; Content?: Compone
       <a className="fixed top-2 left-2 z-20 translate-y-[-150%] bg-accent px-4 py-2 text-background focus:translate-y-0" href="#main">Skip to content</a>
       <Header />
       {meta && Content ? <Post meta={meta} Content={Content} /> : pathname === "/" || pathname === "/posts" || pathname === "/posts/" ? <Home /> : <NotFound />}
+      <Footer />
     </div>
   );
 }
