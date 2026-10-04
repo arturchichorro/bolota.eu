@@ -14,7 +14,7 @@ export function ProjectItem({ title, description, years, gh, posts }: ProjectPro
       {description && <p className="mt-2 mb-4 text-sm leading-relaxed text-muted">{description}</p>}
       <div className="mt-auto flex flex-wrap gap-2 text-xs">
         {gh && <a href={gh} target="_blank" rel="noreferrer">GitHub ↗</a>}
-        {posts?.map((post) => <a key={post.url} href={post.url} target={post.external ? "_blank" : undefined}>{post.post_title}{post.external ? " ↗" : ""}</a>)}
+        {posts?.map((post) => <a key={post.url} href={post.external ? post.url : `/posts/${post.url.replace(/^\/?posts\//, "").replace(/^\/+|\/+$/g, "")}/`} target={post.external ? "_blank" : undefined} rel={post.external ? "noreferrer" : undefined}>{post.post_title}{post.external ? " ↗" : ""}</a>)}
       </div>
     </article>
   );
