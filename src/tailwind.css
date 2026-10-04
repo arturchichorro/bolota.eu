@@ -29,13 +29,6 @@
   --font-mono: var(--font-sans);
 }
 
-@layer base {
-  html,
-  body {
-    overscroll-behavior: none;
-  }
-}
-
 a,
 .link {
   text-decoration-style: dashed;

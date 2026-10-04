@@ -96,9 +96,7 @@ function Post({ meta, Content }: { meta: PostMeta; Content: ComponentType<any> }
 function NotFound() {
   return (
     <main className="grid min-h-[65vh] flex-1 place-content-center text-center">
-      <p className="mb-5 font-mono text-xs font-semibold uppercase tracking-[.14em] text-accent">404</p>
-      <h1 className="mb-6 text-[clamp(2.5rem,8vw,5rem)] font-normal">Nothing planted here.</h1>
-      <a className="link" href="/">Return to the blog →</a>
+      <h1 className="text-2xl">404: Not found</h1>
     </main>
   );
 }
