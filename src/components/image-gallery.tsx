@@ -1,5 +1,5 @@
 import { Dialog } from "@base-ui/react/dialog";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 
 export type GalleryImage = {
@@ -15,21 +15,31 @@ export function ImageGallery({
   images,
   layout = "scroll",
   wide = false,
+  fadeEdges = false,
+  preload = false,
   previewAspectRatio = "6 / 5",
   previewMaxWidth,
 }: {
   images: GalleryImage[];
-  layout?: "scroll" | "inline" | "carousel";
+  layout?: "scroll" | "inline";
   wide?: boolean;
+  fadeEdges?: boolean;
+  preload?: boolean;
   previewAspectRatio?: string;
   previewMaxWidth?: string;
 }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [previewIndex, setPreviewIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const movePreview = (direction: -1 | 1) => {
-    setPreviewIndex((index) => (index + direction + images.length) % images.length);
-  };
+  useEffect(() => {
+    if (layout !== "scroll") return;
+    const scroller = scrollRef.current;
+    const middle = scroller?.querySelectorAll("figure")[Math.floor(images.length / 2)];
+    if (!scroller || !middle) return;
+    const viewport = scroller.getBoundingClientRect();
+    const image = middle.getBoundingClientRect();
+    scroller.scrollLeft += image.left + image.width / 2 - viewport.left - scroller.clientWidth / 2;
+  }, [layout, images.length]);
   const expandableIndices = images.flatMap((image, index) => image.expandable === false ? [] : [index]);
   const activePosition = activeIndex === null ? -1 : expandableIndices.indexOf(activeIndex);
   const selectedImage = activeIndex === null ? undefined : images[activeIndex];
@@ -38,7 +48,6 @@ export function ImageGallery({
     if (activePosition < 0 || expandableIndices.length < 2) return;
     const next = (activePosition + direction + expandableIndices.length) % expandableIndices.length;
     setActiveIndex(expandableIndices[next]);
-    if (layout === "carousel") setPreviewIndex(expandableIndices[next]);
   };
 
   useEffect(() => {
@@ -63,21 +72,18 @@ export function ImageGallery({
     <Dialog.Root open={selectedImage !== undefined} onOpenChange={(open) => { if (!open) setActiveIndex(null); }}>
       <div className="not-prose my-7" style={wideStyle}>
         <div
-          className={layout === "scroll" ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3" : layout === "carousel" ? "grid grid-cols-[2rem_minmax(0,1fr)_2rem] items-center gap-2 sm:gap-4" : "grid gap-3"}
-          style={layout === "inline" ? { gridTemplateColumns: `repeat(${images.length}, minmax(0, 1fr))` } : undefined}
-          role={layout === "carousel" ? "region" : undefined}
-          aria-roledescription={layout === "carousel" ? "carousel" : undefined}
-          aria-label={layout === "carousel" ? "Image gallery" : undefined}
-          onKeyDown={(event) => {
-            if (layout !== "carousel" || activeIndex !== null) return;
-            if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-              event.preventDefault();
-              movePreview(event.key === "ArrowLeft" ? -1 : 1);
-            }
-          }}
+          ref={scrollRef}
+          className={layout === "scroll" ? `flex max-w-full gap-4 overflow-x-auto overscroll-x-contain px-3 pb-3 focus-visible:outline-2 focus-visible:outline-accent ${fadeEdges ? "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden" : ""}` : "grid gap-3"}
+          style={layout === "inline"
+            ? { gridTemplateColumns: `repeat(${images.length}, minmax(0, 1fr))` }
+            : {
+              ...(fadeEdges ? { maskImage: "linear-gradient(to right, transparent, black 1.5rem, black calc(100% - 1.5rem), transparent)" } : {}),
+            }}
+          role={layout === "scroll" ? "region" : undefined}
+          aria-label={layout === "scroll" ? "Image gallery — scroll horizontally" : undefined}
+          tabIndex={layout === "scroll" ? 0 : undefined}
         >
           {images.map((image, index) => {
-            if (layout === "carousel" && index !== previewIndex) return null;
             const expandable = image.expandable !== false;
             const preview = (
               <img
@@ -85,14 +91,14 @@ export function ImageGallery({
                 style={{ aspectRatio: previewAspectRatio, objectFit: image.previewFit || "cover", objectPosition: "center" }}
                 src={image.src}
                 alt={image.alt}
-                loading="lazy"
+                loading={preload ? "eager" : "lazy"}
                 decoding="async"
               />
             );
 
             return (
               <figure
-                className={layout === "scroll" ? "m-0 w-[min(70vw,35rem)] shrink-0 snap-start" : layout === "carousel" ? "col-start-2 row-start-1 m-0 min-w-0 justify-self-center" : "m-0 min-w-0 justify-self-center"}
+                className={layout === "scroll" ? "m-0 w-[min(70vw,35rem)] shrink-0" : "m-0 min-w-0 justify-self-center"}
                 style={{ ...(layout !== "scroll" ? { width: "100%" } : {}), maxWidth: previewMaxWidth }}
                 key={`${image.src}-${index}`}
               >
@@ -110,13 +116,6 @@ export function ImageGallery({
               </figure>
             );
           })}
-          {layout === "carousel" && images.length > 1 && (
-            <>
-              <Button unstyled className="col-start-1 row-start-1 grid h-10 w-8 cursor-pointer place-items-center text-3xl text-muted hover:text-accent focus-visible:outline-2 focus-visible:outline-accent" onClick={() => movePreview(-1)} aria-label="Previous gallery image">‹</Button>
-              <Button unstyled className="col-start-3 row-start-1 grid h-10 w-8 cursor-pointer place-items-center text-3xl text-muted hover:text-accent focus-visible:outline-2 focus-visible:outline-accent" onClick={() => movePreview(1)} aria-label="Next gallery image">›</Button>
-            </>
-          )}
-          {layout === "carousel" && <span className="sr-only" aria-live="polite" aria-atomic="true">Image {previewIndex + 1} of {images.length}: {images[previewIndex]?.alt}</span>}
         </div>
       </div>
 

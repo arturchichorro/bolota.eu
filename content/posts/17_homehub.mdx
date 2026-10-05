@@ -14,8 +14,11 @@ import { LocalFirstSyncFlowDiagram, TraditionalRequestFlowDiagram } from "../../
 I've been working on a dashboard for myself, and this is the first devlog. Its first two modules are **Lists**, for todo lists, shopping lists, or anything else, and **Recipes**, where I can save things I've cooked, with some pictures and history.
 
 <ImageGallery
-  layout="carousel"
-  previewMaxWidth="24rem"
+  layout="scroll"
+  fadeEdges
+  preload
+  previewAspectRatio="1 / 1"
+  previewMaxWidth="19rem"
   images={[
     { src: "https://media.achichorro.com/posts/17_homehub/If0ZI6Cx8kn0TMPkiAsymzxaQu9t1eJUR8bswMpSN0PYW5d7.png", alt: "Home Hub recipes list with sidebar open"
     },
