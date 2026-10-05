@@ -106,6 +106,12 @@ export const edges = [
 <StaticBlogFlowDiagram label="Data flow" nodes={nodes} edges={edges} />
 ```
 
+## Media
+
+Public images and videos are stored in the `achichorro-media` R2 bucket and served from `https://media.achichorro.com`. Organize object keys under `posts/<post-slug>/` and use the full public URL in MDX, including gallery `fullSrc` values.
+
+Upload files with the correct content type. Existing migrated assets have immutable cache headers: use a new object key when changing a file rather than overwriting a cached URL. Media hosting does not require a Worker or browser-side credentials.
+
 ## Preview and publish
 
 ```bash
