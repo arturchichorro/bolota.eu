@@ -27,7 +27,7 @@ export default defineConfig({
     frontmatterPlugin(),
     mdx({
       remarkPlugins: [remarkMath, remarkBaseUiDetails],
-      rehypePlugins: [rehypeMath, [rehypePrettyCode, { theme: "ayu-dark", keepBackground: false }]],
+      rehypePlugins: [rehypeMath, [rehypePrettyCode, { theme: "vitesse-black", keepBackground: false }]],
     }),
     react(),
     tailwindcss(),
