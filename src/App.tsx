@@ -30,14 +30,14 @@ function Header({ meta }: { meta?: PostMeta }) {
 function Footer() {
   return (
     <footer className="mt-8 py-6 text-sm text-muted">
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+      <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
+        <a className="whitespace-nowrap no-underline underline-offset-4 hover:underline" href="/rss.xml">Subscribe via RSS</a>
         <form action="/api/subscribe" method="post" data-newsletter-form className="flex flex-wrap items-center gap-2">
           <label htmlFor="newsletter-email" className="whitespace-nowrap">Subscribe via newsletter</label>
           <input id="newsletter-email" name="email" type="email" required maxLength={254} autoComplete="email" placeholder="Email" aria-label="Email address" aria-describedby="newsletter-status" className="w-36 min-w-0 rounded border border-border bg-transparent px-2 py-1 text-foreground placeholder:text-muted focus-visible:outline-2 focus-visible:outline-accent" />
           <input name="website" type="text" autoComplete="off" tabIndex={-1} aria-hidden="true" className="hidden" />
           <button type="submit" className="cursor-pointer rounded border border-border bg-transparent px-2 py-1 text-foreground hover:border-accent focus-visible:outline-2 focus-visible:outline-accent disabled:cursor-wait disabled:opacity-60">Subscribe</button>
         </form>
-        <a className="whitespace-nowrap no-underline underline-offset-4 hover:underline" href="/rss.xml">Subscribe via RSS</a>
       </div>
       <p id="newsletter-status" data-newsletter-status role="status" aria-live="polite" aria-atomic="true" className="m-0 text-xs [&:not(:empty)]:mt-2 data-[state=error]:text-warning data-[state=success]:text-accent" />
     </footer>
