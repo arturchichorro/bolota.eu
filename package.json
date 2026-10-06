@@ -11,6 +11,7 @@
     "check": "tsc --noEmit && tsc --noEmit -p worker/newsletter/tsconfig.json",
     "test:rendering": "node --experimental-strip-types --test scripts/rendering.test.mjs",
     "test:newsletter": "node --experimental-strip-types --test scripts/newsletter.test.mjs",
+    "test:publisher": "python3 -m unittest discover -s scripts/publisher -p 'test_*.py' -v",
     "newsletter:dev": "wrangler dev --config worker/newsletter/wrangler.jsonc --env development --port 8787",
     "newsletter:deploy": "wrangler deploy --config worker/newsletter/wrangler.jsonc --env ''"
   },

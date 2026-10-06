@@ -31,6 +31,10 @@ The homepage receives only metadata, not every post body. The React bundle is re
 - `scripts/prerender.mjs` — static output and SEO artifacts
 - `dist` — generated deployment output
 
+## Publishing
+
+GitHub Actions verifies locked builds and tests, then publishes only pushes to `main` through the dedicated `achichorro-publish` account. The root-owned receiver validates a complete archive, serializes activation, rejects stale generations, and atomically switches a relative release symlink. It has no Docker/sudo/home-hub permissions. Shared ingress lives in `vps-infra`; newsletter Worker deployment remains separate. See [Deployment](deployment.md).
+
 ## Build properties
 
 - Every published route has complete static HTML, including math and syntax-highlighted code. Neither feature requires browser JavaScript.

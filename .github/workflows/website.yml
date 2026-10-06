@@ -1,0 +1,83 @@
+name: Verify and publish website
+
+on:
+  pull_request:
+  push:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 10.28.2
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm test:rendering
+      - run: pnpm test:newsletter
+      - name: Test restricted publisher and shell syntax
+        run: |
+          pnpm test:publisher
+          bash -n scripts/publisher/install.sh
+          bash -n scripts/publisher/send.sh
+      - run: pnpm build
+      - name: Validate newsletter Worker without deploying
+        run: pnpm exec wrangler deploy --config worker/newsletter/wrangler.jsonc --env '' --dry-run
+      - name: Package complete static build
+        run: tar -czf site.tar.gz -C dist .
+      - uses: actions/upload-artifact@v7
+        with:
+          name: static-site
+          path: site.tar.gz
+          compression-level: 0
+          retention-days: 7
+
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: website-production
+    concurrency:
+      group: achichorro-static-publish
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v8
+        with:
+          name: static-site
+          path: ${{ runner.temp }}/website
+      - name: Skip commits superseded on main
+        id: current
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)"
+          if [ "$latest" = "$GITHUB_SHA" ]; then
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "A newer main commit superseded this build; nothing published."
+          fi
+      - name: Upload and atomically activate
+        if: steps.current.outputs.publish == 'true'
+        env:
+          WEBSITE_SSH_HOST: ${{ secrets.WEBSITE_SSH_HOST }}
+          WEBSITE_SSH_USER: ${{ secrets.WEBSITE_SSH_USER }}
+          WEBSITE_SSH_PRIVATE_KEY: ${{ secrets.WEBSITE_SSH_PRIVATE_KEY }}
+          WEBSITE_SSH_KNOWN_HOSTS: ${{ secrets.WEBSITE_SSH_KNOWN_HOSTS }}
+        run: ./scripts/publisher/send.sh "$RUNNER_TEMP/website/site.tar.gz"

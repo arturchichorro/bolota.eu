@@ -27,8 +27,13 @@ pnpm preview
 - `pnpm build` — build and prerender every page, plus RSS, sitemap and robots.txt
 - `pnpm preview` — preview the production build
 - `pnpm test:newsletter` — newsletter Worker unit tests
+- `pnpm test:publisher` — restricted publisher tests (Python 3 and Docker required)
 - `pnpm newsletter:dev` — local newsletter Worker
 - `pnpm newsletter:deploy` — deploy the newsletter Worker
+
+## Deployment
+
+Shared Caddy/HTTPS lives in the separate private `vps-infra` repository. A verified push to `main` publishes versioned static releases through a restricted SSH account; pushes to `develop` only verify. See [Static publishing setup](docs/deployment.md) for credentials, host-key pinning, activation, and rollback.
 
 ## Newsletter
 
