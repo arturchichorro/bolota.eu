@@ -8,8 +8,11 @@
     "dev": "vite",
     "build": "vite build && vite build --ssr src/entry-server.tsx --outDir .ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
-    "check": "tsc --noEmit",
-    "test:rendering": "node --experimental-strip-types --test scripts/rendering.test.mjs"
+    "check": "tsc --noEmit && tsc --noEmit -p worker/newsletter/tsconfig.json",
+    "test:rendering": "node --experimental-strip-types --test scripts/rendering.test.mjs",
+    "test:newsletter": "node --experimental-strip-types --test scripts/newsletter.test.mjs",
+    "newsletter:dev": "wrangler dev --config worker/newsletter/wrangler.jsonc --env development --port 8787",
+    "newsletter:deploy": "wrangler deploy --config worker/newsletter/wrangler.jsonc --env ''"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -34,6 +37,7 @@
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.3.1",
+    "wrangler": "^4.147.0",
     "yaml": "^2.9.1",
     "zod": "^4.6.5"
   }

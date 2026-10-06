@@ -4,3 +4,8 @@ dist
 .npm-cache
 *.local
 .DS_Store
+.wrangler
+.dev.vars
+.dev.vars.*
+.env
+.env.*

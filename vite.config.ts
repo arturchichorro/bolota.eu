@@ -42,5 +42,7 @@ export default defineConfig({
     ],
   },
   resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
+  server: { proxy: { "/api/subscribe": "http://127.0.0.1:8787" } },
+  preview: { proxy: { "/api/subscribe": "http://127.0.0.1:8787" } },
   build: { target: "es2022" },
 });

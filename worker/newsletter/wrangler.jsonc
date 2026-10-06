@@ -1,0 +1,38 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "achichorro-newsletter",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-02",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "achichorro.com/api/subscribe", "zone_name": "achichorro.com" }
+  ],
+  "vars": {
+    "ALLOWED_ORIGINS": "https://achichorro.com",
+    "MAILERLITE_GROUP_ID": "147494466607908861"
+  },
+  "ratelimits": [
+    {
+      "name": "SUBSCRIBE_RATE_LIMITER",
+      "namespace_id": "478130",
+      "simple": { "limit": 5, "period": 60 }
+    }
+  ],
+  "env": {
+    "development": {
+      "routes": [],
+      "vars": {
+        "ALLOWED_ORIGINS": "http://localhost:5173,http://127.0.0.1:5173,http://localhost:4173,http://127.0.0.1:4173",
+        "MAILERLITE_GROUP_ID": ""
+      },
+      "ratelimits": [
+        {
+          "name": "SUBSCRIBE_RATE_LIMITER",
+          "namespace_id": "478131",
+          "simple": { "limit": 5, "period": 60 }
+        }
+      ]
+    }
+  }
+}

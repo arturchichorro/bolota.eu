@@ -12,7 +12,7 @@ The site is a static-first Vite and React application. MDX is compiled during de
 4. Vite creates the client and server bundles.
 5. `scripts/prerender.mjs` renders every route into `dist`, then generates the sitemap, RSS feed, and robots file.
 
-The homepage receives only metadata, not every post body. The React bundle is retained only for posts marked `interactive: true`. Static articles and index pages remain JavaScript-free. Series navigation and its hover/focus tooltips are prerendered HTML and CSS and do not require hydration.
+The homepage receives only metadata, not every post body. The React bundle is retained only for posts marked `interactive: true`. Static articles and index pages do not hydrate React; their only browser script is the small vanilla newsletter submit handler. Series navigation and its hover/focus tooltips are prerendered HTML and CSS and do not require hydration.
 
 ## Important locations
 
@@ -26,6 +26,8 @@ The homepage receives only metadata, not every post body. The React bundle is re
 - `src/components/series-navigation.tsx` — previous/next links, position counter, and CSS title tooltips
 - `src/tailwind.css` — Tailwind entry point, Typography plugin, content sources, and theme tokens
 - `@fontsource-variable/dm-sans` — self-hosted variable font for headings and body text
+- `public/newsletter.js` — deferred newsletter submission and inline feedback, without React
+- `worker/newsletter` — separately deployed Cloudflare Worker; see [Newsletter setup](newsletter.md)
 - `scripts/prerender.mjs` — static output and SEO artifacts
 - `dist` — generated deployment output
 
@@ -34,7 +36,7 @@ The homepage receives only metadata, not every post body. The React bundle is re
 - Every published route has complete static HTML, including math and syntax-highlighted code. Neither feature requires browser JavaScript.
 - Invalid TeX fails compilation with its source location; `pnpm test:rendering` checks the adapter, all post formulas, and code highlighting.
 - Post bodies are split by route.
-- The homepage has no production JavaScript.
+- Every page includes a small deferred newsletter script. It does not load React or post bodies and only contacts the Worker on submission.
 - Images embedded as JSX receive lazy-loading attributes during MDX compilation.
 - Drafts are excluded from routes and discovery files.
 - Invalid or unknown frontmatter fields and invalid series references fail the build. Only `interactive: true` enables post hydration.

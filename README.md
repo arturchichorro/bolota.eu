@@ -26,6 +26,13 @@ pnpm preview
 - `pnpm check` — TypeScript checks
 - `pnpm build` — build and prerender every page, plus RSS, sitemap and robots.txt
 - `pnpm preview` — preview the production build
+- `pnpm test:newsletter` — newsletter Worker unit tests
+- `pnpm newsletter:dev` — local newsletter Worker
+- `pnpm newsletter:deploy` — deploy the newsletter Worker
+
+## Newsletter
+
+The static footer uses a small vanilla script and a separate Cloudflare Worker. See [Newsletter setup](docs/newsletter.md) for MailerLite configuration, secrets, deployment, and verification.
 
 ## Writing
 

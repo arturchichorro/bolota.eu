@@ -70,15 +70,11 @@ export function ImageGallery({
 
   return (
     <Dialog.Root open={selectedImage !== undefined} onOpenChange={(open) => { if (!open) setActiveIndex(null); }}>
-      <div className="not-prose my-7" style={wideStyle}>
+      <div className="not-prose relative my-7 bg-background" style={wideStyle}>
         <div
           ref={scrollRef}
           className={layout === "scroll" ? `flex max-w-full gap-4 overflow-x-auto overscroll-x-contain px-3 pb-3 focus-visible:outline-2 focus-visible:outline-accent ${fadeEdges ? "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden" : ""}` : "grid gap-3"}
-          style={layout === "inline"
-            ? { gridTemplateColumns: `repeat(${images.length}, minmax(0, 1fr))` }
-            : {
-              ...(fadeEdges ? { maskImage: "linear-gradient(to right, transparent, black 1.5rem, black calc(100% - 1.5rem), transparent)" } : {}),
-            }}
+          style={layout === "inline" ? { gridTemplateColumns: `repeat(${images.length}, minmax(0, 1fr))` } : undefined}
           role={layout === "scroll" ? "region" : undefined}
           aria-label={layout === "scroll" ? "Image gallery — scroll horizontally" : undefined}
           tabIndex={layout === "scroll" ? 0 : undefined}
@@ -117,6 +113,12 @@ export function ImageGallery({
             );
           })}
         </div>
+        {layout === "scroll" && fadeEdges && (
+          <>
+            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-6 bg-linear-to-r from-background to-transparent" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-6 bg-linear-to-l from-background to-transparent" />
+          </>
+        )}
       </div>
 
       <Dialog.Portal>

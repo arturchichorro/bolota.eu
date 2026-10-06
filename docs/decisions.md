@@ -26,7 +26,7 @@ The site uses the same Inter variable font as the previous application for inter
 
 ## Progressive enhancement
 
-Reading never requires JavaScript. Only posts with interactive demonstrations hydrate in the browser. Series navigation uses static links and CSS hover/focus tooltips, without additional JavaScript. This keeps the common path fast while preserving the old content.
+Reading never requires JavaScript. Only posts with interactive demonstrations hydrate in the browser. Series navigation uses static links and CSS hover/focus tooltips, without additional JavaScript. The newsletter footer uses a small vanilla submit handler on every page for inline feedback, without adding React hydration to static pages. Its separate Cloudflare Worker keeps MailerLite credentials server-side. This keeps the common path fast while preserving the old content.
 
 ## pnpm
 
