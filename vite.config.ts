@@ -8,25 +8,12 @@ import { defineConfig } from "vite";
 import { frontmatterPlugin, postIndexPlugin } from "./src/content.ts";
 import rehypeMath from "./src/rehype-math.ts";
 
-type MdxNode = { type?: string; name?: string; children?: MdxNode[] };
-
-function remarkBaseUiDetails() {
-  return (tree: MdxNode) => {
-    const visit = (node: MdxNode) => {
-      if (node.type === "mdxJsxFlowElement" && node.name === "details") node.name = "MdxDetails";
-      node.children?.forEach(visit);
-    };
-
-    visit(tree);
-  };
-}
-
 export default defineConfig({
   plugins: [
     postIndexPlugin(),
     frontmatterPlugin(),
     mdx({
-      remarkPlugins: [remarkMath, remarkBaseUiDetails],
+      remarkPlugins: [remarkMath],
       rehypePlugins: [rehypeMath, [rehypePrettyCode, { theme: "vitesse-black", keepBackground: false }]],
     }),
     react(),
@@ -35,7 +22,6 @@ export default defineConfig({
   optimizeDeps: {
     include: [
       "@base-ui/react/button",
-      "@base-ui/react/collapsible",
       "@base-ui/react/dialog",
       "@base-ui/react/slider",
       "@base-ui/react/switch",

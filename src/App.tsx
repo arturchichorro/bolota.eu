@@ -36,7 +36,7 @@ function Footer() {
           <label htmlFor="newsletter-email" className="whitespace-nowrap">Subscribe via newsletter</label>
           <input id="newsletter-email" name="email" type="email" required maxLength={254} autoComplete="email" placeholder="Email" aria-label="Email address" aria-describedby="newsletter-status" className="w-36 min-w-0 rounded border border-border bg-transparent px-2 py-1 text-foreground placeholder:text-muted focus-visible:outline-2 focus-visible:outline-accent" />
           <input name="website" type="text" autoComplete="off" tabIndex={-1} aria-hidden="true" className="hidden" />
-          <button type="submit" className="cursor-pointer rounded border border-border bg-transparent px-2 py-1 text-foreground hover:border-accent focus-visible:outline-2 focus-visible:outline-accent disabled:cursor-wait disabled:opacity-60">Subscribe</button>
+          <button type="submit" aria-label="Subscribe" className="cursor-pointer rounded border border-border bg-transparent px-2 py-1 text-foreground hover:border-accent focus-visible:outline-2 focus-visible:outline-accent disabled:cursor-wait disabled:opacity-60"><span aria-hidden="true">→</span></button>
         </form>
       </div>
       <p id="newsletter-status" data-newsletter-status role="status" aria-live="polite" aria-atomic="true" className="m-0 text-xs [&:not(:empty)]:mt-2 data-[state=error]:text-warning data-[state=success]:text-accent" />
