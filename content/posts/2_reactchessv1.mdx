@@ -8,15 +8,15 @@ icon: react
 
 My month of december was mostly spent programming a UI to play chess on, using React. I'm really happy with it! It can currently be played via <a href="https://chess-react-bolota.netlify.app/" className="link" target="_blank">this</a> link (it's hosted on netlify). The source code is all in this <a href="https://github.com/arturchichorro/chess-react" className="link" target="_blank">GitHub repository</a>.
 
-### Features:
+## Features:
 - All the movement rules of chess are implemented, including en passant, castling both directions and pawns moving two squares on their first move
 - Checkmates, stalemates, threefold repetitions, fifty move rule
 - A button to take back the last move made
 - A button to flip the board and play from the perspective of the black pieces
 - Right click any square on the board to highlight it, just like how you can do so in other chess platforms
-- A complete list of the moves played on the side of the board, using accurate commonly used chess notation 
+- A complete list of the moves played on the side of the board, using accurate commonly used chess notation
 
-### Things I still want to add:
+## Things I still want to add:
 - Possibility to send a link to play with someone online
 - Possibility to play with time
 - Responsive design
@@ -28,10 +28,10 @@ My month of december was mostly spent programming a UI to play chess on, using R
 - Easily resize the board
 - Fix bugs related to pressing the takeback button while the promotion window is open
 
-### Overall thoughts
+## Overall thoughts
 It was really fun to work on this project. It taught me a lot about React, Redux, and surprisingly, css. One of the highlights of this project was coding the button that flips the board. It was surprisingly simple when reduced to simple smaller problems, and it was mostly done using css!
 
-There were some other interesting challenges too: after I had most of the code done, I had a global state that kept track of all the moves played until then, within an array. The problem was that I wasn't keeping track of the castling permissions at every ply, and instead only stored an object with this information. This created several problems: one simple example was that if I moved my king and lost castling rights, and then pressed the takeback button, I then wouldn't be able to castle in the previous position either (which would be wrong). I had to change the data strucure because of this. This was a great opportunity to learn more git, and it was an interesting challenge to refactor through so much code. 
+There were some other interesting challenges too: after I had most of the code done, I had a global state that kept track of all the moves played until then, within an array. The problem was that I wasn't keeping track of the castling permissions at every ply, and instead only stored an object with this information. This created several problems: one simple example was that if I moved my king and lost castling rights, and then pressed the takeback button, I then wouldn't be able to castle in the previous position either (which would be wrong). I had to change the data strucure because of this. This was a great opportunity to learn more git, and it was an interesting challenge to refactor through so much code.
 Here's how my positions (initial state) were stored in global state before the modification:
 ```js
 position: [createPosition()],
@@ -50,5 +50,3 @@ game: [{
 (Note that I then also added the fifty move rule counter to the mix, so that it wouldn't bug out the takeback button).
 
 This project was a learning experience. I started from this <a className="link" href="https://www.youtube.com/watch?v=jS9elCC2hPQ&list=PLnWzgq1mKyAsFZoMyZQbB8bNuNufSD0Sz&index=1" target="_blank">youtube series</a> and then added a bunch of other different features. It was my first good deep dive into React and Redux.
-
-

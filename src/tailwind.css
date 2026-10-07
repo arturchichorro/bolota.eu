@@ -1,0 +1,69 @@
+@import "@fontsource-variable/dm-sans";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@source "../content/posts";
+
+@theme {
+  --color-background: #090909;
+  --color-surface: #121212;
+  --color-surface-2: #1a1a1a;
+  --color-foreground: #ededed;
+  --color-primary: #ededed;
+  --color-muted: #a3a3a3;
+  --color-muted-foreground: #a3a3a3;
+  --color-faint: #737373;
+  --color-border: #2a2a2a;
+  --color-accent: #62c98d;
+  --color-accent-soft: #97d9b2;
+  --color-secondary: #ffd479;
+  --color-secondary-foreground: #ff8f87;
+  --color-warning: #ff8f87;
+  --color-sudoku: #102219;
+  --color-sudoku-foreground: #0c1911;
+  --color-sudoku-text: #62c98d;
+  --color-sudoku-borders: #263d2e;
+  --color-sudoku-highlight: #62c98d;
+  --color-sudoku-warning: #5b241f;
+  --color-sudoku-textwarning: #ff8f87;
+  --font-sans: "DM Sans Variable", "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-sans);
+}
+
+@layer components {
+  [data-rehype-pretty-code-figure] [data-line] {
+    @apply border-l-2 border-transparent px-4;
+  }
+
+  [data-rehype-pretty-code-figure] [data-highlighted-line] {
+    @apply border-accent bg-accent/10;
+  }
+
+  [data-rehype-pretty-code-figure] [data-highlighted-chars] {
+    @apply rounded-sm bg-accent/15;
+  }
+}
+
+a,
+.link {
+  text-decoration-style: dashed;
+}
+
+.link,
+[data-article] .prose .link {
+  @apply text-accent no-underline decoration-1 decoration-accent/50 underline-offset-4 hover:underline;
+}
+
+.reference,
+[data-article] .prose .reference {
+  @apply px-1 text-accent no-underline decoration-1 decoration-accent/50 underline-offset-4 hover:underline;
+}
+
+.ref-number,
+[data-article] .prose .ref-number {
+  @apply cursor-default tabular-nums no-underline;
+}
+
+.subheading-anchor,
+[data-article] .prose .subheading-anchor {
+  @apply font-medium text-accent no-underline decoration-1 decoration-accent/50 underline-offset-4 hover:underline;
+}

@@ -7,14 +7,13 @@ icon: python
 ---
 
 
-### What is Advent of Code
+## What is Advent of Code
 <a className="link" href="https://adventofcode.com/" target="_blank">Advent of Code</a> is a yearly set of 25 problems, each divided in two parts, with one being released every day since the 1st of December all the way until Christmas day. Quite literally an advent calendar for coding. As we approach Christmas, the problems become harder and harder. 
 
 This year, I decided to take part. I had a three day workshop on using Python for Data Science at the beginning of the month, so it felt fitting to stick with Python for the rest of the month as well. Turns out that by the time I got to the last few problems, I was taking well over 6 hours to complete some of them. Here's some of my favorite problems:
 
-<hr className="border-border"/>
 
-#### Day 13
+### Day 13
 This problem involved trying to find the minimum amount of tokens to spend on a bunch of claw machines. A claw machine looks like this:
 
 ```txt
@@ -43,7 +42,7 @@ By rewritting the problem this way, we can now use **Cramer's Rule** to solve fo
 <div className="grid grid-cols-1 sm:grid-cols-3">
   <div>
     $$
-    det_A =
+    \det(A) =
     \begin{vmatrix}
     94 & 22 \\
     34 & 67
@@ -52,7 +51,7 @@ By rewritting the problem this way, we can now use **Cramer's Rule** to solve fo
   </div>
   <div>
     $$
-    det_{A1} =
+    \det(A_1) =
     \begin{vmatrix}
     8400 & 22 \\
     5400 & 67
@@ -61,7 +60,7 @@ By rewritting the problem this way, we can now use **Cramer's Rule** to solve fo
   </div>
   <div>
     $$
-    det_{A2} =
+    \det(A_2) =
     \begin{vmatrix}
     94 & 8400 \\
     34 & 5400
@@ -71,7 +70,7 @@ By rewritting the problem this way, we can now use **Cramer's Rule** to solve fo
 </div>
 
 
-Now, the value of $a$ is simply $\frac{det_{A1}}{det_A}$ and the value of b is $\frac{det_{A2}}{det_A}$. If these values are integers, we have the only combination of A button presses and B button presses that solves this problem. For this specific claw machine, the solution is $a = 80$ and $b = 40$.
+Now, the value of $a$ is simply $\dfrac{\det(A_1)}{\det(A)}$ and the value of $b$ is $\dfrac{\det(A_2)}{\det(A)}$. If these values are integers, we have the only combination of A button presses and B button presses that solves this problem. For this specific claw machine, the solution is $a = 80$ and $b = 40$.
 
 Now all we have to do is just rinse and repeat for all the different claw machines that are in the input. Then, we can add **$3\times a+b \hspace{0.5mm}$ to a "token" variable** to figure out how many tokens we need. Here's how I did it in code:
 
@@ -103,9 +102,8 @@ def solve_part2(input):
 
 I liked this problem because of the simplicity of the solution. It's all very basic Linear Algebra. You can read the full problem statement <a className="link" href="https://adventofcode.com/2024/day/13" target="_blank">here</a>.
 
-<hr className="border-border"/>
 
-#### Day 19
+### Day 19
 <a className="link" href="https://adventofcode.com/2024/day/19" target="_blank">Day 19's</a> problem was about arranging "towel" patterns into some desired designs. Here's an example of what the input looks like:
 
 ```txt
@@ -178,8 +176,7 @@ If you're curious, the answer to my specific (very large) input was 691316989225
 
 I loved this problem for its elegant solution (a recurring theme for me). Memoization transformed the DFS from overwhelming my computer to running instantly. It was fascinating. You can read the full problem statement <a className="link" href="https://adventofcode.com/2024/day/19" target="_blank">here</a>.
 
-<hr className="border-border"/>
-#### Day 23
+### Day 23
 For <a className="link" href="https://adventofcode.com/2024/day/23" target="_blank">day 23</a>, the input looked something like this:
 
 <div className="prose">
@@ -243,7 +240,7 @@ Each line of text represents a non-directional connection in a graph. The task i
 This is a visualization of the graph from the example shown above:
 
 <div className="flex justify-center">
-    <img className="border-2 border-border rounded-md" src="https://utfs.io/f/If0ZI6Cx8kn0y8tBq9l80UEDefc5O9rNHguPAI2XiKCb6kdS" width="600" alt="Simple graph" />
+    <img className="border-2 border-border rounded-md" src="https://media.achichorro.com/posts/13_adventofcode24/If0ZI6Cx8kn0y8tBq9l80UEDefc5O9rNHguPAI2XiKCb6kdS.png" width="600" alt="Simple graph" />
 </div>
 
 If you look closely, you can see that the nodes `co`, `de`, `ka`, `ta` form a clique: they are all connected pair by pair. There are more cliques in this graph, but this group of four is actually the largest one and is, therefore, the answer to the problem at hand.
@@ -251,7 +248,7 @@ If you look closely, you can see that the nodes `co`, `de`, `ka`, `ta` form a cl
 Now for this small of an example, it's reasonable enough to solve the problem just by looking at the graph. But what if the input is much larger? For comparison, the input that I received had **3380 different edges**. Here's an attempt at visualizing the resulting graph:
 
 <div className="flex justify-center">
-    <img className="border-2 border-border rounded-md" src="https://utfs.io/f/If0ZI6Cx8kn0ljQKqlMlsUvHt4wE5ZGKI9b7XR6x1hpA0SYe" width="600" alt="Graph from the problem I had to solve" />
+    <img className="border-2 border-border rounded-md" src="https://media.achichorro.com/posts/13_adventofcode24/If0ZI6Cx8kn0ljQKqlMlsUvHt4wE5ZGKI9b7XR6x1hpA0SYe.png" width="600" alt="Graph from the problem I had to solve" />
 </div>
 
 Clearly, we need a better approach. For that, I found the <a className="link" href="https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm" target="_blank">Bron-Kerbosch Algorithm</a>: an algorithm precisely to find **maximal cliques** in graphs.
@@ -299,10 +296,9 @@ For the curious, the algorithm takes 0.3836s without pivot and 0.0159s with pivo
 
 It's always really nice when you find these concise algorithms that solve exactly the problem you're facing: that's why I thoroughly enjoyed day 23's problem. You can read the full problem statement <a className="link" href="https://adventofcode.com/2024/day/23" target="_blank">here</a>. Also, <a href="https://www.youtube.com/watch?v=132XR-RLNoY&t=63s" className="link" target="_blank">here's the video</a> that I used to properly understand the algorithm step by step.
 
-<hr className="border-border"/>
-### Honorable Mentions
+## Honorable Mentions
 
-#### Day 11
+### Day 11
 
 Part 1 of <a className="link" href="https://adventofcode.com/2024/day/11" target="_blank">Day 11</a> was easily solved by brute force as it only involved doing a bunch of calculations on a loop with **25 iterations**. For part 2, the rules didn't change as they usually did every other day. Instead, we simply had to do a bigger loop: **75 iterations**. 
 
@@ -338,9 +334,8 @@ def change_stone_counts(counts):
 
 By recognizing a pattern, all of the computational overhead of the problem disappears. Isn't that neat?
 
-<hr className="border-border"/>
 
-#### Day 14
+### Day 14
 
 I wanted to mention <a className="link" href="https://adventofcode.com/2024/day/14" target="_blank">Day 14</a> because it was such a curveball compared to all other problems.
 
@@ -364,7 +359,7 @@ Here, the safety factor is $1 \times 3 \times 4 \times 1 = 12$. By calculating t
 <details>
 <summary><span className="link cursor-pointer">Spoiler</span></summary>
 <div className="flex justify-center">
-    <img className="border-2 border-border rounded-md" src="https://utfs.io/f/If0ZI6Cx8kn00zxsuoNLNmz7d5qZgfWVMDh3KH2ux9CGwseb" width="600" alt="My team during Hack Together." />
+    <img className="border-2 border-border rounded-md" src="https://media.achichorro.com/posts/13_adventofcode24/If0ZI6Cx8kn00zxsuoNLNmz7d5qZgfWVMDh3KH2ux9CGwseb.png" width="600" alt="My team during Hack Together." />
 </div>
 <hr className="border-border"/>
 </details>
@@ -374,9 +369,8 @@ Found it! Since the safety factor calculation **ignores robots in the central co
 
  After staring at random dots scattered across a 2D grid, seeing this result was incredibly satisfying, especially since it came from a hunch I didn\'t have much faith in. I thoroughly enjoyed the concept behind this exercise. <a href="https://www.youtube.com/watch?v=hhRC8XrXY1o" target="_blank" className="link">Here's a video</a> I saw of someone being a much better detective than me.
 
-<hr className="border-border"/>
 
-#### Parsing Strings
+### Parsing Strings
 
 Every day, the input of the problem was a very large string. It quickly became a habit to write a `parse_input` function at the start of each problem. As surprising as it sounds, it actually became one of my favorite parts of solving each problem. Here's some examples:
 
@@ -511,9 +505,8 @@ And become something like this:
 [(5, 4), (4, 2), (4, 5), (3, 0), (2, 1), (6, 3), (2, 4), (1, 5), (0, 6), (3, 3), (2, 6), (5, 1), (1, 2), (5, 5), (2, 5), (6, 5), (1, 4), (0, 4), (6, 4), (1, 1), (6, 1), (1, 0), (0, 5), (1, 6), (2, 0)]
 ```
 
-<hr className="border-border"/>
 
-### Final Remarks
+## Final Remarks
 
 Of course, there were also some exercises that truly stumped me. Without checking out <a className="link" target="_blank" href="https://www.reddit.com/r/adventofcode/">Advent of Code's reddit</a>, I doubt I would have managed to finish all exercises before the end of the year. Parts 2 from both <a className="link" target="_blank" href="https://adventofcode.com/2024/day/16">day 16</a> and <a className="link" target="_blank" href="https://adventofcode.com/2024/day/24">day 24</a> were the ones that eluded me the most.
 
