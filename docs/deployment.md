@@ -100,7 +100,7 @@ This contains public host identity, not a password. CI sets `StrictHostKeyChecki
 
 ### 4. Configure the GitHub environment
 
-In **arturchichorro/bolota.eu → Settings → Environments**, create `website-production`. Restrict deployment branches to **main only**. Add these environment secrets:
+In **arturchichorro/achichorro → Settings → Environments**, create `website-production`. Restrict deployment branches to **main only**. Add these environment secrets:
 
 | Secret | Value |
 | --- | --- |
