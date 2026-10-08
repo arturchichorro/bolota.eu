@@ -30,6 +30,14 @@
 }
 
 @layer components {
+  [data-article] details {
+    @apply my-4;
+  }
+
+  [data-article] summary {
+    @apply cursor-pointer text-accent;
+  }
+
   [data-rehype-pretty-code-figure] [data-line] {
     @apply border-l-2 border-transparent px-4;
   }
