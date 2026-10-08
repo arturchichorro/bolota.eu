@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import { useId, type SVGProps } from "react";
 
 type IconProps = SVGProps<SVGSVGElement>;
 
@@ -365,6 +365,37 @@ function HomeHubIcon(props: IconProps) {
   );
 }
 
+function CdIcon(props: IconProps) {
+  const gradientId = useId();
+
+  return (
+    <svg viewBox="0 0 32 32" {...props}>
+      <defs>
+        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
+          <stop stopColor="#e2e4e5" />
+          <stop offset="0.18" stopColor="#bdc9ce" />
+          <stop offset="0.32" stopColor="#c7d6d3" />
+          <stop offset="0.46" stopColor="#ececea" />
+          <stop offset="0.58" stopColor="#c8c5cf" />
+          <stop offset="0.72" stopColor="#d5c8cc" />
+          <stop offset="0.86" stopColor="#b6c1c8" />
+          <stop offset="1" stopColor="#e1e3e4" />
+        </linearGradient>
+      </defs>
+      <path
+        fill={`url(#${gradientId})`}
+        fillRule="evenodd"
+        d="M16 1a15 15 0 1 0 0 30 15 15 0 0 0 0-30Zm0 12a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"
+      />
+      <circle cx="16" cy="16" r="4.5" fill="none" stroke="#c5c9cd" strokeWidth="2.5" />
+      <circle cx="16" cy="16" r="3.2" fill="none" stroke="#737d85" strokeWidth="0.5" />
+      <circle cx="16" cy="16" r="6" fill="none" stroke="#8e979e" strokeWidth="0.6" />
+      <circle cx="16" cy="16" r="12.8" fill="none" stroke="#7e8890" strokeOpacity="0.18" strokeWidth="0.4" />
+      <circle cx="16" cy="16" r="14.5" fill="none" stroke="#8e979e" strokeWidth="0.6" />
+    </svg>
+  );
+}
+
 const icons = {
   buildspace: BuildspaceIcon,
   manim: ManimIcon,
@@ -380,6 +411,7 @@ const icons = {
   sudoku: SudokuIcon,
   simpleAi: SimpleAiIcon,
   homeHub: HomeHubIcon,
+  cd: CdIcon,
 } as const;
 
 export function PostIcon({ name }: { name?: string }) {
