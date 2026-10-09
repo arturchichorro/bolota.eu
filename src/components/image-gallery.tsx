@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Button } from "./ui/button";
+import "./image-gallery.css";
 
 export type GalleryImage = {
   src: string;

@@ -1,3 +1,5 @@
+import "./slider.css";
+
 interface Props {
   value: number[];
   onValueChange: (value: number[]) => void;
