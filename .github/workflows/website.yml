@@ -33,6 +33,7 @@ jobs:
           bash -n scripts/publisher/install.sh
           bash -n scripts/publisher/send.sh
       - run: pnpm build
+      - run: pnpm test:prerender
       - name: Validate newsletter Worker without deploying
         run: pnpm exec wrangler deploy --config worker/newsletter/wrangler.jsonc --env '' --dry-run
       - name: Package complete static build
