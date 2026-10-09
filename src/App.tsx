@@ -127,6 +127,6 @@ export function App({ pathname, Content }: { pathname: string; Content?: Compone
 export function seoFor(pathname: string) {
   const post = postFromPath(pathname);
   return post
-    ? { title: `${post.title} · achichorro.com`, description: post.description || "A post by Artur Chichorro.", canonical: `${SITE}/posts/${post.slug}`, type: "article", date: post.date }
-    : { title: "achichorro.com", description: "Whatever is in my head, mostly software and the world", canonical: SITE, type: "website" };
+    ? { title: `${post.title} · achichorro.com`, description: post.description || "A post by Artur Chichorro.", canonical: `${SITE}/posts/${post.slug}/`, type: "article", date: post.date }
+    : { title: "achichorro.com", description: "Whatever is in my head, mostly software and the world", canonical: `${SITE}/`, type: "website" };
 }

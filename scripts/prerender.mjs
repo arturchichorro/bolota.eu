@@ -42,12 +42,12 @@ for (const route of server.routes) {
 
 const siteMap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${server.posts.map((post) => `  <url><loc>https://achichorro.com/posts/${post.slug}</loc><lastmod>${post.date}</lastmod></url>`).join("\n")}
+${server.posts.map((post) => `  <url><loc>https://achichorro.com/posts/${post.slug}/</loc><lastmod>${post.date}</lastmod></url>`).join("\n")}
 </urlset>`;
 await writeFile(resolve(dist, "sitemap.xml"), siteMap);
 await writeFile(resolve(dist, "robots.txt"), "User-agent: *\nAllow: /\nSitemap: https://achichorro.com/sitemap.xml\n");
 
-const rss = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>achichorro.com</title><link>https://achichorro.com</link><description>Artur Chichorro's blog.</description>${server.posts.map((post) => `<item><title>${escape(post.title)}</title><link>https://achichorro.com/posts/${post.slug}</link><guid>https://achichorro.com/posts/${post.slug}</guid><pubDate>${new Date(`${post.date}T00:00:00Z`).toUTCString()}</pubDate><description>${escape(post.description || "")}</description></item>`).join("")}</channel></rss>`;
+const rss = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>achichorro.com</title><link>https://achichorro.com/</link><description>Artur Chichorro's blog.</description>${server.posts.map((post) => `<item><title>${escape(post.title)}</title><link>https://achichorro.com/posts/${post.slug}/</link><guid>https://achichorro.com/posts/${post.slug}/</guid><pubDate>${new Date(`${post.date}T00:00:00Z`).toUTCString()}</pubDate><description>${escape(post.description || "")}</description></item>`).join("")}</channel></rss>`;
 await writeFile(resolve(dist, "rss.xml"), rss);
 await rm(resolve(root, ".ssr"), { recursive: true, force: true });
 
