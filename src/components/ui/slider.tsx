@@ -1,4 +1,4 @@
-import { Slider as BaseSlider } from "@base-ui/react/slider";
+import "./slider.css";
 
 interface Props {
   value: number[];
@@ -9,20 +9,24 @@ interface Props {
 }
 
 export function Slider({ value, onValueChange, max = 100, step = 1, className = "" }: Props) {
+  const progress = max > 0 ? Math.min(100, Math.max(0, value[0] / max * 100)) : 0;
   return (
-    <BaseSlider.Root
-      value={value}
-      onValueChange={(nextValue) => onValueChange([...nextValue])}
-      max={max}
-      step={step}
-      className={`w-24 ${className}`}
-    >
-      <BaseSlider.Control className="flex h-5 touch-none items-center select-none">
-        <BaseSlider.Track className="relative h-1 w-full rounded-full bg-border">
-          <BaseSlider.Indicator className="rounded-full bg-accent" />
-          <BaseSlider.Thumb aria-label="Speed" className="size-3.5 rounded-full border border-accent bg-surface shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background" />
-        </BaseSlider.Track>
-      </BaseSlider.Control>
-    </BaseSlider.Root>
+    <div className={`w-24 ${className}`}>
+      <div className="relative flex h-5 touch-none items-center select-none">
+        <div aria-hidden="true" className="relative h-1 w-full rounded-full bg-border">
+          <div className="h-full rounded-full bg-accent" style={{ width: `${progress}%` }} />
+        </div>
+        <input
+          type="range"
+          aria-label="Speed"
+          min={0}
+          max={max}
+          step={step}
+          value={value[0]}
+          onChange={(event) => onValueChange([event.currentTarget.valueAsNumber])}
+          className="native-slider"
+        />
+      </div>
+    </div>
   );
 }

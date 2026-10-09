@@ -19,14 +19,6 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  optimizeDeps: {
-    include: [
-      "@base-ui/react/button",
-      "@base-ui/react/dialog",
-      "@base-ui/react/slider",
-      "@base-ui/react/switch",
-    ],
-  },
   resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
   server: { proxy: { "/api/subscribe": "http://127.0.0.1:8787" } },
   preview: { proxy: { "/api/subscribe": "http://127.0.0.1:8787" } },

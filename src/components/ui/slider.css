@@ -1,0 +1,58 @@
+/* Extend by one thumb width so its center reaches both ends of the track,
+   matching the previous slider rather than the browser's inset endpoints. */
+.native-slider {
+  appearance: none;
+  position: absolute;
+  left: -7px;
+  width: calc(100% + 14px);
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.native-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: transparent;
+}
+
+.native-slider::-moz-range-track {
+  height: 4px;
+  background: transparent;
+}
+
+.native-slider::-moz-range-progress {
+  background: transparent;
+}
+
+.native-slider::-webkit-slider-thumb {
+  appearance: none;
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  background: var(--color-surface);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+.native-slider::-moz-range-thumb {
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  background: var(--color-surface);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+.native-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-accent);
+}
+
+.native-slider:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-accent);
+}

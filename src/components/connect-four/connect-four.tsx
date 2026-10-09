@@ -201,7 +201,7 @@ const ConnectFour = () => {
         <Button className="w-40 text-xs sm:text-sm" size="sm" variant="outline" onClick={() => restartGame('human')}>Human vs Human</Button>
         <div className="text-sm flex flex-row items-center justify-center gap-2">
           Eval Bar:
-          <Switch className="my-2" checked={showEvalBar} onCheckedChange={(checked) => {setShowEvalBar(checked)}}/>
+          <Switch aria-label="Eval Bar" className="my-2" checked={showEvalBar} onCheckedChange={(checked) => {setShowEvalBar(checked)}}/>
         </div>
       </div>
     </div>
